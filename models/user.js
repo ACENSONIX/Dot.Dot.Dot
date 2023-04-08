@@ -14,6 +14,7 @@ const User_Model= dbConn.define('user', {
    pan: Sequelize.STRING,
    dob: Sequelize.STRING,
    image : Sequelize.STRING,
+   docVerfied : Sequelize.STRING
 })
 
 module.exports= User_Model;

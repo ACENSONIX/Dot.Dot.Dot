@@ -11,7 +11,7 @@ const Cafe_Model= dbConn.define('cafe', {
     zip: Sequelize.STRING,
     gstNo : Sequelize.STRING,
     pan : Sequelize.STRING,
-    
+    fssai : Sequelize.STRING,  
 });
 
 module.exports= Cafe_Model;
