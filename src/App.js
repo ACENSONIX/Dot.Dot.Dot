@@ -1,27 +1,27 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Dashboard from "./scenes/dashboard";
 import Team from "./scenes/team";
-import Invoices from "./scenes/invoices";
-import Contacts from "./scenes/contacts";
-import Bar from "./scenes/bar";
-import Form from "./scenes/form";
-import Line from "./scenes/line";
-import Pie from "./scenes/pie";
-import FAQ from "./scenes/faq";
-import Geography from "./scenes/geography";
+// import Invoices from "./scenes/invoices";
+// import Contacts from "./scenes/contacts";
+// import Bar from "./scenes/bar";
+// import Form from "./scenes/form";
+// import Line from "./scenes/line";
+// import Pie from "./scenes/pie";
+// import FAQ from "./scenes/faq";
+// import Geography from "./scenes/geography";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
-import Calendar from "./scenes/calendar/calendar";
+// import Calendar from "./scenes/calendar/calendar";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Layout from "./components/Layout";
 import Employee from "./scenes/employee/employee";
-import Applicant from "./scenes/applicant/applicant";
-import viewEmployee from "./scenes/employee/viewEmployee";
-import newApplicant from "./scenes/applicant/newApplicant";
-import viewApplicant from "./scenes/applicant/viewApplicant";
+import Applicant from "./scenes/applicant/Applicant";
+import ViewEmployee from "./scenes/employee/ViewEmployee";
+import Form from "./scenes/applicant/NewApplicant";
+import ViewApplicant from "./scenes/applicant/ViewApplicant";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -39,9 +39,9 @@ function App() {
             <Route path='/dashboard/team' element={<Team />} />
             <Route path='/dashboard/employee' element={<Employee />} />
             <Route path='/dashboard/applicant' element={<Applicant />} />
-            <Route path ='/dashboard/add-applicant' element={<newApplicant />} />
-            <Route path ='/dashboard/view-applicant' element={<viewApplicant />} />
-            <Route path ='/dashboard/view-employee' element={<viewEmployee />} />
+            <Route path='/dashboard/add-applicant' element={<Form />} />
+            <Route path='/dashboard/view-applicant' element={<ViewApplicant />} />
+            <Route path='/dashboard/view-employee' element={<ViewEmployee />} />
           </Route>
 
           {/* 

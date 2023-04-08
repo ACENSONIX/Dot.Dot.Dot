@@ -8,24 +8,24 @@ import { useState } from "react";
 const Form = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-  const [image, setImage] = useState();
+  const [image, setImage] = useState({});
 
   const handleFormSubmit = values => {
     console.log(values);
   };
   const handleImageFile = e => {
-    setImage(e.target.files[0], "$$$$");
+    setImage({ [e.target.name]: e.target.files[0], ...image });
   };
 
   return (
-    <Box display='grid' sx={{ placeItems: "center", height: "100%" }}>
+    <Box display='grid' sx={{ placeItems: "center" }}>
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
         validationSchema={checkoutSchema}>
         {({ values, errors, touched, handleBlur, handleChange, handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            <Header title='SIGN UP' subtitle='Register for a New User Profile' />
+            <Header title='SIGN UP APPLICANT' subtitle='Register a new Applicant Profile' />
             <Box
               display='grid'
               gap='1rem'
@@ -99,56 +99,27 @@ const Form = () => {
                 sx={{ gridColumn: "span 1" }}
               />
 
-              <TextField
-                fullWidth
-                variant='filled'
-                type='text'
-                label='GSTIN Number'
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.gst}
-                name='gst'
-                error={!!touched.gst && !!errors.gst}
-                helperText={touched.gst && errors.gst}
-                sx={{ gridColumn: "span 2" }}
-              />
               <Button
                 variant='contained'
                 fullWidth
                 component='label'
                 style={{ gridColumn: "span 2", backgroundColor: "#323848a0" }}
-                value={image}
-                onChange={e => handleImageFile(e)}>
-                {image ? image.name : "Upload PAN"}
-                <input hidden accept='image/*' type='file' />
+                value={image.pan}
+                onChange={handleImageFile}>
+                {image.pan ? image.pan.name : "Upload PAN"}
+                <input hidden accept='image/*' type='file' name='pan' />
               </Button>
 
-              <TextField
+              <Button
+                variant='contained'
                 fullWidth
-                variant='filled'
-                type='password'
-                label='Password'
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.password}
-                name='password'
-                error={!!touched.password && !!errors.password}
-                helperText={touched.password && errors.password}
-                sx={{ gridColumn: "span 2" }}
-              />
-              <TextField
-                fullWidth
-                variant='filled'
-                type='password'
-                label='Confirm Password'
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.password_confirm}
-                name='password_confirm'
-                error={!!touched.password_confirm && !!errors.password_confirm}
-                helperText={touched.password_confirm && errors.password_confirm}
-                sx={{ gridColumn: "span 2" }}
-              />
+                component='label'
+                style={{ gridColumn: "span 2", backgroundColor: "#323848a0" }}
+                value={image.aadhaar}
+                onChange={handleImageFile}>
+                {image.aadhaar ? image.aadhaar.name : "Upload Aadhaar"}
+                <input hidden accept='image/*' type='file' name='aadhaar' />
+              </Button>
 
               {/* <TextField
                 fullWidth

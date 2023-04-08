@@ -50,6 +50,19 @@ const Form = () => {
                 fullWidth
                 variant='filled'
                 type='text'
+                label='Owner'
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.owner}
+                name='owner'
+                error={!!touched.owner && !!errors.owner}
+                helperText={touched.owner && errors.owner}
+                sx={{ gridColumn: "span 4" }}
+              />
+              <TextField
+                fullWidth
+                variant='filled'
+                type='text'
                 label='Email'
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -62,7 +75,7 @@ const Form = () => {
               <TextField
                 fullWidth
                 variant='filled'
-                type='text'
+                type='tel'
                 label='Contact Number'
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -110,13 +123,13 @@ const Form = () => {
                 name='gst'
                 error={!!touched.gst && !!errors.gst}
                 helperText={touched.gst && errors.gst}
-                sx={{ gridColumn: "span 2" }}
+                sx={{ gridColumn: "span 3" }}
               />
               <Button
                 variant='contained'
                 fullWidth
                 component='label'
-                style={{ gridColumn: "span 2", backgroundColor: "#323848a0" }}
+                style={{ gridColumn: "span 1", backgroundColor: "#323848a0" }}
                 value={image}
                 onChange={e => handleImageFile(e)}>
                 {image ? image.name : "Upload PAN"}
