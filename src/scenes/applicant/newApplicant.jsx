@@ -3,27 +3,32 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
+import { useState } from "react";
 
 const Form = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
+  const [image, setImage] = useState();
+
   const handleFormSubmit = values => {
     console.log(values);
   };
+  const handleImageFile = e => {
+    setImage(e.target.files[0], "$$$$");
+  };
 
   return (
-    <Box m='20px'>
-      <Header title='CREATE USER' subtitle='Create a New User Profile' />
-
+    <Box display='grid' sx={{ placeItems: "center", height: "100%" }}>
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
         validationSchema={checkoutSchema}>
         {({ values, errors, touched, handleBlur, handleChange, handleSubmit }) => (
           <form onSubmit={handleSubmit}>
+            <Header title='SIGN UP' subtitle='Register for a New User Profile' />
             <Box
               display='grid'
-              gap='30px'
+              gap='1rem'
               gridTemplateColumns='repeat(4, minmax(0, 1fr))'
               sx={{
                 "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
@@ -32,27 +37,14 @@ const Form = () => {
                 fullWidth
                 variant='filled'
                 type='text'
-                label='First Name'
+                label='Name'
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.firstName}
-                name='firstName'
-                error={!!touched.firstName && !!errors.firstName}
-                helperText={touched.firstName && errors.firstName}
-                sx={{ gridColumn: "span 2" }}
-              />
-              <TextField
-                fullWidth
-                variant='filled'
-                type='text'
-                label='Last Name'
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.lastName}
-                name='lastName'
-                error={!!touched.lastName && !!errors.lastName}
-                helperText={touched.lastName && errors.lastName}
-                sx={{ gridColumn: "span 2" }}
+                value={values.name}
+                name='name'
+                error={!!touched.name && !!errors.name}
+                helperText={touched.name && errors.name}
+                sx={{ gridColumn: "span 4" }}
               />
               <TextField
                 fullWidth
@@ -65,7 +57,7 @@ const Form = () => {
                 name='email'
                 error={!!touched.email && !!errors.email}
                 helperText={touched.email && errors.email}
-                sx={{ gridColumn: "span 4" }}
+                sx={{ gridColumn: "span 2" }}
               />
               <TextField
                 fullWidth
@@ -78,38 +70,103 @@ const Form = () => {
                 name='contact'
                 error={!!touched.contact && !!errors.contact}
                 helperText={touched.contact && errors.contact}
-                sx={{ gridColumn: "span 4" }}
+                sx={{ gridColumn: "span 2" }}
               />
               <TextField
                 fullWidth
                 variant='filled'
                 type='text'
-                label='Address 1'
+                label='Address'
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.address1}
-                name='address1'
-                error={!!touched.address1 && !!errors.address1}
-                helperText={touched.address1 && errors.address1}
-                sx={{ gridColumn: "span 4" }}
+                value={values.address}
+                name='address'
+                error={!!touched.address && !!errors.address}
+                helperText={touched.address && errors.address}
+                sx={{ gridColumn: "span 3" }}
               />
               <TextField
                 fullWidth
                 variant='filled'
                 type='text'
-                label='Address 2'
+                label='Pincode'
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.address2}
-                name='address2'
-                error={!!touched.address2 && !!errors.address2}
-                helperText={touched.address2 && errors.address2}
-                sx={{ gridColumn: "span 4" }}
+                value={values.pincode}
+                name='pincode'
+                error={!!touched.pincode && !!errors.pincode}
+                helperText={touched.pincode && errors.pincode}
+                sx={{ gridColumn: "span 1" }}
               />
+
+              <TextField
+                fullWidth
+                variant='filled'
+                type='text'
+                label='GSTIN Number'
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.gst}
+                name='gst'
+                error={!!touched.gst && !!errors.gst}
+                helperText={touched.gst && errors.gst}
+                sx={{ gridColumn: "span 2" }}
+              />
+              <Button
+                variant='contained'
+                fullWidth
+                component='label'
+                style={{ gridColumn: "span 2", backgroundColor: "#323848a0" }}
+                value={image}
+                onChange={e => handleImageFile(e)}>
+                {image ? image.name : "Upload PAN"}
+                <input hidden accept='image/*' type='file' />
+              </Button>
+
+              <TextField
+                fullWidth
+                variant='filled'
+                type='password'
+                label='Password'
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.password}
+                name='password'
+                error={!!touched.password && !!errors.password}
+                helperText={touched.password && errors.password}
+                sx={{ gridColumn: "span 2" }}
+              />
+              <TextField
+                fullWidth
+                variant='filled'
+                type='password'
+                label='Confirm Password'
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.password_confirm}
+                name='password_confirm'
+                error={!!touched.password_confirm && !!errors.password_confirm}
+                helperText={touched.password_confirm && errors.password_confirm}
+                sx={{ gridColumn: "span 2" }}
+              />
+
+              {/* <TextField
+                fullWidth
+                variant='filled'
+                type='text'
+                label='PAN Number'
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.pan}
+                name='pan'
+                error={!!touched.pan && !!errors.pan}
+                helperText={touched.pan && errors.pan}
+                sx={{ gridColumn: "span 2" }}
+              /> */}
             </Box>
-            <Box display='flex' justifyContent='end' mt='20px'>
+            <Box display='grid' mt='20px'>
               <Button type='submit' color='secondary' variant='contained'>
-                Create New User
+                Sign up
               </Button>
             </Box>
           </form>
