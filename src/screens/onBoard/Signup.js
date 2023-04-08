@@ -30,7 +30,7 @@ const apiKey = {
   ADDRESS: 'address',
   ZIP: 'zip',
   GSTNO: 'gstno',
-  IMAGE: 'image',
+  PAN: 'pan',
   FSSAI: 'fssai',
 };
 
@@ -52,23 +52,33 @@ export default function Signup({navigation}) {
   };
 
   const callApi = data => {
+    console.log('data', data);
     var myHeaders = new Headers();
     myHeaders.append(
       'Cookie',
-      'connect.sid=s%3A7TiJYb7Rudxmi9jMhiPzm3_1UdNfxy6j.gX3dCg0NTwYbI1ODPA4JqG027%2FNr3kDoPTyn7UJw6BU',
+      'connect.sid=s%3AJSxS1kzUnMOFLhiKvQ-TrEk_6w3_zcvC.GSqL%2FtyBFDIk%2B%2B227gQ9%2BTDF3Bzw%2FgxPJTxEovMhPPc',
     );
 
     var formdata = new FormData();
-    formdata.append('firstName', 'Nihal');
-    formdata.append('lastName', 'Gupta');
-    formdata.append('email', 'nihal@gmail.com');
-    formdata.append('password', 'nihal123');
-    formdata.append('location', 'Mumbai');
-    formdata.append('phone', '9833256433');
-    formdata.append('address', 'Goregaon');
-    formdata.append('zip', '400104');
-    formdata.append('dob', '03122002');
-    formdata.append(apiKey.Image, data.image);
+    formdata.append(apiKey.NAME, data[apiKey.NAME]);
+    formdata.append(apiKey.EMAIL, data[apiKey.EMAIL]);
+    formdata.append(apiKey.OWNER, data[apiKey.OWNER]);
+    formdata.append(apiKey.PASSWORD, data[apiKey.PASSWORD]);
+    formdata.append(apiKey.LOCATION, data[apiKey.LOCATION]);
+    formdata.append(apiKey.PHONE, data[apiKey.PHONE]);
+    formdata.append(apiKey.ADDRESS, data[apiKey.ADDRESS]);
+    formdata.append(apiKey.ZIP, data[apiKey.ZIP]);
+    formdata.append(apiKey.GSTNO, data[apiKey.GSTNO]);
+    formdata.append(apiKey.FSSAI, data[apiKey.FSSAI]);
+    formdata.append(apiKey.PAN, {
+      uri: data[apiKey.PAN].uri,
+      name: 'photo.png',
+      filename: 'imageName.png',
+      type: 'image/png',
+    });
+    formdata.append('Content-Type', 'image/png');
+
+    console.log('formdata', formdata);
 
     var requestOptions = {
       method: 'POST',
@@ -77,7 +87,7 @@ export default function Signup({navigation}) {
       redirect: 'follow',
     };
 
-    fetch('http://localhost:4000/user/signup', requestOptions)
+    fetch('http://localhost:4000/cafe/signup', requestOptions)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
@@ -339,7 +349,7 @@ export default function Signup({navigation}) {
               requiredError={constants.ERROR_LOCATION}
             />
             <ImagePicker
-              name={apiKey.IMAGE}
+              name={apiKey.PAN}
               title={'Upload Your Image'}
               control={control}
               errors={errors}
@@ -353,7 +363,7 @@ export default function Signup({navigation}) {
             />
           </View>
           <View style={internalstyles.buttonNext}>
-            <PrimaryButton title="Next" onPress={callApi} />
+            <PrimaryButton title="Next" onPress={handleSubmit(callApi)} />
           </View>
         </View>
       </ScrollView>

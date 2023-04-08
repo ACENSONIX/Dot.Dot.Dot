@@ -3,6 +3,7 @@ import LocalizedStrings from 'react-native-localization';
 
 const setOfStrings = new LocalizedStrings({
   en: {
+    allEmployees: 'All Employees',
     login: 'Login',
     username: 'Username',
     password: 'Password',

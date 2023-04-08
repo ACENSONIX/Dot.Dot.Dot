@@ -145,7 +145,7 @@ export default function EmployeeDetails({navigation}) {
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={[styles.styleFull]}>
       <Image
-        source={require('../../../assets/sample/late_blight.jpg')}
+        source={require('../../../../assets/sample/late_blight.jpg')}
         style={{height: 200, width: '100%'}}
       />
       <View style={{paddingHorizontal: 15}}>

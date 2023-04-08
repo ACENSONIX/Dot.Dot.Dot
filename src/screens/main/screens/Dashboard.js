@@ -21,24 +21,9 @@ import {BarChart} from 'react-native-chart-kit';
 import setOfStrings from '../../../utility/screenStrings';
 var PushNotification = require('react-native-push-notification');
 
-const recentPrecautionData = [
-  {
-    date: '12/12/2020',
-    title: 'Precaution 1',
-    crop: 'Tomato',
-    disease: 'Late Blight',
-    precautions: 'do this and that',
-    image: require('../../../assets/sample/late_blight.jpg'),
-  },
-  {
-    date: '12/12/2020',
-    title: 'Precaution 2',
-    crop: 'Tomato',
-    disease: 'Late Blight',
-    precautions: 'do this and that',
-    image: require('../../../assets/sample/late_blight.jpg'),
-  },
-];
+const employeesData = [
+  
+]
 
 export default function Dashboard({navigation}) {
   useEffect(() => {
@@ -308,20 +293,20 @@ export default function Dashboard({navigation}) {
           />
         </View>
       </View>
-      {/* <View styles={internalStyles.recentPrecaution}>
+      <View styles={internalStyles.recentPrecaution}>
         <View
           style={[internalStyles.home, {paddingVertical: 0, paddingTop: 15}]}>
           <Text style={internalStyles.header}>
-            {setOfStrings.recentPrecautions}
+            {setOfStrings.allEmployees}
           </Text>
         </View>
         <FlatList
-          data={recentPrecautionData}
-          renderItem={({item}) => renderRecentPrecautions(item)}
+          data={employeesData}
+          renderItem={({item}) => renderEmployee(item)}
           keyExtractor={item => item.id}
           style={{paddingBottom: 10}}
         />
-      </View> */}
+      </View>
     </ScrollView>
   );
 }
