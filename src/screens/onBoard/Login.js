@@ -134,7 +134,7 @@ export default function Login({route,navigation}) {
           </View>
           <View style={internalstyles.buttonLogin}>
             <PrimaryButton title={setOfStrings.submit} onPress={handleSubmit(doLogin)} />
-            <Ripple
+            {/* <Ripple
               onPress={() => changeStack()}
               style={{
                 marginTop: '5%',
@@ -149,7 +149,7 @@ export default function Login({route,navigation}) {
               <Text style={{fontSize: fonts._14, color: colors.BLACK}}>
                 {setOfStrings.skip}
               </Text>
-            </Ripple>
+            </Ripple> */}
           </View>
         </View>
       </ScrollView>

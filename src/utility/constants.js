@@ -17,9 +17,12 @@ export default constants = {
   TXT_NOT_SIGNED_UP: "Haven't signed up yet?",
   TXT_SIGN_UP: 'Sign Up',
   TXT_MOBILE_NUMBER: 'Mobile Number',
-  TXT_NAME: 'Name',
+  TXT_FIRST_NAME: 'First Name',
+  TXT_LAST_NAME: 'Last Name',
   TXT_LOCATION: 'Location',
   TXT_TITLE: 'Title',
+  TXT_ADDRESS: 'Address',
+  TXT_ZIP_CODE: 'Zip Code',
   TXT_DESCRIPTION: 'Description/ Question',
 
   TXT_FIRST_NAME: 'First Name',
