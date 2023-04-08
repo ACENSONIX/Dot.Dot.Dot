@@ -17,6 +17,11 @@ import Calendar from "./scenes/calendar/calendar";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Layout from "./components/Layout";
+import Employee from "./scenes/employee/employee";
+import Applicant from "./scenes/applicant/applicant";
+import viewEmployee from "./scenes/employee/viewEmployee";
+import newApplicant from "./scenes/applicant/newApplicant";
+import viewApplicant from "./scenes/applicant/viewApplicant";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -27,10 +32,16 @@ function App() {
         <CssBaseline />
 
         <Routes>
-          <Route path='/' element={<Dashboard />} />
+          {/* <Route path='/' element={<Dashboard />} /> */}
 
           <Route path='/dashboard' element={<Layout />}>
+            <Route path='/dashboard/app' element={<Dashboard />} />
             <Route path='/dashboard/team' element={<Team />} />
+            <Route path='/dashboard/employee' element={<Employee />} />
+            <Route path='/dashboard/applicant' element={<Applicant />} />
+            <Route path ='/dashboard/add-applicant' element={<newApplicant />} />
+            <Route path ='/dashboard/view-applicant' element={<viewApplicant />} />
+            <Route path ='/dashboard/view-employee' element={<viewEmployee />} />
           </Route>
 
           {/* 
