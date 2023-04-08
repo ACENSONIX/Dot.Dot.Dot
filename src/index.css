@@ -47,3 +47,18 @@ body,
   grid-column: 1 / -1;
   border-bottom: 4px solid #fff;
 }
+
+.signup-backdrop {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.signup-form {
+  background-color: #141b2d;
+  padding: 2rem;
+  border-radius: 1.5rem;
+}

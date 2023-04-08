@@ -7,6 +7,7 @@ import Header from "./Header";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { register } from "../actions/owner/owner";
+import backdrop from "../assets/signup-backdrop.jpg";
 
 const Form = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -17,7 +18,7 @@ const Form = () => {
 
   const handleFormSubmit = values => {
     console.log({ values, image });
-    try{
+    try {
       let formData = new FormData();
       formData.append("name", values.name);
       formData.append("owner", values.owner);
@@ -29,23 +30,32 @@ const Form = () => {
       formData.append("pan", image);
       formData.append("password", values.password);
       dispatch(register(formData, navigate));
-    }catch(err){
+    } catch (err) {
       console.log(err);
     }
   };
 
   const handleImageFile = e => {
-    setImage(e.target.files[0], "$$$$");
+    setImage(e.target.files[0]);
   };
 
+  console.log(image);
+
   return (
-    <Box display='grid' sx={{ placeItems: "center", height: "100%" }}>
+    <Box
+      display='grid'
+      sx={{
+        placeItems: "center",
+        height: "100%",
+        position: "relative",
+      }}>
+      {/* <img src={backdrop} alt='backdrop' className='signup-backdrop' /> */}
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
         validationSchema={checkoutSchema}>
         {({ values, errors, touched, handleBlur, handleChange, handleSubmit }) => (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className='signup-form'>
             <Header title='SIGN UP' subtitle='Register for a New User Profile' />
             <Box
               display='grid'
@@ -117,7 +127,20 @@ const Form = () => {
                 name='address'
                 error={!!touched.address && !!errors.address}
                 helperText={touched.address && errors.address}
-                sx={{ gridColumn: "span 3" }}
+                sx={{ gridColumn: "span 2" }}
+              />
+              <TextField
+                fullWidth
+                variant='filled'
+                type='text'
+                label='City'
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.location}
+                name='location'
+                error={!!touched.location && !!errors.location}
+                helperText={touched.location && errors.location}
+                sx={{ gridColumn: "span 1" }}
               />
               <TextField
                 fullWidth
@@ -144,13 +167,13 @@ const Form = () => {
                 name='gst'
                 error={!!touched.gst && !!errors.gst}
                 helperText={touched.gst && errors.gst}
-                sx={{ gridColumn: "span 3" }}
+                sx={{ gridColumn: "span 2" }}
               />
               <Button
                 variant='contained'
                 fullWidth
                 component='label'
-                style={{ gridColumn: "span 1", backgroundColor: "#323848a0" }}
+                style={{ gridColumn: "span 2", backgroundColor: "#323848a0" }}
                 value={image}
                 onChange={e => handleImageFile(e)}>
                 {image ? image.name : "Upload PAN"}
@@ -205,6 +228,7 @@ const checkoutSchema = yup.object().shape({
   contact: yup.string().matches(phoneRegExp, "Phone number is not valid").required("required"),
   address: yup.string().required("required"),
   pincode: yup.string().required("required"),
+  location: yup.string().required("required"),
   gst: yup.string().required("required"),
   password: yup.string().required("required"),
   password_confirm: yup.string().required("required"),
@@ -215,6 +239,7 @@ const initialValues = {
   contact: "",
   address: "",
   pincode: "",
+  location: "",
   gst: "",
 };
 

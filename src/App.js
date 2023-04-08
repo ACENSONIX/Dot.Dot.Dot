@@ -17,9 +17,9 @@ import { ColorModeContext, useMode } from "./theme";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Layout from "./components/Layout";
-import Employee from "./scenes/employee/employee";
+import Employee from "./scenes/employee/Employee";
 import Applicant from "./scenes/applicant/Applicant";
-import ViewEmployee from "./scenes/employee/ViewEmployee";
+import ViewEmployee from "./scenes/employee/viewEmployee";
 import NewApplicant from "./scenes/applicant/NewApplicant";
 import ViewApplicant from "./scenes/applicant/ViewApplicant";
 import { useEffect } from "react";
@@ -51,8 +51,8 @@ function App() {
             <Route path='/dashboard/employee' element={<Employee />} />
             <Route path='/dashboard/applicant' element={<Applicant />} />
             <Route path='/dashboard/add-applicant' element={<NewApplicant />} />
-            <Route path='/dashboard/view-applicant' element={<ViewApplicant />} />
-            <Route path='/dashboard/view-employee' element={<ViewEmployee />} />
+            <Route path='/dashboard/view-applicant/:id' element={<ViewApplicant />} />
+            <Route path='/dashboard/view-employee/:id' element={<ViewEmployee />} />
           </Route>
 
           {/* 

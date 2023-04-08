@@ -75,9 +75,9 @@ const Applicant = () => {
       flex: 1,
       renderCell: ({ id }) => {
         return (
-          <Link to={`/applicant/${id}`} style={{ textDecoration: "none" }}>
+          <Link to={`/dashboard/view-applicant/${id}`} style={{ textDecoration: "none" }}>
             <Button variant='contained' color='secondary'>
-              <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
+              <Typography color={colors.grey["800"]} sx={{ ml: "5px" }}>
                 View
               </Typography>
             </Button>

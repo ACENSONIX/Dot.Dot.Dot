@@ -68,32 +68,29 @@ const Employee = () => {
     //   },
     // },
     {
-        field: "action",
-        headerName: "Action",
-        flex: 1,
-        renderCell: ({id}) => {
-            return (
-                <Link to={`/applicant/${id}`} style={{textDecoration:'none'}}>
-                <Button
-                variant="contained"
-                color="secondary"
-                >
-                <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
-                    View
-                </Typography>
-                </Button>
-                </Link>
-            );
-            },
-    }
+      field: "action",
+      headerName: "Action",
+      flex: 1,
+      renderCell: ({ id }) => {
+        return (
+          <Link to={`/dashboard/view-employee/${id}`} style={{ textDecoration: "none" }}>
+            <Button variant='contained' color='secondary'>
+              <Typography color={colors.grey["800"]} sx={{ ml: "5px" }}>
+                View
+              </Typography>
+            </Button>
+          </Link>
+        );
+      },
+    },
   ];
 
   return (
-    <Box m="20px">
-      <Header title="EMPLOYEES" subtitle="Managing the Employees" />
+    <Box m='20px'>
+      <Header title='EMPLOYEES' subtitle='Managing the Employees' />
       <Box
-        m="40px 0 0 0"
-        height="75vh"
+        m='40px 0 0 0'
+        height='75vh'
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
@@ -118,8 +115,7 @@ const Employee = () => {
           "& .MuiCheckbox-root": {
             color: `${colors.greenAccent[200]} !important`,
           },
-        }}
-      >
+        }}>
         <DataGrid rows={mockDataTeam} columns={columns} />
       </Box>
     </Box>

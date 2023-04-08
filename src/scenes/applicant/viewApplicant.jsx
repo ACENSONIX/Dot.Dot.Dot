@@ -24,7 +24,7 @@ const ViewApplicant = () => {
       gap='1em 2em'
       gridTemplateColumns='repeat(15,1fr)'
       position='relative'>
-      <img class='cover-image' src='http://unsplash.it/seed/person/1600/400' alt='cover' />
+      <img class='cover-image' src='http://unsplash.it/1600/400' alt='cover' />
 
       <Box
         borderRadius='50%'
@@ -33,10 +33,11 @@ const ViewApplicant = () => {
         border='4px solid #fff'
         gridRow='2 / span 2'
         gridColumn='2 / span 2'
+        backgroundColor='#141b2d'
         sx={{
           "&>img": { width: "100%", height: "100%", aspectRatio: "1/1", borderRadius: "50%" },
         }}>
-        <img src='http://unsplash.it/seed/person/200/200' alt='profile' />
+        <img src='http://unsplash.it/200/200' alt='profile' />
       </Box>
       <Typography
         variant='h1'
@@ -49,15 +50,32 @@ const ViewApplicant = () => {
       </Typography>
 
       <Box
-        position='sticky'
-        inset='auto 1rem 0 auto'
+        gridRow='4'
+        gridColumn='1 / -1'
         display='grid'
-        gridAutoColumns='8rem'
+        gap='0.5em'
+        p='0.5rem 1rem'
+        backgroundColor='#243153'>
+        <Typography variant='h3'>{Applicant.email}</Typography>
+        <Typography variant='h3'>{Applicant.phone} </Typography>
+        <Typography variant='body1'>{Applicant.address}</Typography>
+        <Typography variant='body1'>
+          {Applicant.location}-{Applicant.zip}
+        </Typography>
+      </Box>
+
+      <Box
+        position='sticky'
+        bottom='0'
+        gridAutoFlow='column'
+        display='grid'
+        gridAutoColumns='1fr'
         gap='1rem'
-        marginLeft='auto'
-        gridColumn='-2'
-        gridRow='3 / span 2'
-        padding='1rem'>
+        gridColumn='1 / -1'
+        gridRow='100'
+        padding='1rem'
+        backgroundColor='rgba(0 0 0 / 0.7)'
+        backdropFilter='blur(20px)'>
         <Button
           sx={{
             backgroundColor: colors.greenAccent["600"],
@@ -106,15 +124,6 @@ const ViewApplicant = () => {
           }}>
           Blacklist
         </Button>
-      </Box>
-
-      <Box gridRow='4' gridColumn='1 / -1' display='grid' gap='0.5em' p='0 1rem'>
-        <Typography variant='h3'>{Applicant.email}</Typography>
-        <Typography variant='h3'>{Applicant.phone} </Typography>
-        <Typography variant='body1'>{Applicant.address}</Typography>
-        <Typography variant='body1'>
-          {Applicant.location}-{Applicant.zip}
-        </Typography>
       </Box>
     </Box>
   );
