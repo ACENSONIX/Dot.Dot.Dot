@@ -1,0 +1,79 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("space-purp.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    color: white;
+    font-family: "Poppins";
+}
+.navbar {
+    margin-bottom: 50px;
+    position: static;
+}
+.navbar-nav .nav-link.active{
+    color: white;
+    font-size: 1.2rem;
+}
+.navbar-brand {
+    color: white;
+    font-size: 2rem;
+}
+.navbar-brand:hover {
+    color: white;
+}
+.navbar-toggler {
+    /* background-color: white; */
+    color: white;
+}
+h2 {
+    margin-bottom: 20px;
+}
+form, h2 {
+    margin-left: 20px;
+    align-self: center;
+}
+.form-control {
+    background-color: rgb(178, 178, 178);
+}
+.form-class {
+    align-items: center;
+    margin-left: 32%;
+    margin-top: 10%;
+}
+div h2 {
+    text-align: center;
+}
+.submit-button {
+    margin-left: 38%;
+    background-color: gray;
+}
+.submit-button :hover {
+    background-color: rgb(75, 74, 74);
+}
+@media (max-width: 992px) {
+    .navbar-nav .nav-link.active{
+      color: black;
+    }
+}
+.eximg {
+    width: 30%;
+    height: 30%;
+}
+.imagesec {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+}
+.result {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+}
