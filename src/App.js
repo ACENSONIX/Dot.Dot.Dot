@@ -18,10 +18,10 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Layout from "./components/Layout";
 import Employee from "./scenes/employee/employee";
-import Applicant from "./scenes/applicant/applicant";
-import ViewEmployee from "./scenes/employee/viewEmployee";
-import Form from "./scenes/applicant/newApplicant";
-import ViewApplicant from "./scenes/applicant/viewApplicant";
+import Applicant from "./scenes/applicant/Applicant";
+import ViewEmployee from "./scenes/employee/ViewEmployee";
+import NewApplicant from "./scenes/applicant/NewApplicant";
+import ViewApplicant from "./scenes/applicant/ViewApplicant";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getApplicants } from "./actions/applicants/applicants";
@@ -34,7 +34,7 @@ function App() {
   useEffect(() => {
     const getReduxData = async () => {
       dispatch(getApplicants());
-    }
+    };
     getReduxData();
   }, [dispatch]);
 
@@ -50,7 +50,7 @@ function App() {
             <Route path='/dashboard/team' element={<Team />} />
             <Route path='/dashboard/employee' element={<Employee />} />
             <Route path='/dashboard/applicant' element={<Applicant />} />
-            <Route path='/dashboard/add-applicant' element={<Form />} />
+            <Route path='/dashboard/add-applicant' element={<NewApplicant />} />
             <Route path='/dashboard/view-applicant' element={<ViewApplicant />} />
             <Route path='/dashboard/view-employee' element={<ViewEmployee />} />
           </Route>

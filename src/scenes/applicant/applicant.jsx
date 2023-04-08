@@ -117,8 +117,7 @@ const Applicant = () => {
           "& .MuiCheckbox-root": {
             color: `${colors.greenAccent[200]} !important`,
           },
-        }}
-      >
+        }}>
         <DataGrid rows={mockDataTeam} columns={columns} />
       </Box>
     </Box>
