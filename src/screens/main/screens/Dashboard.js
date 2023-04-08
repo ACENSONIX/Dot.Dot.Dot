@@ -20,8 +20,6 @@ import messaging from '@react-native-firebase/messaging';
 import {Dropdown} from 'react-native-element-dropdown';
 import {BarChart} from 'react-native-chart-kit';
 import setOfStrings from '../../../utility/screenStrings';
-import Video from 'react-native-video';
-import VideoPlayer from 'react-native-video-controls';
 var PushNotification = require('react-native-push-notification');
 
 const recentPrecautionData = [
@@ -44,8 +42,6 @@ const recentPrecautionData = [
 ];
 
 export default function Dashboard({navigation}) {
-
-  const [checkVideo, setCheckVideo] = React.useState(false);
   useEffect(() => {
     navigation.setOptions({
       header: () => (
@@ -107,9 +103,6 @@ export default function Dashboard({navigation}) {
     setUpFirebase();
   }, []);
 
-  const openTutorial = () => {
-    setCheckVideo(!checkVideo);
-  };
 
   const requestUserPermission = async () => {
     const authorizationStatus = await messaging().requestPermission();
@@ -253,16 +246,6 @@ export default function Dashboard({navigation}) {
       style={[styles.styleFull, {paddingHorizontal: 15, paddingTop: 10}]}
       showsVerticalScrollIndicator={false}>
       <View>
-        {checkVideo && (
-          <View style={internalStyles.video}>
-            <VideoPlayer
-              controls={true}
-              source={require('../../../assets/video/Tutorial.mp4')}
-              style={internalStyles.videoplayer}
-              resizeMode="contain"
-            />
-          </View>
-        )}
         <View style={internalStyles.home}>
           <Text style={internalStyles.header}>{setOfStrings.overview}</Text>
         </View>
@@ -377,22 +360,6 @@ export default function Dashboard({navigation}) {
 }
 
 const internalStyles = StyleSheet.create({
-  video: {
-    width: '100%',
-    height: 400,
-    borderRadius: 10,
-    backgroundColor: colors.WHITE,
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 1,
-    marginBottom: 10,
-  },
-  videoplayer: {
-    width: '100%',
-    height: '100%',
-    borderRadius: 10,
-  },
   header: {
     color: colors.BLACK,
     fontWeight: '700',

@@ -85,7 +85,7 @@ export default function Signup({navigation}) {
           style={{
             fontFamily: fonts.FONT_FAMILY.Regular,
             fontSize: fonts._23,
-            color: colors.WHITE,
+            color: colors.PRIMARY,
           }}>
           Hello,
         </Text>
@@ -93,7 +93,7 @@ export default function Signup({navigation}) {
           style={{
             fontFamily: fonts.FONT_FAMILY.Bold,
             fontSize: fonts._27,
-            color: colors.WHITE,
+            color: colors.PRIMARY,
           }}>
           Let’s get Started
         </Text>

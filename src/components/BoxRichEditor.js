@@ -71,7 +71,7 @@ const internalStyles = StyleSheet.create({
     fontFamily: fonts.FONT_FAMILY.Regular,
     fontWeight: '400',
     fontSize: fonts._13,
-    color: colors.WHITE,
+    color: colors.BLACK,
     opacity:0.5
   },
   container: {

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
-import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, Image, ScrollView, Alert} from 'react-native';
 import Ripple from 'react-native-material-ripple';
 import SplashScreen from 'react-native-splash-screen';
 import CommonInput from '../../components/CommonInput';
@@ -12,6 +12,7 @@ import global from '../../utility/global';
 import fonts from '../../utility/fonts';
 import colors from '../../styles/colors';
 import setOfStrings from '../../utility/screenStrings'
+import TouchId from 'react-native-touch-id';
 
 const apiKey = {
   USERTYPE: 'userType',
@@ -134,11 +135,26 @@ export default function Login({route,navigation}) {
           </View>
           <View style={internalstyles.buttonLogin}>
             <PrimaryButton title={setOfStrings.submit} onPress={handleSubmit(doLogin)} />
-            {/* <Ripple
-              onPress={() => changeStack()}
+            <Ripple
+              onPress={() => TouchId.authenticate('Place your fingerprint!', {
+                title: 'Authentication',
+              })
+                .then(() => {
+                  Alert.alert('Authentication Successful!');
+                  console.log('Done');
+                  setTimeout(() => {
+                    navigation.reset({
+                      index: 0,
+                      routes: [{name: 'MainStack'}],
+                    });
+                  }, 1000);
+                })
+                .catch(() => {
+                  Alert.alert('Fingerprint Did not match');
+                })}
               style={{
                 marginTop: '5%',
-                borderColor: colors.GREY,
+                borderColor: colors.PRIMARY,
                 borderWidth: 1,
                 borderRadius: 5,
                 width: '90%',
@@ -147,9 +163,9 @@ export default function Login({route,navigation}) {
                 justifyContent: 'center',
               }}>
               <Text style={{fontSize: fonts._14, color: colors.BLACK}}>
-                {setOfStrings.skip}
+                FingerPrint Login
               </Text>
-            </Ripple> */}
+            </Ripple>
           </View>
         </View>
       </ScrollView>
@@ -199,13 +215,13 @@ const internalstyles = StyleSheet.create({
   notSignedUpText: {
     fontFamily: fonts.FONT_FAMILY.Regular,
     fontWeight: '400',
-    fontSize: fonts._12,
+    fontSize: fonts._14,
     color: colors.WHITE,
   },
   signUpText: {
     fontFamily: fonts.FONT_FAMILY.SemiBold,
     fontWeight: '600',
-    fontSize: fonts._11,
+    fontSize: fonts._13,
     color: colors.PRIMARY,
     textDecorationLine: 'underline',
     marginLeft: 5,

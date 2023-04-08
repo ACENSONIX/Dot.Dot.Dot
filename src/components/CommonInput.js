@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: fonts._13,
     textAlignVertical: 'center',
-    color: colors.WHITE,
+    color: colors.BLACK,
   },
   ripple: {
     flex: 0.2,

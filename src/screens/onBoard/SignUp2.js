@@ -153,14 +153,14 @@ export default function SignUp2({navigation}) {
   };
   return (
     <LinearGradient
-      colors={[colors.BACKGROUND, colors.BLACK]}
+      colors={[colors.BACKGROUND, colors.WHITE]}
       style={styles.styleFull}>
       <View style={{height: '25%', justifyContent: 'center', paddingLeft: 30}}>
         <Text
           style={{
             fontFamily: fonts.FONT_FAMILY.Regular,
             fontSize: fonts._23,
-            color: colors.WHITE,
+            color: colors.PRIMARY,
           }}>
           Your,
         </Text>
@@ -168,7 +168,7 @@ export default function SignUp2({navigation}) {
           style={{
             fontFamily: fonts.FONT_FAMILY.Bold,
             fontSize: fonts._27,
-            color: colors.WHITE,
+            color: colors.PRIMARY,
           }}>
           Professional Details
         </Text>
