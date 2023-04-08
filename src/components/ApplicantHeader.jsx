@@ -8,6 +8,9 @@ const ApplicantHeader = ({ title, subtitle }) => {
   return (
     <Box sx={{display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
     <Box mb="30px" >
+      <Typography variant="h5" color={colors.greenAccent[100]}>
+        {subtitle}
+      </Typography>
       <Typography
         variant="h2"
         color={colors.grey[100]}

@@ -18,12 +18,13 @@ import { ColorModeContext, useMode } from "./theme";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Layout from "./components/Layout";
-import Employee from "./scenes/employee/Employee";
-import Applicant from "./scenes/applicant/Applicant";
+import Employee from "./scenes/employee/employee";
+import Applicant from "./scenes/applicant/applicant";
 import ViewEmployee from "./scenes/employee/viewEmployee";
 import NewApplicant from "./scenes/applicant/newApplicant";
 import ViewApplicant from "./scenes/applicant/viewApplicant";
 import Profile from "./scenes/profile/profile";
+import Landing from "./components/Landing";
 
 //redux
 import { useDispatch } from "react-redux";

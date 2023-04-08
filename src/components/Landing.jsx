@@ -17,7 +17,7 @@ const Landing = () => {
       <Grid className='hero' id='top'>
         <VStack className='hero-content'>
           <h1 className='hero-header'>HR Verifications</h1>
-          <p>Empowering job providers to take the next step in their career.</p>
+          <h4>Empowering job providers to take the next step in their career.</h4>
         </VStack>
         <svg
           version='1.1'
@@ -201,7 +201,7 @@ const Landing = () => {
             y='375'
             fill='white'
             fontSize='16pt'>
-            Get Shortlisted
+            Verify through AI
           </text>
           <text
             className='path-text-3'
@@ -221,7 +221,7 @@ const Landing = () => {
             y='175'
             fill='white'
             fontSize='16pt'>
-            Interview
+            Get Hired
           </text>
           <text
             className='path-text-5'
@@ -266,7 +266,7 @@ const Landing = () => {
             data-aos-delay='200'>
             <Image src={graduate} width='5rem' />
             <Text as='h2' color='gray.800' fontWeight='bold' fontSize='3xl'>
-              Recent Graduate
+              Fresher
             </Text>
           </VStack>
           <VStack
@@ -324,13 +324,13 @@ const Landing = () => {
             Made by,
           </Text>
           <Grid>
-            <Text>Aman Nambisan</Text>
-            <Text>Varun Vishwanath</Text>
-            <Text>Devansh Ashar</Text>
+            <Text>Pratik Wadke</Text>
+            <Text>Sahil Shetty</Text>
+            <Text>Nihal Gupta</Text>
             <Text>Devansh Rathor</Text>
           </Grid>
           <Text as='h3' fontWeight='bold'>
-            For LOC 5.0
+            For Codeshastra 9.0
           </Text>
         </Box>
         <Box>
@@ -338,11 +338,8 @@ const Landing = () => {
             Links
           </Text>
           <Grid color='#af99ff'>
-            <Link href='/top'>Home</Link>
-            <Link href='/aboutus'>About Us</Link>
             <Link href='/signup'>Sign Up</Link>
             <Link href='/login'>Login</Link>
-            <Link href='/dashboard'>DashBoard</Link>
           </Grid>
         </Box>
         <Box>

@@ -9,8 +9,13 @@ import Header from "../../components/Header";
 import { useEffect } from "react";
 import ApplicantHeader from "../../components/ApplicantHeader";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Applicant = () => {
+
+  const applicants = useSelector((state) => state.applicant.applicantData);
+  console.log(applicants.user);
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const columns = [
@@ -118,7 +123,7 @@ const Applicant = () => {
             color: `${colors.greenAccent[200]} !important`,
           },
         }}>
-        <DataGrid rows={mockDataTeam} columns={columns} />
+        <DataGrid rows={applicants.user} columns={columns} />
       </Box>
     </Box>
   );
