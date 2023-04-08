@@ -17,7 +17,6 @@ import constants from '../../../utility/constants';
 import fonts from '../../../utility/fonts';
 import global from '../../../utility/global';
 import messaging from '@react-native-firebase/messaging';
-import {Dropdown} from 'react-native-element-dropdown';
 import {BarChart} from 'react-native-chart-kit';
 import setOfStrings from '../../../utility/screenStrings';
 var PushNotification = require('react-native-push-notification');
@@ -80,11 +79,6 @@ export default function Dashboard({navigation}) {
         console.log('NOTIFICATION test:', notification);
 
         handleNotificationClick(notification.data);
-
-        // process the notification
-
-        // (required) Called when a remote is received or opened, or local notification is opened
-        // notification.finish(PushNotificationIOS.FetchResult.NoData);
       },
 
       // (optional) Called when Registered Action is pressed and invokeApp is false, if true onNotification will be called (Android)
@@ -150,33 +144,6 @@ export default function Dashboard({navigation}) {
   const handleNotificationClick = notification => {
     console.log('handleNotificationClick: ' + JSON.stringify(notification));
     return;
-
-    // if (global.isEmptyObject(state.user)) {
-    //   navigateTo('OnBoard', notification);
-    //   return;
-    // }
-
-    if (notification && notification.type) {
-      switch (notification.type) {
-        // case "1":
-        //   props.navigation.navigate("ProductDetail", {
-        //     [constants.PARAM_PRODUCT]: notification.id ? {
-        //       productId: notification.id
-        //     } : null,
-        //   })
-        //   break;
-
-        case '2':
-          props.navigation.navigate('OrderDetails', {
-            [constants.PARAM_ORDER_ID]: notification.id
-              ? notification.id
-              : null,
-          });
-          break;
-        default:
-          break;
-      }
-    }
   };
 
   const refreshTokenListener = () => {
@@ -257,12 +224,12 @@ export default function Dashboard({navigation}) {
               marginVertical: 10,
             }}>
             {rederRectangle(
-              setOfStrings.totalCrops,
+              setOfStrings.totalHoursWorked,
               '1000',
               require('../../../assets/images/totalcrops.png'),
             )}
             {rederRectangle(
-              setOfStrings.totalFarmArea,
+              setOfStrings.totalRedFlags,
               '1000',
               require('../../../assets/images/farmarea.png'),
             )}
@@ -274,12 +241,12 @@ export default function Dashboard({navigation}) {
               marginVertical: 10,
             }}>
             {rederRectangle(
-              setOfStrings.totalDiseasedCrop,
+              setOfStrings.totalOrangeFlags,
               '1000',
               require('../../../assets/images/diseasedcrops.png'),
             )}
             {rederRectangle(
-              setOfStrings.totalProduction,
+              setOfStrings.totalYellowFlags,
               '1000',
               require('../../../assets/images/totalproduction.png'),
             )}
@@ -289,7 +256,7 @@ export default function Dashboard({navigation}) {
       <View style={internalStyles.earningAndSales}>
         <View style={internalStyles.home}>
           <Text style={internalStyles.header}>
-            {setOfStrings.productionDetails}
+            {setOfStrings.recentDetails}
           </Text>
         </View>
         <View style={{flex: 1, padding: 5, alignItems: 'center'}}>
@@ -341,7 +308,7 @@ export default function Dashboard({navigation}) {
           />
         </View>
       </View>
-      <View styles={internalStyles.recentPrecaution}>
+      {/* <View styles={internalStyles.recentPrecaution}>
         <View
           style={[internalStyles.home, {paddingVertical: 0, paddingTop: 15}]}>
           <Text style={internalStyles.header}>
@@ -354,7 +321,7 @@ export default function Dashboard({navigation}) {
           keyExtractor={item => item.id}
           style={{paddingBottom: 10}}
         />
-      </View>
+      </View> */}
     </ScrollView>
   );
 }

@@ -116,7 +116,7 @@ export default function Login({route,navigation}) {
               validationError={constants.ERROR_PASSWORDV}
             />
           </View>
-          <View style={internalstyles.forgotPassword}>
+          {/* <View style={internalstyles.forgotPassword}>
             <Ripple onPress={() => navigation.navigate('ForgotPassword')}>
               <Text style={internalstyles.forgotPasswordText}>
                 {setOfStrings.forgotPassword}
@@ -132,9 +132,9 @@ export default function Login({route,navigation}) {
                 {setOfStrings.signUp}
               </Text>
             </Ripple>
-          </View>
+          </View> */}
           <View style={internalstyles.buttonLogin}>
-            <PrimaryButton title={setOfStrings.submit} onPress={handleSubmit(doLogin)} />
+            <PrimaryButton title={setOfStrings.login} onPress={handleSubmit(doLogin)} />
             <Ripple
               onPress={() => TouchId.authenticate('Place your fingerprint!', {
                 title: 'Authentication',

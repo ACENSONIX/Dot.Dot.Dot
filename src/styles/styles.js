@@ -17,7 +17,7 @@ var styles = StyleSheet.create({
     backgroundColor: colors.BACKGROUND,
   },
   bottomTabBarStyle: {
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.BACKGROUND2,
     height: 70,
     marginBottom: hasNotch ? -40 : 0,
     elevation: 24,

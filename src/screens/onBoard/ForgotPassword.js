@@ -45,7 +45,7 @@ export default function ForgotPassword({navigation}) {
   return (
     <View style={[styles.styleFull]}>
       <LinearGradient
-        colors={[colors.BACKGROUND, colors.BLACK]}
+        colors={[colors.BACKGROUND, colors.WHITE]}
         style={styles.styleFull}>
         <View style={{height: '25%'}} />
         <View style={internalstyles.mainContainer}>

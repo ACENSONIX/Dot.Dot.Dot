@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     height: 56,
     alignItems: 'center',
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.BACKGROUND2,
     paddingHorizontal: 15,
     elevation: 5,
   },

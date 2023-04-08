@@ -7,10 +7,7 @@ import colors from '../styles/colors';
 import constants from '../utility/constants';
 import global from '../utility/global';
 import DashboardStack from './main/DashboardStack';
-import UploadImageStack from './main/UploadImageStack';
 import styles from '../styles/styles';
-import ForumStack from './main/ForumStack';
-import WeatherStack from './main/WeatherStack';
 import SettingsStack from './main/SettingsStack';
 
 
@@ -45,17 +42,14 @@ const bottomTabNavigator = () => {
     <Tab.Navigator
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color}) => getTabBarIcon(route, focused, color),
-        tabBarActiveTintColor: colors.BLACK,
-        tabBarInactiveTintColor: colors.TAB_INACTIVE,
+        tabBarActiveTintColor: colors.PRIMARY,
+        tabBarInactiveTintColor: colors.GREY,
         tabBarShowLabel: false,
         headerShown: false,
         tabBarStyle: styles.bottomTabBarStyle,
       })}
       initialRouteName="DashboardStack">
-      <Tab.Screen name={'WeatherStack'} component={WeatherStack} />
-      <Tab.Screen name={'UploadImageStack'} component={UploadImageStack} />
       <Tab.Screen name={'DashboardStack'} component={DashboardStack} />
-      <Tab.Screen name={'ForumStack'} component={ForumStack} />
       <Tab.Screen name={'SettingsStack'} component={SettingsStack} />
     </Tab.Navigator>
   );

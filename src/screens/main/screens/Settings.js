@@ -10,22 +10,22 @@ import Header from '../../../components/Header';
 import {launchImageLibrary} from 'react-native-image-picker';
 const list = [
   {
-    name: 'Subscribe New Expert',
-    screen: 'SubscribeNewExpert',
+    name: 'Add New Employee',
+    screen: 'AddNewEmployee',
     icon: 'external-link',
   },
   {
-    name: 'My Subscription Plan',
-    screen: 'CurrentPlan',
-    icon: 'credit-card',
-  },
+    name: 'Check Employee',
+    screen: 'CheckEmployee',
+    icon: 'camera',
+  }
 ];
 
 const accountInfo = {
-  name: "Farmer's Name",
+  name: 'Name',
   mobile: '1234567890',
-  email: 'username',
-  credits: '10',
+  email: 'nihalng786@gmail.com',
+  reviews: '0',
 };
 export default function Settings({navigation}) {
   const [logo, setLogo] = React.useState(null);
@@ -43,6 +43,7 @@ export default function Settings({navigation}) {
   const navigateTo = screen => {
     navigation.navigate(screen);
   };
+
   const showLogoutAlert = () => {
     global.showAlert('Logout', 'Are you sure you want to logout?', () => {
       global.storeItem(constants.USER_DATA, null);
@@ -56,21 +57,6 @@ export default function Settings({navigation}) {
         });
       }, 1000);
     });
-  };
-
-  const doUnsubscribe = () => {
-    console.log('doUnsubscribe');
-  };
-
-  const showUnsubscribeAlert = () => {
-    global.showAlert(
-      'Unsubscribe',
-      'Are you sure you want to unsubscribe? Your Money will not be deducted further.',
-      () => {
-        global.showMessage('Unsubscribe successfully', false);
-        doUnsubscribe();
-      },
-    );
   };
 
   const handleImagePicker = () => {
@@ -87,10 +73,6 @@ export default function Settings({navigation}) {
         console.log('logo', logo);
       }
     });
-  };
-
-  const invitefriend = () => {
-    console.log('invitefriend');
   };
 
   const getAccountInfo = () => {
@@ -125,10 +107,10 @@ export default function Settings({navigation}) {
             <Text style={internalStyles.name}>{accountInfo.name}</Text>
 
             <Text style={internalStyles.infoText}>{accountInfo.mobile}</Text>
-            <Text style={internalStyles.infoText}>Credits Earned : {accountInfo.credits}</Text>
-            <Text style={[internalStyles.infoText]}>
-              {accountInfo.email}
+            <Text style={internalStyles.infoText}>
+              Reviews : {accountInfo.reviews}
             </Text>
+            <Text style={[internalStyles.infoText]}>{accountInfo.email}</Text>
           </View>
         </View>
       </View>
@@ -141,7 +123,7 @@ export default function Settings({navigation}) {
         styles.styleFull,
         {
           paddingHorizontal: 15,
-          marginTop: 10,
+          paddingTop: 15,
         },
       ]}>
       {getAccountInfo()}
@@ -187,20 +169,18 @@ export default function Settings({navigation}) {
           </Ripple>
         );
       })}
-
       <Ripple
         style={[
           internalStyles.twoColumn,
           internalStyles.ripple,
           {
             backgroundColor: colors.WHITE,
-            paddingStart: 10,
+            paddingStart: 9,
           },
         ]}
-        onPress={() => showUnsubscribeAlert()}>
+        onPress={() => navigateTo('ChooseLanguage')}>
         <View style={{flexDirection: 'row'}}>
-          {global.drawIcon(constants.IC_FEATHER, 'edit-3', 19, colors.PRIMARY)}
-
+          {global.drawIcon(constants.IC_FEATHER, 'globe', 19, colors.PRIMARY)}
           <Text
             style={[
               internalStyles.text,
@@ -209,7 +189,7 @@ export default function Settings({navigation}) {
                 marginLeft: 19,
               },
             ]}>
-            Unsubscribe Current Plan
+            Choose Language
           </Text>
         </View>
         {global.drawIcon(constants.IC_FEATHER, 'chevron-right', 20, '#A6A6A6')}
@@ -221,13 +201,12 @@ export default function Settings({navigation}) {
           internalStyles.ripple,
           {
             backgroundColor: colors.WHITE,
-            paddingStart: 10,
+            paddingLeft: 9,
           },
         ]}
-        onPress={() => invitefriend()}>
+        onPress={() => console.log('Share Profile CLicked')}>
         <View style={{flexDirection: 'row'}}>
-          {global.drawIcon(constants.IC_FEATHER, 'link', 19, colors.PRIMARY)}
-
+          {global.drawIcon(constants.IC_FEATHER, 'share-2', 19, colors.PRIMARY)}
           <Text
             style={[
               internalStyles.text,
@@ -236,7 +215,7 @@ export default function Settings({navigation}) {
                 marginLeft: 19,
               },
             ]}>
-            Invite A Friend
+            Share Profile
           </Text>
         </View>
         {global.drawIcon(constants.IC_FEATHER, 'chevron-right', 20, '#A6A6A6')}
@@ -250,7 +229,7 @@ export default function Settings({navigation}) {
             backgroundColor: colors.SECONDARY,
             marginTop: 28,
             marginBottom: 10,
-            paddingLeft: 18,
+            paddingLeft: 9,
           },
         ]}
         onPress={() => showLogoutAlert()}>

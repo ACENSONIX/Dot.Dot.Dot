@@ -22,7 +22,11 @@ const data = [
 export default function ChooseLanguage({navigation}) {
   const setText = shortForm => {
     setOfStrings.setLanguage(shortForm);
-    navigation.navigate('Login', {JSON_CLICKED_ITEM: shortForm});
+    // if back screen is Settings then navigate to Settings
+    // else navigate to Login
+    navigation.canGoBack()
+      ? navigation.navigate('Settings', {JSON_CLICKED_ITEM: shortForm})
+      : navigation.navigate('Login', {JSON_CLICKED_ITEM: shortForm});
   };
 
   return (

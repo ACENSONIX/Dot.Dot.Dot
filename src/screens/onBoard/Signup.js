@@ -52,28 +52,59 @@ export default function Signup({navigation}) {
   };
 
   const callApi = data => {
-    var formData = new FormData();
-    formData.append(apiKey.EMAIL, data.email);
-    formData.append(apiKey.FirstName, data.firstName);
-    formData.append(apiKey.LastName, data.lastName);
-    formData.append(apiKey.MOBILE_NUMBER, data.mobileNumber);
-    formData.append(apiKey.LOCATION, data.location);
-    formData.append(apiKey.ADDRESS, data.address);
-    formData.append(apiKey.ZIPCODE, data.zip);
-    formData.append(apiKey.PASSWORD, data.password);
-    formData.append(apiKey.AADHAR, data.aadhar);
-    formData.append(apiKey.PAN, data.pan);
-    formData.append(apiKey.Image, data.image);
-    console.log(formData);
-    // axios.post('http://192.168.208.132:4000/user/signup', formData)
+    // var formData = new FormData();
+    // formData.append(apiKey.EMAIL, data.email);
+    // formData.append(apiKey.FirstName, data.firstName);
+    // formData.append(apiKey.LastName, data.lastName);
+    // formData.append(apiKey.MOBILE_NUMBER, data.mobileNumber);
+    // formData.append(apiKey.LOCATION, data.location);
+    // formData.append(apiKey.ADDRESS, data.address);
+    // formData.append(apiKey.ZIPCODE, data.zip);
+    // formData.append(apiKey.PASSWORD, data.password);
+    // formData.append(apiKey.AADHAR, data.aadhar);
+    // formData.append(apiKey.PAN, data.pan);
+    // formData.append(apiKey.Image, data.image);
+    // console.log(formData);
+    // axios.post('http://localhost:4000/user/signup', formData)
     //   .then(res => {
     //     console.log(res);
     //   })
     //   .catch(err => {
     //     console.log(JSON.stringify(err));
     //   });
-    console.log('api called');
-    doNavigate();
+    // console.log('api called');
+    // doNavigate();
+    var myHeaders = new Headers();
+    myHeaders.append(
+      'Cookie',
+      'connect.sid=s%3A7TiJYb7Rudxmi9jMhiPzm3_1UdNfxy6j.gX3dCg0NTwYbI1ODPA4JqG027%2FNr3kDoPTyn7UJw6BU',
+    );
+
+    var formdata = new FormData();
+    formdata.append('firstName', 'Nihal');
+    formdata.append('lastName', 'Gupta');
+    formdata.append('email', 'nihal@gmail.com');
+    formdata.append('password', 'nihal123');
+    formdata.append('location', 'Mumbai');
+    formdata.append('phone', '9833256433');
+    formdata.append('address', 'Goregaon');
+    formdata.append('zip', '400104');
+    formdata.append('dob', '03122002');
+    formdata.append(apiKey.AADHAR, data.aadhar);
+    formdata.append(apiKey.PAN, data.pan);
+    formdata.append(apiKey.Image, data.image);
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow',
+    };
+
+    fetch('http://localhost:4000/user/signup', requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
   };
 
   return (
