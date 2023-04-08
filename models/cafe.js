@@ -2,6 +2,7 @@ const dbConn= require('./../utils/dbConnection')
 const Sequelize= require('sequelize')
 
 const Cafe_Model= dbConn.define('cafe', {
+    owner: Sequelize.STRING,
     name : Sequelize.STRING,
     email: Sequelize.STRING,
     password: Sequelize.STRING,
