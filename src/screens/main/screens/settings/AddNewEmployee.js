@@ -80,18 +80,35 @@ export default function AddNewEmployee({navigation}) {
     );
 
     var formdata = new FormData();
-    formdata.append('firstName', 'Nihal');
-    formdata.append('lastName', 'Gupta');
-    formdata.append('email', 'nihal@gmail.com');
-    formdata.append('password', 'nihal123');
-    formdata.append('location', 'Mumbai');
-    formdata.append('phone', '9833256433');
-    formdata.append('address', 'Goregaon');
-    formdata.append('zip', '400104');
-    formdata.append('dob', '03122002');
-    formdata.append(apiKey.AADHAR, data.aadhar);
-    formdata.append(apiKey.PAN, data.pan);
-    formdata.append(apiKey.Image, data.image);
+    formdata.append(apiKey.FirstName, data[apiKey.FirstName]);
+    formdata.append(apiKey.LastName, data[apiKey.LastName]);
+    formdata.append(apiKey.EMAIL, data[apiKey.EMAIL]);
+    formdata.append(apiKey.MOBILE_NUMBER, data[apiKey.MOBILE_NUMBER]);
+    formdata.append(apiKey.LOCATION, data[apiKey.LOCATION]);
+    formdata.append(apiKey.ADDRESS, data[apiKey.ADDRESS]);
+    formdata.append(apiKey.ZIPCODE, data[apiKey.ZIPCODE]);
+    formdata.append(apiKey.PASSWORD, data[apiKey.PASSWORD]);
+    formdata.append(apiKey.AADHAR, {
+      uri: data[apiKey.AADHAR].uri,
+      name: 'photo.png',
+      filename: 'imageName.png',
+      type: 'image/png',
+    });
+    formdata.append('Content-Type', 'image/png');
+    formdata.append(apiKey.PAN, {
+      uri: data[apiKey.PAN].uri,
+      name: 'photo.png',
+      filename: 'imageName.png',
+      type: 'image/png',
+    });
+    formdata.append('Content-Type', 'image/png');
+    formdata.append(apiKey.Image, {
+      uri: data[apiKey.Image].uri,
+      name: 'photo.png',
+      filename: 'imageName.png',
+      type: 'image/png',
+    });
+    formdata.append('Content-Type', 'image/png');
 
     var requestOptions = {
       method: 'POST',
@@ -364,7 +381,7 @@ export default function AddNewEmployee({navigation}) {
             />
           </View>
           <View style={internalstyles.buttonNext}>
-            <PrimaryButton title="Add" onPress={callApi} />
+            <PrimaryButton title="Add" onPress={handleSubmit(callApi)} />
           </View>
         </View>
       </ScrollView>
