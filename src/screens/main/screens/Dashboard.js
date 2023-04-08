@@ -50,7 +50,24 @@ const employeesData = [
 ];
 
 export default function Dashboard({navigation}) {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({
+    cafe: {
+      address: 'Nihal',
+      createdAt: '2023-04-08T17:50:15.000Z',
+      email: 'nihalng786@gmail.com',
+      fssai: null,
+      gstNo: null,
+      id: 13,
+      location: 'Nihal',
+      name: 'Nihal',
+      pan: 'cafe/pan/13.jpg',
+      password: 'nuhal123#',
+      phone: '9833256433',
+      updatedAt: '2023-04-08T17:50:15.000Z',
+      zip: 'Nihal',
+    },
+    message: 'Login Successful',
+  });
   useEffect(() => {
     global.getItem(constants.USER_DATA).then(result => {
       console.log('result', result);
@@ -59,7 +76,7 @@ export default function Dashboard({navigation}) {
     navigation.setOptions({
       header: () => (
         <Header
-          title={user ? setOfStrings.hey + ' ' : setOfStrings.hey}
+          title={user ? setOfStrings.hey + ' ' + user.cafe.name: setOfStrings.hey}
           showBackButton={false}
           navigation={navigation}
           endRippleIcon={'phone-call'}

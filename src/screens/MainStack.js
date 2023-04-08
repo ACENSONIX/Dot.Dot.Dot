@@ -9,6 +9,7 @@ import DashboardStack from './main/DashboardStack';
 import styles from '../styles/styles';
 import SettingsStack from './main/SettingsStack';
 import UpdatesStack from './main/UpdatesStack';
+import MapStack from './main/MapStack';
 
 const getTabBarIcon = (route, focused, color) => {
   if (route.name === 'DashboardStack') {
@@ -17,6 +18,8 @@ const getTabBarIcon = (route, focused, color) => {
     return global.drawIcon(constants.IC_MATERIAL, 'settings', 26, color);
   } else if (route.name === 'UpdatesStack') {
     return global.drawIcon(constants.IC_MATERIAL, 'activity', 26, color);
+  } else if (route.name === 'MapStack') {
+    return global.drawIcon(constants.IC_MATERIAL, 'map', 26, color);
   }
 };
 
@@ -35,6 +38,7 @@ const bottomTabNavigator = () => {
       })}
       initialRouteName="DashboardStack">
       <Tab.Screen name={'DashboardStack'} component={DashboardStack} />
+      <Tab.Screen name={'MapStack'} component={MapStack} />
       <Tab.Screen name={'UpdatesStack'} component={UpdatesStack} />
       <Tab.Screen name={'SettingsStack'} component={SettingsStack} />
     </Tab.Navigator>
