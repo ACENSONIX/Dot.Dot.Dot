@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.FONT_FAMILY.Regular,
     fontWeight: '400',
     fontSize: fonts._10,
-    color: colors.BLACK,
+    color: colors.PRIMARY,
     opacity: 0.5,
   },
   boxView: {
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: fonts._13,
     textAlignVertical: 'center',
-    color: colors.BLACK,
+    color: colors.WHITE,
   },
   ripple: {
     flex: 0.2,

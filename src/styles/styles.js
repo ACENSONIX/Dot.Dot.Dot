@@ -26,7 +26,8 @@ var styles = StyleSheet.create({
   titleOnBoard: {
     fontSize: fonts._18,
     fontFamily: fonts.FONT_FAMILY.SemiBold,
-    color: colors.BLACK,
+    fontWeight: '800',
+    color: colors.PRIMARY,
   },
   titleStep: {
     fontSize: fonts._20,

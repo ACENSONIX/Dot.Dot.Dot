@@ -71,11 +71,11 @@ const internalStyles = StyleSheet.create({
     fontFamily: fonts.FONT_FAMILY.Regular,
     fontWeight: '400',
     fontSize: fonts._13,
-    color: colors.BLACK,
+    color: colors.WHITE,
     opacity:0.5
   },
   container: {
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.BACKGROUND2,
     borderRadius: 8,
     paddingBottom: 8,
   },

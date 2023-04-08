@@ -167,7 +167,7 @@ const internalstyles = StyleSheet.create({
   },
   mainContainer: {
     flex: 1,
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.BACKGROUND2,
     paddingBottom: 30,
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
@@ -200,7 +200,7 @@ const internalstyles = StyleSheet.create({
     fontFamily: fonts.FONT_FAMILY.Regular,
     fontWeight: '400',
     fontSize: fonts._12,
-    color: colors.BLACK,
+    color: colors.WHITE,
   },
   signUpText: {
     fontFamily: fonts.FONT_FAMILY.SemiBold,

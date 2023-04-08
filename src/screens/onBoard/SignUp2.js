@@ -21,6 +21,7 @@ import ImagePicker from '../../components/ImagePicker';
 import BoxInput from '../../components/BoxInput';
 import BoxRichEditor from '../../components/BoxRichEditor';
 import Ripple from 'react-native-material-ripple';
+import LinearGradient from 'react-native-linear-gradient';
 
 const apiKey = {
   RESUME: 'resume',
@@ -125,8 +126,8 @@ export default function SignUp2({navigation}) {
           requiredError={constants.ERROR_NAME}
         />
         <BoxRichEditor
-          title={workKey.DESCRIPTION}
-          name={'description'}
+          name={workKey.DESCRIPTION}
+          title={'Description'}
           control={control}
           errors={errors}
           rules={{
@@ -151,8 +152,8 @@ export default function SignUp2({navigation}) {
     );
   };
   return (
-    <ImageBackground
-      source={require('../../assets/images/background_onboard.jpg')}
+    <LinearGradient
+      colors={[colors.BACKGROUND, colors.BLACK]}
       style={styles.styleFull}>
       <View style={{height: '25%', justifyContent: 'center', paddingLeft: 30}}>
         <Text
@@ -199,11 +200,7 @@ export default function SignUp2({navigation}) {
                 alignItems: 'flex-start',
                 flexDirection: 'row',
               }}>
-              <Text
-                style={[
-                  styles.titleOnBoard,
-                  {color: colors.BLACK, fontFamily: fonts.FONT_FAMILY.Regular},
-                ]}>
+              <Text style={[styles.titleOnBoard]}>
                 Add Professionl Experience
               </Text>
             </View>
@@ -239,7 +236,7 @@ export default function SignUp2({navigation}) {
           </View>
         </View>
       </ScrollView>
-    </ImageBackground>
+    </LinearGradient>
   );
 }
 
@@ -253,7 +250,7 @@ const internalstyles = StyleSheet.create({
   },
   mainContainer: {
     flex: 1,
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.BACKGROUND2,
     paddingBottom: 30,
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
@@ -270,11 +267,6 @@ const internalstyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: -15,
-  },
-  title: {
-    fontFamily: 'bold',
-    fontSize: fonts._16,
-    color: colors.BLACK,
   },
   btnPrimary: {
     backgroundColor: colors.PRIMARY,

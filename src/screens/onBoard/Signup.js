@@ -16,9 +16,9 @@ import PrimaryButton from '../../components/PrimaryButton';
 import constants from '../../utility/constants';
 import styles from '../../styles/styles';
 import setOfStrings from '../../utility/screenStrings';
-import {launchImageLibrary} from 'react-native-image-picker';
 import ImagePicker from '../../components/ImagePicker';
 import axios from 'axios';
+import LinearGradient from 'react-native-linear-gradient';
 
 const apiKey = {
   EMAIL: 'email',
@@ -73,12 +73,12 @@ export default function Signup({navigation}) {
     //     console.log(JSON.stringify(err));
     //   });
     console.log('api called');
-    // doNavigate();
+    doNavigate();
   };
 
   return (
-    <ImageBackground
-      source={require('../../assets/images/background_onboard.jpg')}
+    <LinearGradient
+      colors={[colors.BACKGROUND, colors.WHITE]}
       style={styles.styleFull}>
       <View style={{height: '25%', justifyContent: 'center', paddingLeft: 30}}>
         <Text
@@ -128,7 +128,7 @@ export default function Signup({navigation}) {
               <Text
                 style={[
                   styles.titleOnBoard,
-                  {color: colors.BLACK, fontFamily: fonts.FONT_FAMILY.Regular},
+                  {color: colors.WHITE, fontFamily: fonts.FONT_FAMILY.Regular},
                 ]}>
                 Start:{' '}
               </Text>
@@ -338,7 +338,7 @@ export default function Signup({navigation}) {
           </View>
         </View>
       </ScrollView>
-    </ImageBackground>
+    </LinearGradient>
   );
 }
 
@@ -352,7 +352,7 @@ const internalstyles = StyleSheet.create({
   },
   mainContainer: {
     flex: 1,
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.BACKGROUND2,
     paddingBottom: 30,
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,

@@ -14,6 +14,7 @@ import styles from '../../styles/styles';
 import constants from '../../utility/constants';
 import global from '../../utility/global';
 import setOfStrings from '../../utility/screenStrings';
+import LinearGradient from 'react-native-linear-gradient';
 
 const apiKey = {
   USERTYPE: 'userType',
@@ -43,8 +44,8 @@ export default function ForgotPassword({navigation}) {
 
   return (
     <View style={[styles.styleFull]}>
-      <ImageBackground
-        source={require('../../assets/images/background_onboard.jpg')}
+      <LinearGradient
+        colors={[colors.BACKGROUND, colors.BLACK]}
         style={styles.styleFull}>
         <View style={{height: '25%'}} />
         <View style={internalstyles.mainContainer}>
@@ -102,7 +103,7 @@ export default function ForgotPassword({navigation}) {
             />
           </View>
         </View>
-      </ImageBackground>
+      </LinearGradient>
     </View>
   );
 }
@@ -116,7 +117,7 @@ const internalstyles = StyleSheet.create({
   },
   mainContainer: {
     flex: 1,
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.BACKGROUND2,
     paddingBottom: 30,
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,

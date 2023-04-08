@@ -83,6 +83,7 @@ const internalStyles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1,
     borderStyle: 'dashed',
+    borderColor: colors.GREY,
     justifyContent: 'center',
     alignItems: 'center',
   },
