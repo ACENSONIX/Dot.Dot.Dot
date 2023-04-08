@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 // import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
@@ -21,9 +22,10 @@ import Employee from "./scenes/employee/Employee";
 import Applicant from "./scenes/applicant/Applicant";
 import ViewEmployee from "./scenes/employee/viewEmployee";
 import NewApplicant from "./scenes/applicant/newApplicant";
-import ViewApplicant from "./scenes/applicant/ViewApplicant";
-import Landing from "./components/Landing";
-import { useEffect } from "react";
+import ViewApplicant from "./scenes/applicant/viewApplicant";
+import Profile from "./scenes/profile/profile";
+
+//redux
 import { useDispatch } from "react-redux";
 import { getApplicants } from "./actions/applicants/applicants";
 
@@ -54,6 +56,7 @@ function App() {
             <Route path='/dashboard/add-applicant' element={<NewApplicant />} />
             <Route path='/dashboard/view-applicant/:id' element={<ViewApplicant />} />
             <Route path='/dashboard/view-employee/:id' element={<ViewEmployee />} />
+            <Route path='/dashboard/profile' element={<Profile />} />
           </Route>
 
           {/* 

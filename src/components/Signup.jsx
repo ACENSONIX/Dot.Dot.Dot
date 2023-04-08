@@ -25,6 +25,7 @@ const Form = () => {
       formData.append("email", values.email);
       formData.append("phone", values.contact);
       formData.append("address", values.address);
+      formData.append("location", values.location);
       formData.append("zip", values.pincode);
       formData.append("gstNo", values.gst);
       formData.append("pan", image);

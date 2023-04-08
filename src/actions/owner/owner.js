@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, REGISTER } from "../../constants/actionTypes";
+import { LOGIN, LOGOUT, REGISTER, VIEW_PROFILE } from "../../constants/actionTypes";
 import * as api from "../../api/index.js";
 
 export const login = (formData, router) => async (dispatch) => {
@@ -21,7 +21,7 @@ export const register = (formData, router) => async (dispatch) => {
     }
 }
 
-export const logout = () => (dispatch, router) => {
+export const logout = (router) => (dispatch) => {
     try {
         dispatch({ type: LOGOUT });
         router("/login");
@@ -29,3 +29,14 @@ export const logout = () => (dispatch, router) => {
         console.log(error);
     }
 }
+
+export const getProfile = (id) => async (dispatch) => {
+    try {
+        const { data } = await api.getProfile(id);
+        dispatch({ type: VIEW_PROFILE, data });
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+

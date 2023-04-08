@@ -20,6 +20,7 @@
     "@nivo/geo": "^0.55.0",
     "@nivo/line": "^0.55.0",
     "@nivo/pie": "^0.55.0",
+    "@react-google-maps/api": "^2.18.1",
     "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
