@@ -21,17 +21,17 @@ import axios from 'axios';
 import LinearGradient from 'react-native-linear-gradient';
 
 const apiKey = {
+  NAME: 'name',
   EMAIL: 'email',
-  FirstName: 'firstName',
-  LastName: 'lastName',
-  LOCATION: 'location',
-  ADDRESS: 'address',
-  ZIPCODE: 'zip',
+  OWNER: 'owner',
   PASSWORD: 'password',
-  MOBILE_NUMBER: 'mobileNumber',
-  AADHAR: 'aadhar',
-  PAN: 'pan',
-  Image: 'image',
+  LOCATION: 'location',
+  PHONE: 'phone',
+  ADDRESS: 'address',
+  ZIP: 'zip',
+  GSTNO: 'gstno',
+  IMAGE: 'image',
+  FSSAI: 'fssai',
 };
 
 export default function Signup({navigation}) {
@@ -52,28 +52,6 @@ export default function Signup({navigation}) {
   };
 
   const callApi = data => {
-    // var formData = new FormData();
-    // formData.append(apiKey.EMAIL, data.email);
-    // formData.append(apiKey.FirstName, data.firstName);
-    // formData.append(apiKey.LastName, data.lastName);
-    // formData.append(apiKey.MOBILE_NUMBER, data.mobileNumber);
-    // formData.append(apiKey.LOCATION, data.location);
-    // formData.append(apiKey.ADDRESS, data.address);
-    // formData.append(apiKey.ZIPCODE, data.zip);
-    // formData.append(apiKey.PASSWORD, data.password);
-    // formData.append(apiKey.AADHAR, data.aadhar);
-    // formData.append(apiKey.PAN, data.pan);
-    // formData.append(apiKey.Image, data.image);
-    // console.log(formData);
-    // axios.post('http://localhost:4000/user/signup', formData)
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log(JSON.stringify(err));
-    //   });
-    // console.log('api called');
-    // doNavigate();
     var myHeaders = new Headers();
     myHeaders.append(
       'Cookie',
@@ -90,8 +68,6 @@ export default function Signup({navigation}) {
     formdata.append('address', 'Goregaon');
     formdata.append('zip', '400104');
     formdata.append('dob', '03122002');
-    formdata.append(apiKey.AADHAR, data.aadhar);
-    formdata.append(apiKey.PAN, data.pan);
     formdata.append(apiKey.Image, data.image);
 
     var requestOptions = {
@@ -168,25 +144,23 @@ export default function Signup({navigation}) {
           </View>
           <View style={{paddingHorizontal: 22}}>
             <CommonInput
-              name={apiKey.MOBILE_NUMBER}
-              title={constants.TXT_MOBILE_NUMBER}
+              name={apiKey.NAME}
+              title={constants.TXT_NAME}
               starMark={true}
               control={control}
               errors={errors}
               rules={{
                 required: true,
-                pattern: global.getValidPhoneNumberRegex(),
               }}
               otherTextInputProps={{
                 editable: !isLoading,
-                placeholder: `Enter ${constants.TXT_MOBILE_NUMBER}`,
+                placeholder: `Enter ${constants.TXT_NAME}`,
               }}
               textBoxStyle={{backgroundColor: colors.BACKGROUND}}
               style={{
                 marginTop: 26,
               }}
-              requiredError={constants.ERROR_MOBILE}
-              validationError={constants.ERROR_MOBILEV}
+              requiredError={constants.ERROR_NAME}
             />
             <CommonInput
               name={apiKey.EMAIL}
@@ -207,7 +181,6 @@ export default function Signup({navigation}) {
               }}
               requiredError={constants.ERROR_USERNAME}
             />
-
             <CommonInput
               name={apiKey.PASSWORD}
               title={constants.TXT_PASSWORD}
@@ -230,8 +203,8 @@ export default function Signup({navigation}) {
               validationError={constants.ERROR_PASSWORDV}
             />
             <CommonInput
-              name={apiKey.FirstName}
-              title={constants.TXT_FIRST_NAME}
+              name={apiKey.OWNER}
+              title={constants.TXT_NAME_OF_OWNER}
               starMark={true}
               control={control}
               errors={errors}
@@ -239,9 +212,10 @@ export default function Signup({navigation}) {
                 required: true,
               }}
               textBoxStyle={{backgroundColor: colors.BACKGROUND}}
+              secureTextEntry={true}
               otherTextInputProps={{
                 editable: !isLoading,
-                placeholder: `Enter ${constants.TXT_FIRST_NAME}`,
+                placeholder: `Enter ${constants.TXT_NAME_OF_OWNER}`,
               }}
               style={{
                 marginTop: 26,
@@ -249,42 +223,25 @@ export default function Signup({navigation}) {
               requiredError={constants.ERROR_NAME}
             />
             <CommonInput
-              name={apiKey.LastName}
-              title={constants.TXT_LAST_NAME}
+              name={apiKey.PHONE}
+              title={constants.TXT_MOBILE_NUMBER}
               starMark={true}
               control={control}
               errors={errors}
               rules={{
                 required: true,
+                pattern: global.getValidPhoneNumberRegex(),
               }}
-              textBoxStyle={{backgroundColor: colors.BACKGROUND}}
               otherTextInputProps={{
                 editable: !isLoading,
-                placeholder: `Enter ${constants.TXT_LAST_NAME}`,
+                placeholder: `Enter ${constants.TXT_MOBILE_NUMBER}`,
               }}
+              textBoxStyle={{backgroundColor: colors.BACKGROUND}}
               style={{
                 marginTop: 26,
               }}
-              requiredError={constants.ERROR_NAME}
-            />
-            <CommonInput
-              name={apiKey.ADDRESS}
-              title={constants.TXT_ADDRESS}
-              starMark={true}
-              control={control}
-              errors={errors}
-              rules={{
-                required: true,
-              }}
-              textBoxStyle={{backgroundColor: colors.BACKGROUND}}
-              otherTextInputProps={{
-                editable: !isLoading,
-                placeholder: `Enter ${constants.TXT_ADDRESS}`,
-              }}
-              style={{
-                marginTop: 26,
-              }}
-              requiredError={constants.ERROR_LOCATION}
+              requiredError={constants.ERROR_MOBILE}
+              validationError={constants.ERROR_MOBILEV}
             />
             <CommonInput
               name={apiKey.LOCATION}
@@ -306,7 +263,26 @@ export default function Signup({navigation}) {
               requiredError={constants.ERROR_LOCATION}
             />
             <CommonInput
-              name={apiKey.ZIPCODE}
+              name={apiKey.ADDRESS}
+              title={constants.TXT_ADDRESS}
+              starMark={true}
+              control={control}
+              errors={errors}
+              rules={{
+                required: true,
+              }}
+              textBoxStyle={{backgroundColor: colors.BACKGROUND}}
+              otherTextInputProps={{
+                editable: !isLoading,
+                placeholder: `Enter ${constants.TXT_ADDRESS}`,
+              }}
+              style={{
+                marginTop: 26,
+              }}
+              requiredError={constants.ERROR_LOCATION}
+            />
+            <CommonInput
+              name={apiKey.ZIP}
               title={constants.TXT_ZIP_CODE}
               starMark={true}
               control={control}
@@ -324,34 +300,46 @@ export default function Signup({navigation}) {
               }}
               requiredError={constants.ERROR_LOCATION}
             />
-            <ImagePicker
-              name={apiKey.AADHAR}
-              title={'Aadhar Card Image'}
+            <CommonInput
+              name={apiKey.GSTNO}
+              title={constants.TXT_GST_NO}
+              starMark={true}
               control={control}
               errors={errors}
               rules={{
                 required: true,
               }}
-              recomText={setOfStrings.recomSize}
-              style={{marginVertical: 17, height: 150}}
-              uploadBox={{height: 150}}
-              disabled={isLoading}
+              textBoxStyle={{backgroundColor: colors.BACKGROUND}}
+              otherTextInputProps={{
+                editable: !isLoading,
+                placeholder: `Enter ${constants.TXT_GST_NO}`,
+              }}
+              style={{
+                marginTop: 26,
+              }}
+              requiredError={constants.ERROR_LOCATION}
             />
-            <ImagePicker
-              name={apiKey.PAN}
-              title={'Pan Card Image'}
+            <CommonInput
+              name={apiKey.FSSAI}
+              title={constants.TXT_FSSAI_NO}
+              starMark={true}
               control={control}
               errors={errors}
               rules={{
                 required: true,
               }}
-              recomText={setOfStrings.recomSize}
-              style={{marginVertical: 17, height: 150}}
-              uploadBox={{height: 150}}
-              disabled={isLoading}
+              textBoxStyle={{backgroundColor: colors.BACKGROUND}}
+              otherTextInputProps={{
+                editable: !isLoading,
+                placeholder: `Enter ${constants.TXT_FSSAI_NO}`,
+              }}
+              style={{
+                marginTop: 26,
+              }}
+              requiredError={constants.ERROR_LOCATION}
             />
             <ImagePicker
-              name={apiKey.Image}
+              name={apiKey.IMAGE}
               title={'Upload Your Image'}
               control={control}
               errors={errors}

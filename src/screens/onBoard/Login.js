@@ -11,7 +11,7 @@ import {useForm} from 'react-hook-form';
 import global from '../../utility/global';
 import fonts from '../../utility/fonts';
 import colors from '../../styles/colors';
-import setOfStrings from '../../utility/screenStrings'
+import setOfStrings from '../../utility/screenStrings';
 import TouchId from 'react-native-touch-id';
 
 const apiKey = {
@@ -20,7 +20,7 @@ const apiKey = {
   PASSWORD: 'password',
 };
 
-export default function Login({route,navigation}) {
+export default function Login({route, navigation}) {
   const [isLoading, setLoading] = useState(false);
   // accept params from ChooseLanguage.js
   const {
@@ -48,7 +48,7 @@ export default function Login({route,navigation}) {
   };
 
   const changeStack = () => {
-    global.storeItem(constants.USER_DATA, "null");
+    global.storeItem(constants.USER_DATA, 'null');
     setTimeout(() => {
       navigation.reset({
         index: 0,
@@ -116,7 +116,7 @@ export default function Login({route,navigation}) {
               validationError={constants.ERROR_PASSWORDV}
             />
           </View>
-          {/* <View style={internalstyles.forgotPassword}>
+          <View style={internalstyles.forgotPassword}>
             <Ripple onPress={() => navigation.navigate('ForgotPassword')}>
               <Text style={internalstyles.forgotPasswordText}>
                 {setOfStrings.forgotPassword}
@@ -132,26 +132,31 @@ export default function Login({route,navigation}) {
                 {setOfStrings.signUp}
               </Text>
             </Ripple>
-          </View> */}
+          </View>
           <View style={internalstyles.buttonLogin}>
-            <PrimaryButton title={setOfStrings.login} onPress={handleSubmit(doLogin)} />
+            <PrimaryButton
+              title={setOfStrings.login}
+              onPress={handleSubmit(doLogin)}
+            />
             <Ripple
-              onPress={() => TouchId.authenticate('Place your fingerprint!', {
-                title: 'Authentication',
-              })
-                .then(() => {
-                  Alert.alert('Authentication Successful!');
-                  console.log('Done');
-                  setTimeout(() => {
-                    navigation.reset({
-                      index: 0,
-                      routes: [{name: 'MainStack'}],
-                    });
-                  }, 1000);
+              onPress={() =>
+                TouchId.authenticate('Place your fingerprint!', {
+                  title: 'Authentication',
                 })
-                .catch(() => {
-                  Alert.alert('Fingerprint Did not match');
-                })}
+                  .then(() => {
+                    Alert.alert('Authentication Successful!');
+                    console.log('Done');
+                    setTimeout(() => {
+                      navigation.reset({
+                        index: 0,
+                        routes: [{name: 'MainStack'}],
+                      });
+                    }, 1000);
+                  })
+                  .catch(() => {
+                    Alert.alert('Fingerprint Did not match');
+                  })
+              }
               style={{
                 marginTop: '5%',
                 borderColor: colors.PRIMARY,

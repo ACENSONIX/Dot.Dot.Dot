@@ -1,5 +1,13 @@
 import React, {useEffect} from 'react';
-import {FlatList, Image, ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
+import {
+  FlatList,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import Ripple from 'react-native-material-ripple';
 import Header from '../../../../components/Header';
 import colors from '../../../../styles/colors';
@@ -94,13 +102,19 @@ export default function ViewPost({navigation}) {
                 alignItems: 'center',
               }}>
               <Text style={internalStyles.name}>{item.name}</Text>
-              <Text style={{fontSize: 12,color:colors.GREY}}>
+              <Text style={{fontSize: 12, color: colors.GREY}}>
                 {'  '}· {item.location}
               </Text>
             </View>
           </View>
         </View>
-        <Text style={{fontSize: 14, fontWeight: 'normal', marginTop: 10,color:colors.GREY}}>
+        <Text
+          style={{
+            fontSize: 14,
+            fontWeight: 'normal',
+            marginTop: 10,
+            color: colors.GREY,
+          }}>
           {item.comment}
         </Text>
         <View
@@ -159,9 +173,7 @@ export default function ViewPost({navigation}) {
   };
 
   return (
-    <ScrollView 
-    showsVerticalScrollIndicator={false}
-    style={[styles.styleFull]}>
+    <ScrollView showsVerticalScrollIndicator={false} style={[styles.styleFull]}>
       <Image
         source={require('../../../../assets/sample/late_blight.jpg')}
         style={{height: 200, width: '100%'}}
