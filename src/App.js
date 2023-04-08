@@ -17,11 +17,12 @@ import { ColorModeContext, useMode } from "./theme";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Layout from "./components/Layout";
-import Employee from "./scenes/employee/employee";
-import Applicant from "./scenes/applicant/applicant";
+import Employee from "./scenes/employee/Employee";
+import Applicant from "./scenes/applicant/Applicant";
 import ViewEmployee from "./scenes/employee/viewEmployee";
 import NewApplicant from "./scenes/applicant/newApplicant";
-import ViewApplicant from "./scenes/applicant/viewApplicant";
+import ViewApplicant from "./scenes/applicant/ViewApplicant";
+import Landing from "./components/Landing";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getApplicants } from "./actions/applicants/applicants";
@@ -43,7 +44,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Routes>
-          {/* <Route path='/' element={<Dashboard />} /> */}
+          <Route path='/' element={<Landing />} />
 
           <Route path='/dashboard' element={<Layout />}>
             <Route path='/dashboard/app' element={<Dashboard />} />

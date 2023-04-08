@@ -97,6 +97,7 @@ const ViewEmployee = () => {
         backdropFilter='blur(20px)'>
         <Tooltip title='Green Flag' sx={{ fontSize: "1.5rem" }}>
           <Button
+            onClick={handleModalOpen}
             sx={{
               backgroundColor: colors.greenAccent["600"],
               fontWeight: "bold",
@@ -111,6 +112,7 @@ const ViewEmployee = () => {
         </Tooltip>
         <Tooltip title='Yellow Flag' sx={{ fontSize: "1.5rem" }}>
           <Button
+            onClick={handleModalOpen}
             sx={{
               backgroundColor: colors.yellowAccent["600"],
               fontSize: "1.25em",
@@ -125,6 +127,7 @@ const ViewEmployee = () => {
         </Tooltip>
         <Tooltip title='Orange Flag' sx={{ fontSize: "1.5rem" }}>
           <Button
+            onClick={handleModalOpen}
             sx={{
               backgroundColor: colors.orangeAccent["600"],
               fontSize: "1.25em",
@@ -154,25 +157,46 @@ const ViewEmployee = () => {
         </Tooltip>
       </Box>
       <Dialog open={ModalOpen} onClose={handleModalClose}>
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>Reason</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here. We will send updates
-            occasionally.
-          </DialogContentText>
+          <DialogContentText>Reason for your choice</DialogContentText>
           <TextField
             autoFocus
             margin='dense'
             id='name'
-            label='Email Address'
-            type='email'
+            label='Reason'
+            type='text'
             fullWidth
-            variant='standard'
+            variant='filled'
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleModalClose}>Cancel</Button>
-          <Button onClick={handleModalClose}>Submit</Button>
+          <Button
+            sx={{
+              backgroundColor: colors.grey["600"],
+              fontSize: "1.25em",
+              fontWeight: "bold",
+              color: colors.primary["900"],
+              "&:hover": {
+                backgroundColor: colors.grey["400"],
+              },
+            }}
+            onClick={handleModalClose}>
+            Cancel
+          </Button>
+          <Button
+            sx={{
+              backgroundColor: colors.grey["600"],
+              fontSize: "1.25em",
+              fontWeight: "bold",
+              color: colors.primary["900"],
+              "&:hover": {
+                backgroundColor: colors.grey["400"],
+              },
+            }}
+            onClick={handleModalClose}>
+            Submit
+          </Button>
         </DialogActions>
       </Dialog>
     </Box>
