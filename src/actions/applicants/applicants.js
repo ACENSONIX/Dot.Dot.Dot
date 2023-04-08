@@ -1,11 +1,10 @@
 import { ADD_APPLICANT, VIEW_APPLICANT, GET_APPLICANTS } from "../../constants/actionTypes";
 import * as api from  "../../api/index.js";
 
-export const addApplicant = (formData, history) => async (dispatch) => {
+export const addApplicant = (formData) => async (dispatch) => {
     try {
         const { data } = await api.addApplicant(formData);
         dispatch({ type: ADD_APPLICANT, data });
-        // history.push("/dashboard/app");
     } catch (error) {
         console.log(error);
     }

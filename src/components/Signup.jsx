@@ -4,13 +4,34 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "./Header";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { register } from "../actions/owner/owner";
 
 const Form = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const [image, setImage] = useState();
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleFormSubmit = values => {
     console.log({ values, image });
+    try{
+      let formData = new FormData();
+      formData.append("name", values.name);
+      formData.append("owner", values.owner);
+      formData.append("email", values.email);
+      formData.append("phone", values.contact);
+      formData.append("address", values.address);
+      formData.append("zip", values.pincode);
+      formData.append("gstNo", values.gst);
+      formData.append("pan", image);
+      formData.append("password", values.password);
+      dispatch(register(formData, navigate));
+    }catch(err){
+      console.log(err);
+    }
   };
 
   const handleImageFile = e => {
@@ -162,20 +183,6 @@ const Form = () => {
                 helperText={touched.password_confirm && errors.password_confirm}
                 sx={{ gridColumn: "span 2" }}
               />
-
-              {/* <TextField
-                fullWidth
-                variant='filled'
-                type='text'
-                label='PAN Number'
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.pan}
-                name='pan'
-                error={!!touched.pan && !!errors.pan}
-                helperText={touched.pan && errors.pan}
-                sx={{ gridColumn: "span 2" }}
-              /> */}
             </Box>
             <Box display='grid' mt='20px'>
               <Button type='submit' color='secondary' variant='contained'>

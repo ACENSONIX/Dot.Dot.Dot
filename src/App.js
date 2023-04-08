@@ -18,19 +18,30 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Layout from "./components/Layout";
 import Employee from "./scenes/employee/employee";
-import Applicant from "./scenes/applicant/Applicant";
-import ViewEmployee from "./scenes/employee/ViewEmployee";
-import Form from "./scenes/applicant/NewApplicant";
-import ViewApplicant from "./scenes/applicant/ViewApplicant";
+import Applicant from "./scenes/applicant/applicant";
+import ViewEmployee from "./scenes/employee/viewEmployee";
+import Form from "./scenes/applicant/newApplicant";
+import ViewApplicant from "./scenes/applicant/viewApplicant";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getApplicants } from "./actions/applicants/applicants";
 
 function App() {
   const [theme, colorMode] = useMode();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const getReduxData = async () => {
+      dispatch(getApplicants());
+    }
+    getReduxData();
+  }, [dispatch]);
 
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-
         <Routes>
           {/* <Route path='/' element={<Dashboard />} /> */}
 

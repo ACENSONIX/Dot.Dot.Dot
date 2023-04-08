@@ -3,12 +3,27 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "./Header";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { login } from "../actions/owner/owner";
 
 const Form = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleFormSubmit = values => {
     console.log(values);
+    try{
+      const data = {
+        email: values.email,
+        password: values.password,
+      }
+      dispatch(login(data, navigate));
+    }catch(err){
+      console.log(err);
+    }
   };
 
   return (

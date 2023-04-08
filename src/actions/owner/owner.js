@@ -1,30 +1,30 @@
 import { LOGIN, LOGOUT, REGISTER } from "../../constants/actionTypes";
 import * as api from "../../api/index.js";
 
-export const login = (formData, history) => async (dispatch) => {
+export const login = (formData, router) => async (dispatch) => {
     try {
         const { data } = await api.login(formData);
         dispatch({ type: LOGIN, data });
-        history.push("/dashboard/app");
+        router("/dashboard/app");
     } catch (error) {
         console.log(error);
     }
 };
 
-export const register = (formData, history) => async (dispatch) => {
+export const register = (formData, router) => async (dispatch) => {
     try {
         const { data } = await api.register(formData);
         dispatch({ type: REGISTER, data });
-        history.push("/dashboard/app");
+        router("/dashboard/app");
     } catch (error) {
         console.log(error);
     }
 }
 
-export const logout = () => (dispatch) => {
+export const logout = () => (dispatch, router) => {
     try {
         dispatch({ type: LOGOUT });
-        history.push("/login");
+        router("/login");
     } catch (error) {
         console.log(error);
     }
