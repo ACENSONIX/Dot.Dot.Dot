@@ -18,6 +18,7 @@ import styles from '../../../../styles/styles';
 import setOfStrings from '../../../../utility/screenStrings';
 import ImagePicker from '../../../../components/ImagePicker';
 import LinearGradient from 'react-native-linear-gradient';
+import Header from '../../../../components/Header';
 
 const apiKey = {
   EMAIL: 'email',
@@ -43,36 +44,19 @@ export default function AddNewEmployee({navigation}) {
   } = useForm();
 
   useEffect(() => {
-    // drawToolbar();
+    drawToolbar();
   }, []);
+  const drawToolbar = () => {
+    navigation.setOptions({
+      header: () => <Header title={'Check Employee'} navigation={navigation} />,
+    });
+  };
 
   const doNavigate = () => {
     navigation.navigate('SignUp2');
   };
 
   const callApi = data => {
-    // var formData = new FormData();
-    // formData.append(apiKey.EMAIL, data.email);
-    // formData.append(apiKey.FirstName, data.firstName);
-    // formData.append(apiKey.LastName, data.lastName);
-    // formData.append(apiKey.MOBILE_NUMBER, data.mobileNumber);
-    // formData.append(apiKey.LOCATION, data.location);
-    // formData.append(apiKey.ADDRESS, data.address);
-    // formData.append(apiKey.ZIPCODE, data.zip);
-    // formData.append(apiKey.PASSWORD, data.password);
-    // formData.append(apiKey.AADHAR, data.aadhar);
-    // formData.append(apiKey.PAN, data.pan);
-    // formData.append(apiKey.Image, data.image);
-    // console.log(formData);
-    // axios.post('http://localhost:4000/user/signup', formData)
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log(JSON.stringify(err));
-    //   });
-    // console.log('api called');
-    // doNavigate();
     var myHeaders = new Headers();
     myHeaders.append(
       'Cookie',

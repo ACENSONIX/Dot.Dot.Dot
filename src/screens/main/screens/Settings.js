@@ -18,19 +18,34 @@ const list = [
     name: 'Check Employee',
     screen: 'CheckEmployee',
     icon: 'camera',
-  }
+  },
 ];
-
-const accountInfo = {
-  name: 'Name',
-  mobile: '1234567890',
-  email: 'nihalng786@gmail.com',
-  reviews: '0',
-};
 export default function Settings({navigation}) {
+  const [accountInfo, setAccountInfo] = React.useState({
+    cafe: {
+      address: 'Nihal',
+      createdAt: '2023-04-08T17:50:15.000Z',
+      email: 'nihalng786@gmail.com',
+      fssai: null,
+      gstNo: null,
+      id: 13,
+      location: 'Nihal',
+      name: 'Nihal',
+      pan: 'cafe/pan/13.jpg',
+      password: 'nuhal123#',
+      phone: '9833256433',
+      updatedAt: '2023-04-08T17:50:15.000Z',
+      zip: 'Nihal',
+    },
+    message: 'Login Successful',
+  });
   const [logo, setLogo] = React.useState(null);
 
   useEffect(() => {
+    global.getItem(constants.USER_DATA).then(data => {
+      setAccountInfo(data);
+      console.log('data', data);
+    });
     drawToolbar();
   }, []);
 

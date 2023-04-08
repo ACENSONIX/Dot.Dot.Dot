@@ -32,16 +32,6 @@ export default function CheckEmployee({navigation}) {
     });
   };
 
-  const onCheck = data => {
-    console.log(data);
-    // setLoading(false);
-    // if (data.status) {
-    //   setOutput(data.data);
-    // } else {
-    //   global.showMessage(data.message, true, false);
-    // }
-  };
-
   const check = data => {
     // const data2 = new FormData();
     // data2.append('image', data.image.uri);
@@ -55,7 +45,33 @@ export default function CheckEmployee({navigation}) {
     //   }
     // });
     // navigation.navigate('EmployeeDetails', {data: data.image.uri})
-    navigation.navigate('EmployeeDetails')
+    // navigation.navigate('EmployeeDetails')
+    var myHeaders = new Headers();
+    myHeaders.append(
+      'Cookie',
+      'connect.sid=s%3AAB3Vjg-buznA_ihXmhLh48wIagY4CRh6.fy%2BGgmW5j6PrTQnza28jm05mDnSVvXFgbgQ2aPUwYZk',
+    );
+
+    var formdata = new FormData();
+    formdata.append(apikey.IMAGE, {
+      uri: data[apikey.IMAGE].uri,
+      name: 'photo.png',
+      filename: 'imageName.png',
+      type: 'image/png',
+    });
+    formdata.append('Content-Type', 'image/png');
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow',
+    };
+
+    fetch('http://192.168.91.132:4000/user/search', requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
   };
   return (
     <ScrollView

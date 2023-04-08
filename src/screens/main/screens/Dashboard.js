@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {
   View,
@@ -19,19 +19,47 @@ import global from '../../../utility/global';
 import messaging from '@react-native-firebase/messaging';
 import {BarChart} from 'react-native-chart-kit';
 import setOfStrings from '../../../utility/screenStrings';
+import Ripple from 'react-native-material-ripple';
 var PushNotification = require('react-native-push-notification');
 
-const employeesData = [];
+const employeesData = [
+  {
+    id: 1,
+    name: 'John Doe',
+    image: require('../../../assets/images/logo.jpg'),
+    status: 'Active',
+    role: 'Chef',
+    joiningDate: '12/12/2020',
+  },
+  {
+    id: 2,
+    name: 'John Doe',
+    image: require('../../../assets/images/logo.jpg'),
+    status: 'Active',
+    role: 'Chef',
+    joiningDate: '12/12/2020',
+  },
+  {
+    id: 3,
+    name: 'John Doe',
+    image: require('../../../assets/images/logo.jpg'),
+    status: 'Active',
+    role: 'Chef',
+    joiningDate: '12/12/2020',
+  },
+];
 
 export default function Dashboard({navigation}) {
+  const [user, setUser] = useState({});
   useEffect(() => {
     global.getItem(constants.USER_DATA).then(result => {
       console.log('result', result);
+      setUser(result);
     });
     navigation.setOptions({
       header: () => (
         <Header
-          title={setOfStrings.hey + ' ' + 'Username'}
+          title={user ? setOfStrings.hey + ' ' : setOfStrings.hey}
           showBackButton={false}
           navigation={navigation}
           endRippleIcon={'phone-call'}
@@ -145,9 +173,13 @@ export default function Dashboard({navigation}) {
     });
   };
 
-  const renderRecentPrecautions = item => {
+  const renderEmployee = item => {
     return (
-      <View style={internalStyles.recentPrecautionsItem}>
+      <Ripple
+        style={internalStyles.recentPrecautionsItem}
+        onPress={() => {
+          console.log('item', item);
+        }}>
         <View style={internalStyles.recentPrecautionsItemLeft}>
           <Image
             source={item.image}
@@ -160,16 +192,19 @@ export default function Dashboard({navigation}) {
               flexDirection: 'row',
               alignItems: 'center',
             }}>
-            <Text style={internalStyles.title}>{item.title}</Text>
-            <Text style={{fontSize: 12}}>
-              {'  '}· {item.date}
+            <Text style={internalStyles.title}>
+              {item.name} {'  '}· {item.joiningDate}
             </Text>
           </View>
-          <Text style={internalStyles.crop}>{item.crop}</Text>
-          <Text style={{color: colors.GREY}}>{item.disease}</Text>
-          <Text style={{color: colors.GREY}}>{item.precautions}</Text>
+          <Text style={internalStyles.crop}>{item.role}</Text>
+          <Text
+            style={{
+              color: item.status === 'Active' ? 'green' : colors.RED,
+            }}>
+            {item.status}
+          </Text>
         </View>
-      </View>
+      </Ripple>
     );
   };
 
@@ -367,7 +402,7 @@ const internalStyles = StyleSheet.create({
     marginVertical: 5,
   },
   recentPrecautionsItemLeft: {
-    width: 100,
+    width: 80,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -375,8 +410,8 @@ const internalStyles = StyleSheet.create({
     width: '80%',
   },
   recentPrecautionsItemImage: {
-    width: 100,
-    height: 80,
+    width: 80,
+    height: 70,
     marginRight: 5,
   },
   title: {
