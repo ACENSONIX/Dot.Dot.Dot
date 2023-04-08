@@ -124,7 +124,7 @@ export default constants = {
   PARAM_SHOW_VARIANT: 'show variant',
   PARAM_SETUP_STORE_INDEX: 'setup store index',
 
-  USER_DATA: 'USER_DATA',
+  USER_DATA: 'user',
   SETUP_STORE_DATA: 'SETUP_STORE_DATA',
 
   FIREBASE_TOKEN: 'FIREBASE',

@@ -35,16 +35,39 @@ export default function Login({route, navigation}) {
   }, []);
 
   const doLogin = data => {
-    global.showMessage('Login Successfully', false);
-    global.storeItem(constants.USER_DATA, data);
-    setLoading(true);
+    var myHeaders = new Headers();
+    myHeaders.append(
+      'Cookie',
+      'connect.sid=s%3AmUo_wrn5FMYvbl4cm-QXM6StKVd1FLs_.%2F2wZdTVmrFCjoxFmSPaNNxG39EI2TbZoK5AzKLUfg2E',
+    );
 
-    setTimeout(() => {
-      navigation.reset({
-        index: 0,
-        routes: [{name: 'MainStack'}],
-      });
-    }, 1000);
+    var formdata = new FormData();
+    formdata.append('email', data[apiKey.USERNAME]);
+    formdata.append('password', data[apiKey.PASSWORD]);
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow',
+    };
+
+    fetch('http://localhost:4000/cafe/login', requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        if (result) {
+          global.storeItem(constants.USER_DATA, result);
+          setTimeout(() => {
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'MainStack'}],
+            });
+          }, 1000);
+        } else {
+          console.log(result);
+        }
+      })
+      .catch(error => console.log('error', error));
   };
 
   const changeStack = () => {

@@ -21,12 +21,13 @@ import {BarChart} from 'react-native-chart-kit';
 import setOfStrings from '../../../utility/screenStrings';
 var PushNotification = require('react-native-push-notification');
 
-const employeesData = [
-  
-]
+const employeesData = [];
 
 export default function Dashboard({navigation}) {
   useEffect(() => {
+    global.getItem(constants.USER_DATA).then(result => {
+      console.log('result', result);
+    });
     navigation.setOptions({
       header: () => (
         <Header
@@ -81,7 +82,6 @@ export default function Dashboard({navigation}) {
     requestUserPermission();
     setUpFirebase();
   }, []);
-
 
   const requestUserPermission = async () => {
     const authorizationStatus = await messaging().requestPermission();
@@ -296,9 +296,7 @@ export default function Dashboard({navigation}) {
       <View styles={internalStyles.recentPrecaution}>
         <View
           style={[internalStyles.home, {paddingVertical: 0, paddingTop: 15}]}>
-          <Text style={internalStyles.header}>
-            {setOfStrings.allEmployees}
-          </Text>
+          <Text style={internalStyles.header}>{setOfStrings.allEmployees}</Text>
         </View>
         <FlatList
           data={employeesData}
