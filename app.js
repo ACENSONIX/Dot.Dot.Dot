@@ -32,6 +32,8 @@ app.use((req, res, next) => {
 });
 
 app.use('', require('./routes/user'));
+app.use('', require('./routes/cafe'));
+app.use('', require('./routes/work'));
 
 app.use(express.static("public"));
 

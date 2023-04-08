@@ -19,10 +19,14 @@ router.post('/user/login', userController.login);
 
 router.get('/user/profile', userController.getUser);
 
-// router.get('/user/profile', authMiddleware, userController.profile)
+router.get('/user/profile/:id', userController.getUser)
 
-// router.post('/user/update', authMiddleware, userController.update)
+router.get('/user/employee', userController.getEmployedUser);
 
-// router.post('/user/delete', authMiddleware, userController.delete)
+router.get('/user/employee/:id', userController.getEmployedUser);
+
+router.post('/user/flag/:id', userController.flagUser);
+
+router.get('/user/flag/:id', userController.viewFlaggedUser);
 
 module.exports= router;
