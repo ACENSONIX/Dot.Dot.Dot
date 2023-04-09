@@ -1,10 +1,10 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "./Header";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { login } from "../actions/owner/owner";
 import ReactCaptcha from "modern-react-captcha";
 import { useState } from "react";
@@ -116,6 +116,11 @@ const Form = () => {
                 Login
               </Button>
             </Box>
+      <Link to="/signup" style={{textDecoration:'none', marginTop:"20px"}}>
+        <Typography variant="h7" color="white">
+        Don't have an account? Sign up
+        </Typography>
+        </Link>
           </form>
         )}
       </Formik>

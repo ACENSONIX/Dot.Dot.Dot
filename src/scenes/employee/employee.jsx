@@ -39,9 +39,8 @@ const Employee = () => {
       valueGetter: getFullName,
     },
     {
-      field: "age",
-      headerName: "Age",
-      type: "number",
+      field: "dob",
+      headerName: "DOB",
       headerAlign: "left",
       align: "left",
     },

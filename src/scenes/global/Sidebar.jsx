@@ -131,7 +131,7 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
 
-            <Typography variant='h6' color={colors.grey[300]} sx={{ m: "15px 0 5px 20px" }}>
+            <Typography variant='h3' color={colors.grey[300]} sx={{ m: "15px 0 5px 20px" }}>
               Data
             </Typography>
             <Item
@@ -163,6 +163,25 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
 
+            <Typography variant='h3' color={colors.grey[300]} sx={{ m: "15px 0 5px 20px" }}>
+              Documents Verification
+            </Typography>
+            <Item
+              title='Aadhar'
+              to='/dashboard/aadhar'
+              icon={<PeopleOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            >
+            </Item>
+            <Item
+              title='PAN'
+              to='/dashboard/pan'
+              icon={<PeopleOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            >
+            </Item>
             {/* <Item
               title="Contacts Information"
               to="/contacts"

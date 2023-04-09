@@ -25,8 +25,8 @@ class CaptchaTest extends Component {
   render() {
     return (
       <>
-        <Box sx={{display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', width:'100%'}}>
-            <Box sx={{mt:2, mb:2}}>
+        <Box sx={{display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'center', width:'100%'}}>
+            <Box sx={{mt:2, mb:2, width:'100%'}}>
           <LoadCanvasTemplate />
             </Box>
             <Box sx={{width:'100%'}}>
@@ -39,13 +39,6 @@ class CaptchaTest extends Component {
                     required
                     fullWidth
                 />
-            </Box>
-            <Box sx={{mt:2}}>
-                <Button variant="contained" color="secondary" onClick={() => this.doSubmit()} >
-                    <Typography variant="h7" color="white">
-                        Submit
-                    </Typography>
-                </Button>
             </Box>
         </Box>
       </>

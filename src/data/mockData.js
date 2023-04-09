@@ -315,6 +315,18 @@ export const mockTransactions = [
     date: "2022-04-01",
     cost: "133.45",
   },
+  {
+    txId: "01e4dsa",
+    user: "nihalgupta",
+    date: "2021-09-01",
+    cost: "43.95",
+  },
+  {
+    txId: "51034szv",
+    user: "sahilshetty",
+    date: "2022-11-05",
+    cost: "200.95",
+  },
 ];
 
 export const mockBarData = [
