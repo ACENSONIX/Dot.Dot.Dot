@@ -28,6 +28,7 @@ const Topbar = () => {
           <SearchIcon />
         </IconButton>
       </Box>
+      <div id="google_translate_element"></div>
 
       {/* ICONS */}
       <Box display="flex">

@@ -48,11 +48,14 @@ const Sidebar = () => {
     }
     getEmployeeData();
   }, [id]);
+  
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  const [counter, setCounter] = useState(0);
+
 
   return (
     <Box

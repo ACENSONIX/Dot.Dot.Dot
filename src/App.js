@@ -47,6 +47,22 @@ function App() {
     getReduxData();
   }, [dispatch]);
 
+  useEffect(() => {
+    const alanBtn = require('@alan-ai/alan-sdk-web');
+    alanBtn({
+      key: '07070e457e92f6e7f793ccf062512ba02e956eca572e1d8b807a3e2338fdd0dc/stage',
+      rootEl: document.getElementById("alan-btn"),
+      onCommand: (command) => {
+        if (command == 'testCommand1') {
+          // Router.push("/")
+          alert("navigate to home page")
+          // Call the client code that will react to the received command
+        }
+
+      }
+    });
+  }, []);
+
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
