@@ -26,7 +26,8 @@ import ViewApplicant from "./scenes/applicant/viewApplicant";
 import Profile from "./scenes/profile/profile";
 import Landing from "./components/Landing";
 import Flagged from "./scenes/flagged/flagged";
-import Test from "./components/QRReader"
+import Test from "./components/QRReader";
+import RiskChart from "./components/RiskChart";
 
 //redux
 import { useDispatch } from "react-redux";
@@ -48,18 +49,17 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    const alanBtn = require('@alan-ai/alan-sdk-web');
+    const alanBtn = require("@alan-ai/alan-sdk-web");
     alanBtn({
-      key: '07070e457e92f6e7f793ccf062512ba02e956eca572e1d8b807a3e2338fdd0dc/stage',
+      key: "07070e457e92f6e7f793ccf062512ba02e956eca572e1d8b807a3e2338fdd0dc/stage",
       rootEl: document.getElementById("alan-btn"),
-      onCommand: (command) => {
-        if (command == 'testCommand1') {
+      onCommand: command => {
+        if (command == "testCommand1") {
           // Router.push("/")
-          alert("navigate to home page")
+          alert("navigate to home page");
           // Call the client code that will react to the received command
         }
-
-      }
+      },
     });
   }, []);
 
@@ -80,7 +80,8 @@ function App() {
             <Route path='/dashboard/view-employee/:id' element={<ViewEmployee />} />
             <Route path='/dashboard/profile' element={<Profile />} />
             <Route path='/dashboard/flagged' element={<Flagged />} />
-            <Route path="/dashboard/test" element={<Test />} />
+            <Route path='/dashboard/test' element={<Test />} />
+            <Route path='/dashboard/risk-distribution' element={<RiskChart />} />
           </Route>
 
           {/* 

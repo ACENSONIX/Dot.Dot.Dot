@@ -37,25 +37,22 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 };
 
 const Sidebar = () => {
-
   const id = JSON.parse(localStorage.getItem("profile")).id;
 
   const dispatch = useDispatch();
 
-  useEffect (() => {
+  useEffect(() => {
     const getEmployeeData = async () => {
       dispatch(getEmployees(id));
-    }
+    };
     getEmployeeData();
   }, [id]);
-  
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
   const [counter, setCounter] = useState(0);
-
 
   return (
     <Box
@@ -158,6 +155,14 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+            <Item
+              title='Risk Distribution'
+              to='/dashboard/risk-distribution'
+              icon={<PieChartOutlineOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
             {/* <Item
               title="Contacts Information"
               to="/contacts"
