@@ -52,11 +52,12 @@ export default function Login({route, navigation}) {
       redirect: 'follow',
     };
 
-    fetch('http://localhost:4000/cafe/login', requestOptions)
+    fetch('http://192.168.208.132:4000/cafe/login', requestOptions)
       .then(response => response.json())
       .then(result => {
         if (result) {
           global.storeItem(constants.USER_DATA, result);
+          global.showMessage('Login Successfully', false);
           setTimeout(() => {
             navigation.reset({
               index: 0,
@@ -68,16 +69,6 @@ export default function Login({route, navigation}) {
         }
       })
       .catch(error => console.log('error', error));
-  };
-
-  const changeStack = () => {
-    global.storeItem(constants.USER_DATA, 'null');
-    setTimeout(() => {
-      navigation.reset({
-        index: 0,
-        routes: [{name: 'MainStack'}],
-      });
-    }, 1000);
   };
 
   return (

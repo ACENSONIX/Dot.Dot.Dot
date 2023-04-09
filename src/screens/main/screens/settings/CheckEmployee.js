@@ -72,6 +72,7 @@ export default function CheckEmployee({navigation}) {
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
+    navigation.navigate('EmployeeDetails');
   };
   return (
     <ScrollView

@@ -196,6 +196,7 @@ export default function Dashboard({navigation}) {
         style={internalStyles.recentPrecautionsItem}
         onPress={() => {
           console.log('item', item);
+          navigation.navigate('DashboardUser', {item: item});
         }}>
         <View style={internalStyles.recentPrecautionsItemLeft}>
           <Image

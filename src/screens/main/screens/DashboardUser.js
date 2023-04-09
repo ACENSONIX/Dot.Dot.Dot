@@ -9,16 +9,18 @@ import {
   View,
 } from 'react-native';
 import Ripple from 'react-native-material-ripple';
-import Header from '../../../../components/Header';
-import colors from '../../../../styles/colors';
-import styles from '../../../../styles/styles';
-import constants from '../../../../utility/constants';
-import global from '../../../../utility/global';
+import Header from '../../../components/Header';
+import colors from '../../../styles/colors';
+import styles from '../../../styles/styles';
+import constants from '../../../utility/constants';
+import global from '../../../utility/global';
+import PrimaryButton from '../../../components/PrimaryButton';
 
 const accountInfo = {
+  id: 1,
   name: 'Nihal Gupta',
   location: 'Location',
-  image: require('../../../../assets/images/logo.jpg'),
+  image: require('../../../assets/images/logo.jpg'),
   description:
     'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book',
   redFlag: 2,
@@ -31,7 +33,7 @@ const workDetails = [
     id: 1,
     name: "Company's Name",
     location: 'Location',
-    image: require('../../../../assets/images/logo.jpg'),
+    image: require('../../../assets/images/logo.jpg'),
     startDate: '01/01/2020',
     endDate: '01/01/2020',
     description:
@@ -41,7 +43,7 @@ const workDetails = [
     id: 2,
     name: "Company's Name",
     location: 'Location',
-    image: require('../../../../assets/images/logo.jpg'),
+    image: require('../../../assets/images/logo.jpg'),
     startDate: '01/01/2020',
     endDate: '01/01/2020',
     description:
@@ -51,7 +53,7 @@ const workDetails = [
     id: 3,
     name: "Compay's Name",
     location: 'Location',
-    image: require('../../../../assets/images/logo.jpg'),
+    image: require('../../../assets/images/logo.jpg'),
     startDate: '01/01/2020',
     endDate: '01/01/2020',
     description:
@@ -76,7 +78,11 @@ const redFlagDetails = [
   },
 ];
 
-export default function EmployeeDetails({navigation}) {
+const yellowFlagDetails = [];
+
+const orangeFlagDetails = [];
+
+export default function DashboardUser({navigation}) {
   useEffect(() => {
     navigation.setOptions({
       header: () => (
@@ -142,10 +148,63 @@ export default function EmployeeDetails({navigation}) {
     );
   };
 
+  const renderFlags = (title, list) => {
+    return (
+      <View style={{paddingHorizontal: 5}}>
+        <View>
+          <Text
+            style={{
+              fontSize: 16,
+              fontWeight: 'bold',
+              color: colors.BLACK,
+              marginTop: 10,
+              marginBottom: 10,
+            }}>
+            {title}
+          </Text>
+        </View>
+        <FlatList
+          data={list}
+          renderItem={({item}) => (
+            <View
+              style={{
+                paddingHorizontal: 15,
+                backgroundColor: colors.BACKGROUND2,
+                marginBottom: 5,
+                elevation: 1,
+                borderRadius: 3,
+              }}>
+              <Text
+                style={{
+                  fontSize: 14,
+                  fontWeight: 'normal',
+                  marginTop: 10,
+                  color: colors.BLACK,
+                }}>
+                {item.title} - {item.date}
+              </Text>
+              <Text
+                style={{
+                  fontSize: 14,
+                  fontWeight: 'normal',
+                  marginTop: 10,
+                  color: colors.GREY,
+                }}>
+                {item.description}
+              </Text>
+            </View>
+          )}
+          keyExtractor={item => item.id}
+          scrollEnabled={true}
+        />
+      </View>
+    );
+  };
+
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={[styles.styleFull]}>
       <Image
-        source={require('../../../../assets/images/cafe.jpg')}
+        source={require('../../../assets/images/cafe.jpg')}
         style={{height: 200, width: '100%'}}
       />
       <View style={{paddingHorizontal: 15}}>
@@ -250,57 +309,24 @@ export default function EmployeeDetails({navigation}) {
         />
       </View>
 
-      {accountInfo.redFlag > 0 && (
-        <View style={{paddingHorizontal: 5}}>
-          <View>
-            <Text
-              style={{
-                fontSize: 16,
-                fontWeight: 'bold',
-                color: colors.BLACK,
-                marginTop: 10,
-                marginBottom: 10,
-              }}>
-              Red Flags
-            </Text>
-          </View>
-          <FlatList
-            data={redFlagDetails}
-            renderItem={({item}) => (
-              <View
-                style={{
-                  paddingHorizontal: 15,
-                  backgroundColor: colors.BACKGROUND2,
-                  marginBottom: 5,
-                  elevation: 1,
-                  borderRadius: 3,
-                }}>
-                <Text
-                  style={{
-                    fontSize: 14,
-                    fontWeight: 'normal',
-                    marginTop: 10,
-                    color: colors.BLACK,
-                  }}>
-                  {item.title} - {item.date}
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 14,
-                    fontWeight: 'normal',
-                    marginTop: 10,
-                    color: colors.GREY,
-                  }}>
-                  {item.description}
-                </Text>
-              </View>
-            )}
-            keyExtractor={item => item.id}
-            scrollEnabled={true}
-            style={{paddingBottom: 60}}
-          />
-        </View>
-      )}
+      {accountInfo.redFlag > 0 && renderFlags('Red Flags', redFlagDetails)}
+      {accountInfo.yellowFlag > 1 &&
+        renderFlags('Yellow Flags', yellowFlagDetails)}
+      {accountInfo.orangeFlag > 0 &&
+        renderFlags('Orange Flags', orangeFlagDetails)}
+
+      <PrimaryButton
+        style={{
+          marginTop: 10,
+          marginBottom: 5,
+          width: '95%',
+        }}
+        title={`+ Add New Flag`}
+        onPress={() => {
+          // navigate to add new flag screen and send userInfo as param
+          navigation.navigate('AddFlag', {userInfo: accountInfo});
+        }}
+      />
     </ScrollView>
   );
 }

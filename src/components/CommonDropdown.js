@@ -66,6 +66,11 @@ export default function CommonDropdown({
           style={{paddingHorizontal: 10}}
           selectedTextStyle={{color: colors.BLACK}}
           activeColor={colors.PRIMARY}
+          containerStyle={{
+            backgroundColor: colors.BACKGROUND2,
+            borderWidth: 0,
+            borderRadius: 5,
+          }}
           disable={disabled}
           flatListProps={{
             ItemSeparatorComponent: () => (
@@ -85,12 +90,12 @@ const internalStyles = StyleSheet.create({
     fontFamily: fonts.FONT_FAMILY.Regular,
     fontWeight: '400',
     fontSize: fonts._11,
-    color: colors.BLACK,
+    color: colors.PRIMARY,
     opacity: 0.5,
   },
   boxView: {
     height: 45,
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.BACKGROUND2,
     borderWidth: 0.5,
     borderRadius: 5,
     borderColor: '#B0B0B0',
