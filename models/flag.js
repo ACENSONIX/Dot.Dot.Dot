@@ -8,4 +8,4 @@ const Flag_Model= dbConn.define('flag', {
 });
 
 
-module.exports= Work_Model;
+module.exports= Flag_Model;

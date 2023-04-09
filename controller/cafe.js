@@ -4,10 +4,10 @@ const models = require("../utils/allModels");
 
 exports.signup = async (req, res, next) => {
     
-    const { name,email,owner, password, location, phone, address, zip, gstNo  } = req.body;
+    const { name,email,owner, password, location, phone, address, zip, gstNo ,fssai } = req.body;
 
     try{
-
+        console.log(req.body);
         const cafe = await models.Cafe_Model.create({
         name,
         email,
@@ -18,6 +18,7 @@ exports.signup = async (req, res, next) => {
         address,
         zip,
         gstNo,
+        fssai
         });
 
         if(!cafe)

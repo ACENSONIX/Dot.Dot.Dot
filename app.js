@@ -37,6 +37,7 @@ app.use('', require('./routes/work'));
 
 app.use(express.static("public"));
 
+// require('./utils/ML').verifyaadharchecksum()
 
 //Requiring all table relationship
 require("./utils/allTableRelationship");
