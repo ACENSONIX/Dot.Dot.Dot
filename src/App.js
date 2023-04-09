@@ -26,6 +26,7 @@ import ViewApplicant from "./scenes/applicant/viewApplicant";
 import Profile from "./scenes/profile/profile";
 import Landing from "./components/Landing";
 import Flagged from "./scenes/flagged/flagged";
+import Test from "./components/QRReader"
 
 //redux
 import { useDispatch } from "react-redux";
@@ -63,6 +64,7 @@ function App() {
             <Route path='/dashboard/view-employee/:id' element={<ViewEmployee />} />
             <Route path='/dashboard/profile' element={<Profile />} />
             <Route path='/dashboard/flagged' element={<Flagged />} />
+            <Route path="/dashboard/test" element={<Test />} />
           </Route>
 
           {/* 
