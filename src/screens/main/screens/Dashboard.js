@@ -269,14 +269,14 @@ export default function Dashboard({navigation}) {
               marginVertical: 10,
             }}>
             {rederRectangle(
-              setOfStrings.totalHoursWorked,
+              'Total Employees',
               '1000',
-              require('../../../assets/images/totalcrops.png'),
+              require('../../../assets/images/cafe.jpg'),
             )}
             {rederRectangle(
-              setOfStrings.totalRedFlags,
+              'Total Companies',
               '1000',
-              require('../../../assets/images/farmarea.png'),
+              require('../../../assets/images/cafe.jpg'),
             )}
           </View>
           <View
@@ -286,14 +286,14 @@ export default function Dashboard({navigation}) {
               marginVertical: 10,
             }}>
             {rederRectangle(
-              setOfStrings.totalOrangeFlags,
+              'Total Applicants',
               '1000',
-              require('../../../assets/images/diseasedcrops.png'),
+              require('../../../assets/images/cafe.jpg'),
             )}
             {rederRectangle(
-              setOfStrings.totalYellowFlags,
+              'Total Revenue',
               '1000',
-              require('../../../assets/images/totalproduction.png'),
+              require('../../../assets/images/cafe.jpg'),
             )}
           </View>
         </View>
