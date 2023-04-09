@@ -14,6 +14,52 @@ const Landing = () => {
   });
   return (
     <div className='landing'>
+      <Box
+        backgroundColor='#1f2a40'
+        display='grid'
+        gridTemplateColumns='auto 1fr auto auto'
+        padding='1rem 2rem'
+        placeItems='center'
+        gap='1rem'>
+        <Box height='10vh'>
+          <img src={logo} alt='logo' height='100%' width='100%' />
+        </Box>
+        <span></span>
+        <Button
+          variant='solid'
+          borderColor='#453d65'
+          backgroundColor='#453d65'
+          padding='1rem 2rem'
+          fontSize='xl'
+          justifySelf='center'
+          _hover={{
+            backgroundColor: "#574d80",
+          }}
+          borderRadius='1rem'
+          data-aos='fade-down'
+          data-aos-delay='200'
+          as='a'
+          href='/login'>
+          Login
+        </Button>
+        <Button
+          variant='solid'
+          borderColor='#453d65'
+          backgroundColor='#453d65'
+          padding='1rem 2rem'
+          fontSize='xl'
+          justifySelf='center'
+          _hover={{
+            backgroundColor: "#574d80",
+          }}
+          borderRadius='1rem'
+          data-aos='fade-down'
+          data-aos-delay='200'
+          as='a'
+          href='/signup'>
+          Sign up
+        </Button>
+      </Box>
       <Grid className='hero' id='top'>
         <VStack className='hero-content'>
           <h1 className='hero-header'>HR Verifications</h1>
