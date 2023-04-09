@@ -21,15 +21,14 @@ const Flagged = () => {
   const columns = [
     { field: "id", headerName: "ID" },
     {
-      field: "name",
+      field: "firstName",
       headerName: "Name",
       flex: 1,
       cellClassName: "name-column--cell",
     },
     {
-      field: "age",
-      headerName: "Age",
-      type: "number",
+      field: "dob",
+      headerName: "DOB",
       headerAlign: "left",
       align: "left",
     },

@@ -1,4 +1,4 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -8,6 +8,8 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { register } from "../actions/owner/owner";
 import backdrop from "../assets/signup-backdrop.jpg";
+import { Link } from "react-router-dom";
+import CaptchaTest from "./Captcha";
 
 const Form = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -19,6 +21,7 @@ const Form = () => {
   const handleFormSubmit = values => {
     console.log({ values, image });
     try {
+      console.log(values);
       let formData = new FormData();
       formData.append("name", values.name);
       formData.append("owner", values.owner);
@@ -27,6 +30,7 @@ const Form = () => {
       formData.append("address", values.address);
       formData.append("location", values.location);
       formData.append("zip", values.pincode);
+      formData.append("fssai", values.fssai);
       formData.append("gstNo", values.gst);
       formData.append("pan", image);
       formData.append("password", values.password);
@@ -60,7 +64,7 @@ const Form = () => {
             <Header title='SIGN UP' subtitle='Register for a New User Profile' />
             <Box
               display='grid'
-              gap='1rem'
+              gap='0.75rem'
               gridTemplateColumns='repeat(4, minmax(0, 1fr))'
               sx={{
                 "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
@@ -76,7 +80,7 @@ const Form = () => {
                 name='name'
                 error={!!touched.name && !!errors.name}
                 helperText={touched.name && errors.name}
-                sx={{ gridColumn: "span 4" }}
+                sx={{ gridColumn: "span 2" }}
               />
               <TextField
                 fullWidth
@@ -89,7 +93,7 @@ const Form = () => {
                 name='owner'
                 error={!!touched.owner && !!errors.owner}
                 helperText={touched.owner && errors.owner}
-                sx={{ gridColumn: "span 4" }}
+                sx={{ gridColumn: "span 2" }}
               />
               <TextField
                 fullWidth
@@ -170,6 +174,19 @@ const Form = () => {
                 helperText={touched.gst && errors.gst}
                 sx={{ gridColumn: "span 2" }}
               />
+              <TextField
+                fullWidth
+                variant='filled'
+                type='text'
+                label='FSSAI Number'
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.fssai}
+                name='fssai'
+                error={!!touched.fssai && !!errors.fssai}
+                helperText={touched.fssai && errors.fssai}
+                sx={{ gridColumn: "span 2" }}
+              />
               <Button
                 variant='contained'
                 fullWidth
@@ -208,11 +225,27 @@ const Form = () => {
                 sx={{ gridColumn: "span 2" }}
               />
             </Box>
-            <Box display='grid' mt='20px'>
+            <Box sx={{display:'flex', flexDirection:'column', alignItems:'center', mt:3}}>
+              {/* <ReactCaptcha
+                charset="uln"
+                color="random"
+                bgColor="yellow"
+                reload
+                handleSuccess={handleSuccess}
+                handleFailure={handleFailure}
+              /> */}
+              <CaptchaTest />
+            </Box>
+            <Box display='grid'>
               <Button type='submit' color='secondary' variant='contained'>
                 Sign up
               </Button>
             </Box>
+            <Link to="/login" style={{textDecoration:'none', marginTop:"20px"}}>
+        <Typography variant="h7" color="white">
+          Already have an account? Login
+        </Typography>
+        </Link>
           </form>
         )}
       </Formik>
@@ -242,6 +275,7 @@ const initialValues = {
   pincode: "",
   location: "",
   gst: "",
+  fssai: "",
 };
 
 export default Form;
