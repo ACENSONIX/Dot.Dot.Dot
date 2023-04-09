@@ -119,13 +119,13 @@ export default function Settings({navigation}) {
           </Ripple>
 
           <View>
-            <Text style={internalStyles.name}>{accountInfo.name}</Text>
+            <Text style={internalStyles.name}>{accountInfo.cafe.name}</Text>
 
-            <Text style={internalStyles.infoText}>{accountInfo.mobile}</Text>
+            <Text style={internalStyles.infoText}>{accountInfo.cafe.phone}</Text>
             <Text style={internalStyles.infoText}>
               Reviews : {accountInfo.reviews}
             </Text>
-            <Text style={[internalStyles.infoText]}>{accountInfo.email}</Text>
+            <Text style={[internalStyles.infoText]}>{accountInfo.cafe.email}</Text>
           </View>
         </View>
       </View>

@@ -160,6 +160,24 @@ export default function Login({route, navigation}) {
                   .then(() => {
                     Alert.alert('Authentication Successful!');
                     console.log('Done');
+                    global.storeItem(constants.USER_DATA, {
+                      cafe: {
+                        address: 'Nihal',
+                        createdAt: '2023-04-08T17:50:15.000Z',
+                        email: 'nihalng786@gmail.com',
+                        fssai: null,
+                        gstNo: null,
+                        id: 13,
+                        location: 'Nihal',
+                        name: 'Nihal',
+                        pan: 'cafe/pan/13.jpg',
+                        password: 'nuhal123#',
+                        phone: '9833256433',
+                        updatedAt: '2023-04-08T17:50:15.000Z',
+                        zip: 'Nihal',
+                      },
+                      message: 'Login Successful',
+                    });
                     setTimeout(() => {
                       navigation.reset({
                         index: 0,

@@ -39,7 +39,7 @@ const bottomTabNavigator = () => {
       initialRouteName="DashboardStack">
       <Tab.Screen name={'DashboardStack'} component={DashboardStack} />
       <Tab.Screen name={'MapStack'} component={MapStack} />
-      <Tab.Screen name={'UpdatesStack'} component={UpdatesStack} />
+      {/* <Tab.Screen name={'UpdatesStack'} component={UpdatesStack} /> */}
       <Tab.Screen name={'SettingsStack'} component={SettingsStack} />
     </Tab.Navigator>
   );
