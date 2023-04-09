@@ -72,7 +72,7 @@ const Form = () => {
         setOpen(true);
       } else {
         console.log(data.user);
-        navigate("/dashboard/view-applicant", {
+        navigate(`/dashboard/view-applicant/${data.user.id}`, {
           state: {
             user: data.user,
           },
@@ -372,7 +372,7 @@ const Form = () => {
             </Button>
             <Box display="grid" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
-                <Typography variant="h5">Verify</Typography>
+                <Typography variant="h5">Search</Typography>
               </Button>
             </Box>
           </form>

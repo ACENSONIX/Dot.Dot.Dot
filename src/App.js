@@ -25,10 +25,12 @@ import NewApplicant from "./scenes/applicant/newApplicant";
 import ViewApplicant from "./scenes/applicant/viewApplicant";
 import Profile from "./scenes/profile/profile";
 import Landing from "./components/Landing";
+import Flagged from "./scenes/flagged/flagged";
 
 //redux
 import { useDispatch } from "react-redux";
-import { getApplicants } from "./actions/applicants/applicants";
+import { getApplicants, flaggedApplicants } from "./actions/applicants/applicants";
+import { getEmployees } from "./actions/employees/employees";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -38,6 +40,8 @@ function App() {
   useEffect(() => {
     const getReduxData = async () => {
       dispatch(getApplicants());
+      dispatch(flaggedApplicants());
+      dispatch(getEmployees());
     };
     getReduxData();
   }, [dispatch]);
@@ -58,6 +62,7 @@ function App() {
             <Route path='/dashboard/view-applicant/:id' element={<ViewApplicant />} />
             <Route path='/dashboard/view-employee/:id' element={<ViewEmployee />} />
             <Route path='/dashboard/profile' element={<Profile />} />
+            <Route path='/dashboard/flagged' element={<Flagged />} />
           </Route>
 
           {/* 

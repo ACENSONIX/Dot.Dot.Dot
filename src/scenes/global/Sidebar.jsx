@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -16,6 +16,8 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import { useDispatch } from "react-redux";
+import { getEmployees } from "../../actions/employees/employees";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -35,6 +37,18 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 };
 
 const Sidebar = () => {
+
+  const id = JSON.parse(localStorage.getItem("profile")).id;
+
+  const dispatch = useDispatch();
+
+  useEffect (() => {
+    const getEmployeeData = async () => {
+      dispatch(getEmployees(id));
+    }
+    getEmployeeData();
+  }, [id]);
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -130,6 +144,13 @@ const Sidebar = () => {
             <Item
               title='Manage Employees'
               to='/dashboard/employee'
+              icon={<PeopleOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title='Flagged Applicants'
+              to='/dashboard/flagged'
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

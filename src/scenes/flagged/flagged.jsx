@@ -1,28 +1,20 @@
-import { Box, Typography, useTheme, Button } from "@mui/material";
+import { Box, Button, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockDataTeam } from "../../data/mockData";
-import { Link } from "react-router-dom";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
+import { useEffect } from "react";
+import ApplicantHeader from "../../components/ApplicantHeader";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import axios from "axios";
 
-const Employee = () => {
-  const id = JSON.parse(localStorage.getItem("profile")).id;
-  const [employee, setEmployee] = useState();
-  useEffect (() => {
-    const getEmployeeData = async () => {
-      const {data} = await axios.get(`http://192.168.208.132:4000/user/employee/${id}`);
-      console.log(data);
-      setEmployee(data.user);
-    }
-    getEmployeeData();
-  }, [id]);
+const Flagged = () => {
 
+  const flagged = useSelector((state) => state.applicant.flaggedData);
+  console.log(flagged.user);
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -88,7 +80,7 @@ const Employee = () => {
       flex: 1,
       renderCell: ({ id }) => {
         return (
-          <Link to={`/dashboard/view-employee/${id}`} style={{ textDecoration: "none" }}>
+          <Link to={`/dashboard/view-applicant/${id}`} style={{ textDecoration: "none" }}>
             <Button variant='contained' color='secondary'>
               <Typography color={colors.grey["800"]} sx={{ ml: "5px" }}>
                 View
@@ -100,11 +92,9 @@ const Employee = () => {
     },
   ];
 
-  if (!employee) return null;
-
   return (
     <Box m='20px'>
-      <Header title='EMPLOYEES' subtitle='Managing the Employees' />
+      <Header title='FLAGGED APPLICANTS' subtitle='Manage the Flagged Applicants' />
       <Box
         m='40px 0 0 0'
         height='75vh'
@@ -133,10 +123,10 @@ const Employee = () => {
             color: `${colors.greenAccent[200]} !important`,
           },
         }}>
-        <DataGrid rows={employee} columns={columns} />
+        <DataGrid rows={flagged.user} columns={columns} />
       </Box>
     </Box>
   );
 };
 
-export default Employee;
+export default Flagged;

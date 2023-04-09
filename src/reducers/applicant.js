@@ -30,6 +30,13 @@ const applicantReducer = (state = {}, action) => {
         loading: false,
         errors: null,
       };
+    case actionTypes.FLAGGED_APPLICANTS:
+        return{
+            ...state,
+            flaggedData: action.data,
+            loading:false,
+            errors:null,
+        }
     default:
       return state;
   }

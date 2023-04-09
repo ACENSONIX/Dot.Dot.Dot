@@ -13,12 +13,30 @@ import {
   TextField,
 } from "@mui/material";
 import { tokens } from "../../theme";
+import { useParams } from "react-router";
+import { useEffect } from "react";
+import axios from "axios";
 
 const ViewEmployee = () => {
+  const {id} = useParams();
+  const [Employee, setEmployee] = useState();
+
+  useEffect(() => {
+    const getApplicantData = async () => {
+      const {data} = await axios.get(`http://192.168.208.132:4000/user/profile/${id}`);
+      console.log(data.user[0])
+      setEmployee(data.user[0]);
+    };
+    getApplicantData();
+  }, [id]);
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const [ModalOpen, setModalOpen] = useState(false);
+  const [greenModal, setGreenModal] = useState(false);
+  const [redModal, setRedModal] = useState(false);
+  const [orangeModal, setOrangeModal] = useState(false);
+  const [yellowModal, setYellowModal] = useState(false);
 
   const handleModalOpen = () => {
     setModalOpen(true);
@@ -27,16 +45,20 @@ const ViewEmployee = () => {
     setModalOpen(false);
   };
 
-  const [Employee, setEmployee] = useState({
-    firstName: "John",
-    lastName: "Doe",
-    email: "john@example.com",
-    location: "Mumbai",
-    phone: "9783568746",
-    address: "Somewhere Sometime something someone all at nonce",
-    dob: "2023-02-02",
-    zip: "400067",
-  });
+  // const [Employee, setEmployee] = useState({
+  //   firstName: "John",
+  //   lastName: "Doe",
+  //   email: "john@example.com",
+  //   location: "Mumbai",
+  //   phone: "9783568746",
+  //   address: "Somewhere Sometime something someone all at nonce",
+  //   dob: "2023-02-02",
+  //   zip: "400067",
+  // });
+
+  if (!Employee) {
+    return null;
+  }
 
   return (
     <Box

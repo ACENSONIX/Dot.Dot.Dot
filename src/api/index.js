@@ -21,3 +21,8 @@ export const addApplicant = (newApplicant) => API.post("/user/signup", newApplic
 export const viewApplicant = (id) => API.get(`/user/profile/${id}`);
 export const getApplicants = () => API.get("/user/profile");
 export const verifyApplicant = (formData) => API.post("/user/search", formData);
+
+export const flaggedApplicants = () => API.get("/user/flag");
+
+export const getEmployees = (id) => API.get(`/user/employee/${id}`);
+
