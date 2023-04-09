@@ -14,15 +14,18 @@ import axios from "axios";
 const Employee = () => {
   const id = JSON.parse(localStorage.getItem("profile")).id;
   const [employee, setEmployee] = useState();
-  useEffect (() => {
+  useEffect(() => {
     const getEmployeeData = async () => {
-      const {data} = await axios.get(`http://192.168.208.132:4000/user/employee/${id}`);
+      const { data } = await axios.get(`http://192.168.208.132:4000/user/employee/${id}`);
       console.log(data);
       setEmployee(data.user);
-    }
+    };
     getEmployeeData();
   }, [id]);
 
+  function getFullName(params) {
+    return `${params.row.firstName || ""} ${params.row.lastName || ""}`;
+  }
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -33,6 +36,7 @@ const Employee = () => {
       headerName: "Name",
       flex: 1,
       cellClassName: "name-column--cell",
+      valueGetter: getFullName,
     },
     {
       field: "age",

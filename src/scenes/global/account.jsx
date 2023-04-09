@@ -1,43 +1,43 @@
-import { useRef, useState } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useRef, useState } from "react";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 // @mui
-import { alpha } from '@mui/material/styles';
-import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton } from '@mui/material';
+import { alpha } from "@mui/material/styles";
+import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton } from "@mui/material";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 // components
-import { logout } from '../../actions/owner/owner';
-import MenuPopover from './menu';
+import { logout } from "../../actions/owner/owner";
+import MenuPopover from "./menu";
 // mocks_
 
 // ----------------------------------------------------------------------
 
 const MENU_OPTIONS = [
   {
-    label: 'Home',
-    icon: 'eva:home-fill',
-    linkTo: '/dashboard/app',
+    label: "Home",
+    icon: "eva:home-fill",
+    linkTo: "/dashboard/app",
   },
   {
-    label: 'Profile',
-    icon: 'eva:person-fill',
-    linkTo: '/dashboard/profile',
+    label: "Profile",
+    icon: "eva:person-fill",
+    linkTo: "/dashboard/profile",
   },
 ];
 
 // ----------------------------------------------------------------------
 
 export default function Account() {
-  const user = JSON.parse(localStorage.getItem('profile'));
+  const user = JSON.parse(localStorage.getItem("profile"));
   console.log(user);
 
   const anchorRef = useRef(null);
 
   const [open, setOpen] = useState(null);
 
-  const handleOpen = (event) => {
+  const handleOpen = event => {
     setOpen(event.currentTarget);
   };
 
@@ -49,13 +49,12 @@ export default function Account() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    try{
+    try {
       dispatch(logout(navigate));
-    }catch(err){
+    } catch (err) {
       console.log(err);
     }
   };
-
 
   return (
     <>
@@ -63,21 +62,20 @@ export default function Account() {
         ref={anchorRef}
         onClick={handleOpen}
         sx={{
-          p: 0,
           ...(open && {
-            '&:before': {
+            "&:before": {
               zIndex: 1,
               content: "''",
-              width: '100%',
-              height: '100%',
-              borderRadius: '50%',
-              position: 'absolute',
-              bgcolor: (theme) => alpha(theme.palette.grey[900], 0.8),
+              width: "100%",
+              height: "100%",
+              borderRadius: "50%",
+              position: "absolute",
+              bgcolor: theme => alpha(theme.palette.grey[900], 0.8),
             },
+            aspectRatio: "1 / 1",
           }),
-        }}
-      >
-        <Avatar sx={{height:20, width:20}}></Avatar>
+        }}>
+        <Avatar sx={{ height: 20, width: 20 }}></Avatar>
       </IconButton>
 
       <MenuPopover
@@ -88,31 +86,33 @@ export default function Account() {
           p: 0,
           mt: 1.5,
           ml: 0.75,
-          '& .MuiMenuItem-root': {
-            typography: 'body2',
+          "& .MuiMenuItem-root": {
+            typography: "body2",
             borderRadius: 0.75,
           },
-        }}
-      >
+        }}>
         <Box sx={{ my: 1.5, px: 2.5 }}>
-          <Typography variant="subtitle2" noWrap>
+          <Typography variant='subtitle2' noWrap>
             {user.name}
           </Typography>
         </Box>
 
-        <Divider sx={{ borderStyle: 'dashed' }} />
+        <Divider sx={{ borderStyle: "dashed" }} />
 
         <Stack sx={{ p: 1 }}>
-          {MENU_OPTIONS.map((option) => (
-            <MenuItem key={option.label} to={option.linkTo} component={RouterLink} onClick={handleClose}>
+          {MENU_OPTIONS.map(option => (
+            <MenuItem
+              key={option.label}
+              to={option.linkTo}
+              component={RouterLink}
+              onClick={handleClose}>
               {option.label}
             </MenuItem>
           ))}
         </Stack>
 
-        <Divider sx={{ borderStyle: 'dashed' }} />
+        <Divider sx={{ borderStyle: "dashed" }} />
 
-        
         <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
           Logout
         </MenuItem>
@@ -120,4 +120,3 @@ export default function Account() {
     </>
   );
 }
-
