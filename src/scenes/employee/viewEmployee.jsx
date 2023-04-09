@@ -11,15 +11,36 @@ import {
   DialogTitle,
   DialogContent,
   TextField,
+  Modal
 } from "@mui/material";
 import { tokens } from "../../theme";
 import { useParams } from "react-router";
 import { useEffect } from "react";
 import axios from "axios";
+import { Formik } from "formik";
+import AppHeader from "../../components/AppHeader";
+import { useMediaQuery } from "@mui/material";
+
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 800,
+  bgcolor: "background.paper",
+  border: "2px solid #fff",
+  borderRadius: 5,
+  boxShadow: 24,
+  // backdropFilter: 'blur(100px)',
+  p: 4,
+};
 
 const ViewEmployee = () => {
+  const cafeId = JSON.parse(localStorage.getItem("profile")).id;
   const {id} = useParams();
   const [Employee, setEmployee] = useState();
+  const isNonMobile = useMediaQuery("(min-width:600px)");
 
   useEffect(() => {
     const getApplicantData = async () => {
@@ -37,12 +58,93 @@ const ViewEmployee = () => {
   const [redModal, setRedModal] = useState(false);
   const [orangeModal, setOrangeModal] = useState(false);
   const [yellowModal, setYellowModal] = useState(false);
+  const [ModalOpen, setModalOpen] = useState(false);
 
   const handleModalOpen = () => {
     setModalOpen(true);
   };
   const handleModalClose = () => {
     setModalOpen(false);
+  };
+  const handleRedOpen = () => {
+    setRedModal(true);
+  };
+  const handleRedClose = () => {
+    setRedModal(false);
+  };
+  const handleGreenOpen = () => {
+    setGreenModal(true);
+  };
+  const handleGreenClose = () => {
+    setGreenModal(false);
+  };
+  const handleOrangeOpen = () => {
+    setOrangeModal(true);
+  };
+  const handleOrangeClose = () => {
+    setOrangeModal(false);
+  };
+  const handleYellowOpen = () => {
+    setYellowModal(true);
+  };
+  const handleYellowClose = () => {
+    setYellowModal(false);
+  };
+
+  const handleRedSubmit = async(values) => {
+    try{
+      const formData = new FormData();
+      formData.append("reason", values.reason);
+      formData.append("cafeId", cafeId);
+      formData.append("type", 1);
+      const {data} = await axios.post(`http://192.168.208.132:4000/user/flag/${id}`, formData);
+      console.log(data);
+      // handleRedClose();
+    }catch(error){
+      console.log(error)
+    }
+  };
+  
+  const handleGreenSubmit = async(values) => {
+    try{
+      const formData = new FormData();
+      formData.append("reason", values.reason);
+      formData.append("cafeId", cafeId);
+      formData.append("type", 4);
+      const {data} = await axios.post(`http://192.168.208.132:4000/user/flag/${id}`, formData);
+      console.log(data);
+      // handleRedClose();
+    }catch(error){
+      console.log(error)
+    }
+  };
+
+  const handleOrangeSubmit = async(values) => {
+    try{
+      const formData = new FormData();
+      formData.append("reason", values.reason);
+      formData.append("cafeId", cafeId);
+      formData.append("type", 2);
+      const {data} =  await axios.post(`http://192.168.208.132:4000/user/flag/${id}`, formData);
+      console.log(data);
+      // handleRedClose();
+    }catch(error){
+      console.log(error)
+    }
+  };
+
+  const handleYellowSubmit = async(values) => {
+    try{
+      const formData = new FormData();
+      formData.append("reason", values.reason);
+      formData.append("cafeId", cafeId);
+      formData.append("type", 3);
+      const {data} = await axios.post(`http://192.168.208.132:4000/user/flag/${id}`, formData);
+      console.log(data);
+      // handleRedClose();
+    }catch(error){
+      console.log(error)
+    }
   };
 
   // const [Employee, setEmployee] = useState({
@@ -61,6 +163,231 @@ const ViewEmployee = () => {
   }
 
   return (
+    <>
+    <Modal
+        keepMounted
+        open={redModal}
+        onClose={handleRedClose}
+        aria-labelledby="keep-mounted-modal-title"
+        aria-describedby="keep-mounted-modal-description"
+      >
+        <Box sx={style}>
+          <Formik onSubmit={handleRedSubmit} initialValues={redInitValues}>
+            {({
+              values,
+              errors,
+              touched,
+              handleBlur,
+              handleChange,
+              handleSubmit,
+            }) => (
+              <form onSubmit={handleSubmit}>
+                <AppHeader
+                  title="RED FLAG EMPLOYEE"
+                  subtitle="Fill in the details to red flag the employee"
+                />
+                <Box
+                  display="grid"
+                  gap="1rem"
+                  gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+                  sx={{
+                    "& > div": {
+                      gridColumn: isNonMobile ? undefined : "span 4",
+                    },
+                  }}
+                >
+                  <TextField
+                    fullWidth
+                    variant="filled"
+                    type="text"
+                    label="reason"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.reason}
+                    name="reason"
+                    error={!!touched.reason && !!errors.reason}
+                    helperText={touched.reason && errors.reason}
+                    sx={{ gridColumn: "span 2" }}
+                  />
+                </Box>
+                <Box display="grid" mt="20px">
+                  <Button type="submit" color="secondary" variant="contained">
+                    RED FLAG
+                  </Button>
+                </Box>
+              </form>
+            )}
+          </Formik>
+        </Box>
+      </Modal>
+      <Modal
+        keepMounted
+        open={orangeModal}
+        onClose={handleOrangeClose}
+        aria-labelledby="keep-mounted-modal-title"
+        aria-describedby="keep-mounted-modal-description"
+      >
+        <Box sx={style}>
+          <Formik onSubmit={handleOrangeSubmit} initialValues={orangeInitValues}>
+            {({
+              values,
+              errors,
+              touched,
+              handleBlur,
+              handleChange,
+              handleSubmit,
+            }) => (
+              <form onSubmit={handleSubmit}>
+                <AppHeader
+                  title="ORANGE FLAG EMPLOYEE"
+                  subtitle="Fill in the details to orange flag the employee"
+                />
+                <Box
+                  display="grid"
+                  gap="1rem"
+                  gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+                  sx={{
+                    "& > div": {
+                      gridColumn: isNonMobile ? undefined : "span 4",
+                    },
+                  }}
+                >
+                  <TextField
+                    fullWidth
+                    variant="filled"
+                    type="text"
+                    label="reason"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.reason}
+                    name="reason"
+                    error={!!touched.reason && !!errors.reason}
+                    helperText={touched.reason && errors.reason}
+                    sx={{ gridColumn: "span 2" }}
+                  />
+                </Box>
+                <Box display="grid" mt="20px">
+                  <Button type="submit" color="secondary" variant="contained">
+                    ORANGE FLAG
+                  </Button>
+                </Box>
+              </form>
+            )}
+          </Formik>
+        </Box>
+      </Modal>
+      <Modal
+        keepMounted
+        open={yellowModal}
+        onClose={handleYellowClose}
+        aria-labelledby="keep-mounted-modal-title"
+        aria-describedby="keep-mounted-modal-description"
+      >
+        <Box sx={style}>
+          <Formik onSubmit={handleYellowSubmit} initialValues={yellowInitValues}>
+            {({
+              values,
+              errors,
+              touched,
+              handleBlur,
+              handleChange,
+              handleSubmit,
+            }) => (
+              <form onSubmit={handleSubmit}>
+                <AppHeader
+                  title="YELLOW FLAG EMPLOYEE"
+                  subtitle="Fill in the details to yellow flag the employee"
+                />
+                <Box
+                  display="grid"
+                  gap="1rem"
+                  gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+                  sx={{
+                    "& > div": {
+                      gridColumn: isNonMobile ? undefined : "span 4",
+                    },
+                  }}
+                >
+                  <TextField
+                    fullWidth
+                    variant="filled"
+                    type="text"
+                    label="reason"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.reason}
+                    name="reason"
+                    error={!!touched.reason && !!errors.reason}
+                    helperText={touched.reason && errors.reason}
+                    sx={{ gridColumn: "span 2" }}
+                  />
+                </Box>
+                <Box display="grid" mt="20px">
+                  <Button type="submit" color="secondary" variant="contained">
+                    YELLOW FLAG
+                  </Button>
+                </Box>
+              </form>
+            )}
+          </Formik>
+        </Box>
+      </Modal>
+      <Modal
+        keepMounted
+        open={greenModal}
+        onClose={handleGreenClose}
+        aria-labelledby="keep-mounted-modal-title"
+        aria-describedby="keep-mounted-modal-description"
+      >
+        <Box sx={style}>
+          <Formik onSubmit={handleGreenSubmit} initialValues={greenInitValues}>
+            {({
+              values,
+              errors,
+              touched,
+              handleBlur,
+              handleChange,
+              handleSubmit,
+            }) => (
+              <form onSubmit={handleSubmit}>
+                <AppHeader
+                  title="GREEN FLAG EMPLOYEE"
+                  subtitle="Fill in the details to green flag the employee"
+                />
+                <Box
+                  display="grid"
+                  gap="1rem"
+                  gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+                  sx={{
+                    "& > div": {
+                      gridColumn: isNonMobile ? undefined : "span 4",
+                    },
+                  }}
+                >
+                  <TextField
+                    fullWidth
+                    variant="filled"
+                    type="text"
+                    label="reason"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.reason}
+                    name="reason"
+                    error={!!touched.reason && !!errors.reason}
+                    helperText={touched.reason && errors.reason}
+                    sx={{ gridColumn: "span 2" }}
+                  />
+                </Box>
+                <Box display="grid" mt="20px">
+                  <Button type="submit" color="secondary" variant="contained">
+                    GREEN FLAG
+                  </Button>
+                </Box>
+              </form>
+            )}
+          </Formik>
+        </Box>
+      </Modal>
     <Box
       p='1rem 0'
       display='grid'
@@ -119,7 +446,7 @@ const ViewEmployee = () => {
         backdropFilter='blur(20px)'>
         <Tooltip title='Green Flag' sx={{ fontSize: "1.5rem" }}>
           <Button
-            onClick={handleModalOpen}
+            onClick={handleGreenOpen}
             sx={{
               backgroundColor: colors.greenAccent["600"],
               fontWeight: "bold",
@@ -134,7 +461,7 @@ const ViewEmployee = () => {
         </Tooltip>
         <Tooltip title='Yellow Flag' sx={{ fontSize: "1.5rem" }}>
           <Button
-            onClick={handleModalOpen}
+            onClick={handleYellowOpen}
             sx={{
               backgroundColor: colors.yellowAccent["600"],
               fontSize: "1.25em",
@@ -149,7 +476,7 @@ const ViewEmployee = () => {
         </Tooltip>
         <Tooltip title='Orange Flag' sx={{ fontSize: "1.5rem" }}>
           <Button
-            onClick={handleModalOpen}
+            onClick={handleOrangeOpen}
             sx={{
               backgroundColor: colors.orangeAccent["600"],
               fontSize: "1.25em",
@@ -164,7 +491,7 @@ const ViewEmployee = () => {
         </Tooltip>
         <Tooltip title='Red Flag' sx={{ fontSize: "1.5rem" }}>
           <Button
-            onClick={handleModalOpen}
+            onClick={handleRedOpen}
             sx={{
               backgroundColor: colors.redAccent["600"],
               fontSize: "1.25em",
@@ -178,50 +505,20 @@ const ViewEmployee = () => {
           </Button>
         </Tooltip>
       </Box>
-      <Dialog open={ModalOpen} onClose={handleModalClose}>
-        <DialogTitle>Reason</DialogTitle>
-        <DialogContent>
-          <DialogContentText>Reason for your choice</DialogContentText>
-          <TextField
-            autoFocus
-            margin='dense'
-            id='name'
-            label='Reason'
-            type='text'
-            fullWidth
-            variant='filled'
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button
-            sx={{
-              backgroundColor: colors.grey["600"],
-              fontSize: "1.25em",
-              fontWeight: "bold",
-              color: colors.primary["900"],
-              "&:hover": {
-                backgroundColor: colors.grey["400"],
-              },
-            }}
-            onClick={handleModalClose}>
-            Cancel
-          </Button>
-          <Button
-            sx={{
-              backgroundColor: colors.grey["600"],
-              fontSize: "1.25em",
-              fontWeight: "bold",
-              color: colors.primary["900"],
-              "&:hover": {
-                backgroundColor: colors.grey["400"],
-              },
-            }}
-            onClick={handleModalClose}>
-            Submit
-          </Button>
-        </DialogActions>
-      </Dialog>
     </Box>
+    </>
   );
+};
+const redInitValues = {
+  reason: "",
+};
+const greenInitValues = {
+  reason: "",
+};
+const yellowInitValues = {
+  reason: "",
+};
+const orangeInitValues = {
+  reason: "",
 };
 export default ViewEmployee;

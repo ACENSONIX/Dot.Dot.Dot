@@ -25,4 +25,5 @@ export const verifyApplicant = (formData) => API.post("/user/search", formData);
 export const flaggedApplicants = () => API.get("/user/flag");
 
 export const getEmployees = (id) => API.get(`/user/employee/${id}`);
+export const flagEmployee = (id) => API.post(`/user/flag/${id}`);
 
