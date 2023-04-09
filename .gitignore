@@ -1,5 +1,6 @@
 /node_modules
-ML-CSI/bin
-ML-CSI/lib
-ML-CSI/lib64
-ML-CSI/share
+ML/bin
+ML/lib
+ML/lib64
+ML/share
+ML/facematch/static
