@@ -49,7 +49,7 @@ const Dashboard = () => {
           justifyContent='center'>
           <StatBox
             title='12,361'
-            subtitle='Emails Sent'
+            subtitle='Red Flags Found'
             progress='0.75'
             increase='+14%'
             icon={<EmailIcon sx={{ color: colors.greenAccent[600], fontSize: "26px" }} />}
@@ -63,7 +63,7 @@ const Dashboard = () => {
           justifyContent='center'>
           <StatBox
             title='431,225'
-            subtitle='Sales Obtained'
+            subtitle='Sales Increased'
             progress='0.50'
             increase='+21%'
             icon={<PointOfSaleIcon sx={{ color: colors.greenAccent[600], fontSize: "26px" }} />}
@@ -77,7 +77,7 @@ const Dashboard = () => {
           justifyContent='center'>
           <StatBox
             title='32,441'
-            subtitle='New Clients'
+            subtitle='Easy Verification'
             progress='0.30'
             increase='+5%'
             icon={<PersonAddIcon sx={{ color: colors.greenAccent[600], fontSize: "26px" }} />}
@@ -91,7 +91,7 @@ const Dashboard = () => {
           justifyContent='center'>
           <StatBox
             title='1,325,134'
-            subtitle='Traffic Received'
+            subtitle='Verified Applicants'
             progress='0.80'
             increase='+43%'
             icon={<TrafficIcon sx={{ color: colors.greenAccent[600], fontSize: "26px" }} />}
@@ -108,10 +108,10 @@ const Dashboard = () => {
             alignItems='center'>
             <Box>
               <Typography variant='h5' fontWeight='600' color={colors.grey[100]}>
-                Revenue Generated
+                Revenue Generated in this month
               </Typography>
               <Typography variant='h3' fontWeight='bold' color={colors.greenAccent[500]}>
-                $59,342.32
+                3,34,232
               </Typography>
             </Box>
             <Box>
@@ -137,7 +137,7 @@ const Dashboard = () => {
             colors={colors.grey[100]}
             p='15px'>
             <Typography color={colors.grey[100]} variant='h5' fontWeight='600'>
-              Recent Transactions
+              Employee Details
             </Typography>
           </Box>
           {mockTransactions.map((transaction, i) => (
@@ -156,7 +156,7 @@ const Dashboard = () => {
               </Box>
               <Box color={colors.grey[100]}>{transaction.date}</Box>
               <Box backgroundColor={colors.greenAccent[500]} p='5px 10px' borderRadius='4px'>
-                ${transaction.cost}
+                Active
               </Box>
             </Box>
           ))}
