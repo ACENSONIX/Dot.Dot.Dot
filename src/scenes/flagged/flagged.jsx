@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 const Flagged = () => {
 
   const flagged = useSelector((state) => state.applicant.flaggedData);
-  console.log(flagged.user);
+  console.log(flagged?.user);
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -91,6 +91,8 @@ const Flagged = () => {
       },
     },
   ];
+
+  if (!flagged) return null;
 
   return (
     <Box m='20px'>
