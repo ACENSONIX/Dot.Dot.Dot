@@ -12,20 +12,26 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Applicant = () => {
-
-  const applicants = useSelector((state) => state.applicant.applicantData);
+  const applicants = useSelector(state => state.applicant.applicantData);
   console.log(applicants.user);
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  function getFullName(params) {
+    return `${params.row.firstName || ""} ${params.row.lastName || ""}`;
+  }
+
   const columns = [
     { field: "id", headerName: "ID" },
     {
-      field: "name",
+      field: "Name",
       headerName: "Name",
       flex: 1,
       cellClassName: "name-column--cell",
+      valueGetter: getFullName,
     },
+
     {
       field: "age",
       headerName: "Age",

@@ -15,13 +15,13 @@ const Form = () => {
 
   const handleFormSubmit = values => {
     console.log(values);
-    try{
+    try {
       const data = {
         email: values.email,
         password: values.password,
-      }
+      };
       dispatch(login(data, navigate));
-    }catch(err){
+    } catch (err) {
       console.log(err);
     }
   };
@@ -41,6 +41,7 @@ const Form = () => {
               gridTemplateColumns='repeat(4, minmax(0, 1fr))'
               sx={{
                 "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+                minWidth: "40vw",
               }}>
               <TextField
                 fullWidth

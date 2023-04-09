@@ -15,18 +15,18 @@ const BarChart = ({ isDashboard = false }) => {
         axis: {
           domain: {
             line: {
-              stroke: colors.grey[100],
+              stroke: colors.greenAccent[100],
             },
           },
           legend: {
             text: {
-              fill: colors.grey[100],
+              fill: colors.redAccent[100],
             },
           },
           ticks: {
             line: {
               stroke: colors.grey[100],
-              strokeWidth: 1,
+              strokeWidth: 3,
             },
             text: {
               fill: colors.grey[100],
@@ -35,7 +35,7 @@ const BarChart = ({ isDashboard = false }) => {
         },
         legends: {
           text: {
-            fill: colors.grey[100],
+            fill: colors.yellowAccent[100],
           },
         },
       }}
@@ -66,17 +66,18 @@ const BarChart = ({ isDashboard = false }) => {
           spacing: 10,
         },
       ]}
-      borderColor={{
-        from: "color",
-        modifiers: [["darker", "1.6"]],
-      }}
+      borderColor='#4cceac'
+      // {{
+      //   from: "color",
+      //   modifiers: [["darker", "1.6"]],
+      // }}
       axisTop={null}
       axisRight={null}
       axisBottom={{
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard ? undefined : "country", // changed
+        legend: "country", // changed
         legendPosition: "middle",
         legendOffset: 32,
       }}
@@ -84,17 +85,18 @@ const BarChart = ({ isDashboard = false }) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard ? undefined : "food", // changed
+        legend: "food", // changed
         legendPosition: "middle",
         legendOffset: -40,
       }}
       enableLabel={false}
       labelSkipWidth={12}
       labelSkipHeight={12}
-      labelTextColor={{
-        from: "color",
-        modifiers: [["darker", 1.6]],
-      }}
+      labelTextColor='#fff'
+      // {{
+      //   from: "color",
+      //   modifiers: [["darker", 1.6]],
+      // }}
       legends={[
         {
           dataFrom: "keys",

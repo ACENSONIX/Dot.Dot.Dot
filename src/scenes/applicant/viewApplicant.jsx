@@ -6,7 +6,9 @@ import axios from "axios";
 import { Formik } from "formik";
 import AppHeader from "../../components/AppHeader";
 import useMediaQuery from "@mui/material/useMediaQuery";
-
+import CallOutlinedIcon from "@mui/icons-material/CallOutlined";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import PinDropOutlinedIcon from "@mui/icons-material/PinDropOutlined";
 
 const style = {
   position: "absolute",
@@ -22,11 +24,12 @@ const style = {
   p: 4,
 };
 
-
 const ViewApplicant = () => {
+  const url = "http://192.168.208.132:4000/";
+
   const user = JSON.parse(localStorage.getItem("profile"));
-  console.log(user)
-  const {id} = useParams();
+  console.log(user);
+  const { id } = useParams();
   const [Applicant, setApplicant] = useState();
   const [hireOpen, setHireOpen] = useState(false);
   const [rejectOpen, setRejectOpen] = useState(false);
@@ -34,7 +37,7 @@ const ViewApplicant = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const [offer, setOffer] = useState();
 
-  const handleOfferFile = (e) => {
+  const handleOfferFile = e => {
     setOffer(e.target.files[0]);
   };
 
@@ -64,8 +67,8 @@ const ViewApplicant = () => {
 
   useEffect(() => {
     const getApplicantData = async () => {
-      const {data} = await axios.get(`http://192.168.208.132:4000/user/profile/${id}`);
-      console.log(data.user[0])
+      const { data } = await axios.get(`${url}user/profile/${id}`);
+      console.log(data.user[0]);
       setApplicant(data.user[0]);
     };
     getApplicantData();
@@ -84,8 +87,8 @@ const ViewApplicant = () => {
   //   dob: "2023-02-02",
   //   zip: "400067",
   // });
-  const handleHireFormSubmit = async (values) => {
-    try{
+  const handleHireFormSubmit = async values => {
+    try {
       const formData = new FormData();
       formData.append("offer", offer);
       formData.append("position", values.role);
@@ -96,15 +99,18 @@ const ViewApplicant = () => {
       formData.append("company", user.name);
       formData.append("companyEmail", user.email);
       formData.append("companyContact", user.phone);
-      const {data} = await axios.post(`http://192.168.208.132:4000/user/hire/${Applicant.id}`, formData);
+      const { data } = await axios.post(
+        `http://192.168.208.132:4000/user/hire/${Applicant.id}`,
+        formData
+      );
       console.log(data);
-    }catch(error){
+    } catch (error) {
       console.log(error);
     }
   };
 
-  const handleRejectFormSubmit = async (values) => {
-    try{
+  const handleRejectFormSubmit = async values => {
+    try {
       const formData = new FormData();
       formData.append("offer", offer);
       formData.append("role", values.role);
@@ -115,15 +121,18 @@ const ViewApplicant = () => {
       formData.append("companyName", user.name);
       formData.append("companyEmail", user.email);
       formData.append("companyContact", user.phone);
-      const {data} = await axios.post(`http://192.168.208.132:4000/user/hire/${Applicant.id}`, formData);
+      const { data } = await axios.post(
+        `http://192.168.208.132:4000/user/hire/${Applicant.id}`,
+        formData
+      );
       console.log(data);
-    }catch(error){
+    } catch (error) {
       console.log(error);
     }
   };
 
-  const handleBlacklistFormSubmit = async (values) => {
-    try{
+  const handleBlacklistFormSubmit = async values => {
+    try {
       const formData = new FormData();
       formData.append("offer", offer);
       formData.append("role", values.role);
@@ -134,106 +143,102 @@ const ViewApplicant = () => {
       formData.append("companyName", user.name);
       formData.append("companyEmail", user.email);
       formData.append("companyContact", user.phone);
-      const {data} = await axios.post(`http://192.168.208.132:4000/user/hire/${Applicant.id}`, formData);
+      const { data } = await axios.post(
+        `http://192.168.208.132:4000/user/hire/${Applicant.id}`,
+        formData
+      );
       console.log(data);
-    }catch(error){
+    } catch (error) {
       console.log(error);
     }
   };
 
-  if(!Applicant) return null;
+  if (!Applicant) return null;
+  else {
+    console.log(Applicant);
+  }
 
   return (
     <>
-    <Modal
+      <Modal
         keepMounted
         open={hireOpen}
         onClose={handleHireClose}
-        aria-labelledby="keep-mounted-modal-title"
-        aria-describedby="keep-mounted-modal-description"
-      >
+        aria-labelledby='keep-mounted-modal-title'
+        aria-describedby='keep-mounted-modal-description'>
         <Box sx={style}>
           <Formik onSubmit={handleHireFormSubmit} initialValues={initialValues}>
-            {({
-              values,
-              errors,
-              touched,
-              handleBlur,
-              handleChange,
-              handleSubmit,
-            }) => (
+            {({ values, errors, touched, handleBlur, handleChange, handleSubmit }) => (
               <form onSubmit={handleSubmit}>
                 <AppHeader
-                  error="Congratulations!"
-                  title="HIRE NEW APPLICANT"
-                  subtitle="Fill in the details to hire the applicant"
+                  error='Congratulations!'
+                  title='HIRE NEW APPLICANT'
+                  subtitle='Fill in the details to hire the applicant'
                 />
                 <Box
-                  display="grid"
-                  gap="1rem"
-                  gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+                  display='grid'
+                  gap='1rem'
+                  gridTemplateColumns='repeat(4, minmax(0, 1fr))'
                   sx={{
                     "& > div": {
                       gridColumn: isNonMobile ? undefined : "span 4",
                     },
-                  }}
-                >
+                  }}>
                   <TextField
                     fullWidth
-                    variant="filled"
-                    type="text"
-                    label="Role"
+                    variant='filled'
+                    type='text'
+                    label='Role'
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.role}
-                    name="role"
+                    name='role'
                     error={!!touched.role && !!errors.role}
                     helperText={touched.role && errors.role}
                     sx={{ gridColumn: "span 2" }}
                   />
                   <TextField
                     fullWidth
-                    variant="filled"
-                    type="text"
-                    label="Description"
+                    variant='filled'
+                    type='text'
+                    label='Description'
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.description}
-                    name="description"
+                    name='description'
                     error={!!touched.description && !!errors.description}
                     helperText={touched.description && errors.description}
                     sx={{ gridColumn: "span 2" }}
                   />
                   <TextField
                     fullWidth
-                    variant="filled"
-                    type="text"
-                    label="Salary"
+                    variant='filled'
+                    type='text'
+                    label='Salary'
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.salary}
-                    name="salary"
+                    name='salary'
                     error={!!touched.salary && !!errors.salary}
                     helperText={touched.salary && errors.salary}
                     sx={{ gridColumn: "span 2" }}
                   />
                   <Button
-                    variant="filled"
+                    variant='filled'
                     fullWidth
-                    component="label"
+                    component='label'
                     style={{ backgroundColor: "#323848a0" }}
                     value={offer}
-                    onChange={(e) => handleOfferFile(e)}
-                    sx={{ gridColumn: "span 2" }}
-                  >
-                    <Typography variant="h5">
+                    onChange={e => handleOfferFile(e)}
+                    sx={{ gridColumn: "span 2" }}>
+                    <Typography variant='h5'>
                       {offer ? offer.name : "Upload Offer Letter"}
                     </Typography>
-                    <input hidden type="file" />
+                    <input hidden type='file' />
                   </Button>
                 </Box>
-                <Box display="grid" mt="20px">
-                  <Button type="submit" color="secondary" variant="contained">
+                <Box display='grid' mt='20px'>
+                  <Button type='submit' color='secondary' variant='contained'>
                     Hire Applicant
                   </Button>
                 </Box>
@@ -246,51 +251,42 @@ const ViewApplicant = () => {
         keepMounted
         open={rejectOpen}
         onClose={handleRejectClose}
-        aria-labelledby="keep-mounted-modal-title"
-        aria-describedby="keep-mounted-modal-description"
-      >
+        aria-labelledby='keep-mounted-modal-title'
+        aria-describedby='keep-mounted-modal-description'>
         <Box sx={style}>
           <Formik onSubmit={handleRejectFormSubmit} initialValues={rejectInitValues}>
-            {({
-              values,
-              errors,
-              touched,
-              handleBlur,
-              handleChange,
-              handleSubmit,
-            }) => (
+            {({ values, errors, touched, handleBlur, handleChange, handleSubmit }) => (
               <form onSubmit={handleSubmit}>
                 <AppHeader
-                  error="Are you sure about rejection ??"
-                  title="REJECT APPLICANT"
-                  subtitle="Fill in the details to reject the applicant"
+                  error='Are you sure about rejection ??'
+                  title='REJECT APPLICANT'
+                  subtitle='Fill in the details to reject the applicant'
                 />
                 <Box
-                  display="grid"
-                  gap="1rem"
-                  gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+                  display='grid'
+                  gap='1rem'
+                  gridTemplateColumns='repeat(4, minmax(0, 1fr))'
                   sx={{
                     "& > div": {
                       gridColumn: isNonMobile ? undefined : "span 4",
                     },
-                  }}
-                >
+                  }}>
                   <TextField
                     fullWidth
-                    variant="filled"
-                    type="text"
-                    label="reason"
+                    variant='filled'
+                    type='text'
+                    label='reason'
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.reason}
-                    name="reason"
+                    name='reason'
                     error={!!touched.reason && !!errors.reason}
                     helperText={touched.reason && errors.reason}
                     sx={{ gridColumn: "span 2" }}
                   />
                 </Box>
-                <Box display="grid" mt="20px">
-                  <Button type="submit" color="secondary" variant="contained">
+                <Box display='grid' mt='20px'>
+                  <Button type='submit' color='secondary' variant='contained'>
                     Reject Applicant
                   </Button>
                 </Box>
@@ -303,50 +299,41 @@ const ViewApplicant = () => {
         keepMounted
         open={blacklistOpen}
         onClose={handleBlacklistClose}
-        aria-labelledby="keep-mounted-modal-title"
-        aria-describedby="keep-mounted-modal-description"
-      >
+        aria-labelledby='keep-mounted-modal-title'
+        aria-describedby='keep-mounted-modal-description'>
         <Box sx={style}>
           <Formik onSubmit={handleBlacklistFormSubmit} initialValues={blacklistInitValues}>
-            {({
-              values,
-              errors,
-              touched,
-              handleBlur,
-              handleChange,
-              handleSubmit,
-            }) => (
+            {({ values, errors, touched, handleBlur, handleChange, handleSubmit }) => (
               <form onSubmit={handleSubmit}>
                 <AppHeader
-                  title="BLACKLIST APPLICANT"
-                  subtitle="Fill in the details to blacklist the applicant"
+                  title='BLACKLIST APPLICANT'
+                  subtitle='Fill in the details to blacklist the applicant'
                 />
                 <Box
-                  display="grid"
-                  gap="1rem"
-                  gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+                  display='grid'
+                  gap='1rem'
+                  gridTemplateColumns='repeat(4, minmax(0, 1fr))'
                   sx={{
                     "& > div": {
                       gridColumn: isNonMobile ? undefined : "span 4",
                     },
-                  }}
-                >
+                  }}>
                   <TextField
                     fullWidth
-                    variant="filled"
-                    type="text"
-                    label="reason"
+                    variant='filled'
+                    type='text'
+                    label='reason'
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.reason}
-                    name="reason"
+                    name='reason'
                     error={!!touched.reason && !!errors.reason}
                     helperText={touched.reason && errors.reason}
                     sx={{ gridColumn: "span 2" }}
                   />
                 </Box>
-                <Box display="grid" mt="20px">
-                  <Button type="submit" color="secondary" variant="contained">
+                <Box display='grid' mt='20px'>
+                  <Button type='submit' color='secondary' variant='contained'>
                     Blacklist Applicant
                   </Button>
                 </Box>
@@ -355,119 +342,171 @@ const ViewApplicant = () => {
           </Formik>
         </Box>
       </Modal>
-    <Box
-      p='1rem 0'
-      display='grid'
-      gap='1em 2em'
-      gridTemplateColumns='repeat(15,1fr)'
-      position='relative'>
-      <img class='cover-image' src='http://unsplash.it/1600/400' alt='cover' />
-
       <Box
-        borderRadius='50%'
-        width='10rem'
-        height='10rem'
-        border='4px solid #fff'
-        gridRow='2 / span 2'
-        gridColumn='2 / span 2'
-        backgroundColor='#141b2d'
-        sx={{
-          "&>img": { width: "100%", height: "100%", aspectRatio: "1/1", borderRadius: "50%" },
-        }}>
-        <img src='http://unsplash.it/200/200' alt='profile' />
-      </Box>
-      <Typography
-        variant='h1'
-        color={colors.grey[100]}
-        fontWeight='bold'
-        gridColumn='4 / -1'
-        gridRow='3'
-        fontSize='3rem'>
-        {Applicant.firstName} {Applicant.lastName}
-      </Typography>
-
-      <Box
-        gridRow='4'
-        gridColumn='1 / -1'
+        p='1rem 0'
         display='grid'
-        gap='0.5em'
-        p='0.5rem 1rem'
-        backgroundColor='#243153'>
-        <Typography variant='h3'>{Applicant.email}</Typography>
-        <Typography variant='h3'>{Applicant.phone} </Typography>
-        <Typography variant='body1'>{Applicant.address}</Typography>
-        <Typography variant='body1'>
-          {Applicant.location}-{Applicant.zip}
+        gap='0 2em'
+        height='100%'
+        gridTemplateRows='5rem 5rem auto auto 1fr auto'
+        gridTemplateColumns='repeat(15,1fr)'
+        position='relative'>
+        <img class='cover-image' src='http://unsplash.it/1600/400' alt='cover' />
+
+        <Box
+          borderRadius='50%'
+          width='10rem'
+          height='10rem'
+          border='4px solid #fff'
+          gridRow='2 / span 2'
+          gridColumn='2 / span 2'
+          backgroundColor='#141b2d'
+          sx={{
+            "&>img": { width: "100%", height: "100%", aspectRatio: "1/1", borderRadius: "50%" },
+          }}>
+          <img src={`${url}${Applicant.image}`} alt='profile' />
+        </Box>
+
+        <Box
+          backgroundColor='#243153'
+          gridRow='3 / span 2'
+          gridColumn='1 / -1'
+          gap='0 2em'
+          sx={{
+            display: "grid",
+            gridTemplateColumns: "repeat(15,1fr)",
+            borderRadius: "0 0 2rem 2rem",
+            zIndex: -1,
+          }}></Box>
+
+        <Typography
+          variant='h1'
+          color={colors.grey[100]}
+          fontWeight='bold'
+          gridColumn='4 / -1'
+          gridRow='3'
+          fontSize='3rem'>
+          {Applicant.firstName} {Applicant.lastName}
         </Typography>
-      </Box>
 
-      <Box
-        position='sticky'
-        bottom='0'
-        gridAutoFlow='column'
-        display='grid'
-        gridAutoColumns='1fr'
-        gap='1rem'
-        gridColumn='1 / -1'
-        gridRow='100'
-        padding='1rem'
-        backgroundColor='rgba(0 0 0 / 0.7)'
-        backdropFilter='blur(20px)'>
-        <Button
-          onClick={() => setHireOpen(true)}
+        <Box
           sx={{
-            backgroundColor: colors.greenAccent["600"],
-            fontWeight: "bold",
-            fontSize: "1.25em",
-            color: colors.primary["900"],
-            "&:hover": {
-              backgroundColor: colors.greenAccent["400"],
-            },
+            display: "grid",
+            gridAutoFlow: "column",
+            gridColumn: "1 / -1",
+            gridRow: "4",
+            justifyContent: "space-around",
+            padding: "2em 1em ",
           }}>
-          Hire
-        </Button>
-        <Button
-          onClick={() => setRejectOpen(true)}
-          sx={{
-            backgroundColor: colors.redAccent["600"],
-            fontSize: "1.25em",
-            fontWeight: "bold",
-            color: colors.primary["900"],
-            "&:hover": {
-              backgroundColor: colors.redAccent["400"],
-            },
-          }}>
-          Reject
-        </Button>
-        <Button
-          to='/dashboard/add-applicant'
-          component = {Link}
-          sx={{
-            backgroundColor: colors.blueAccent["600"],
-            fontSize: "1.25em",
-            fontWeight: "bold",
-            color: colors.primary["900"],
-            "&:hover": {
-              backgroundColor: colors.blueAccent["400"],
-            },
-          }}>
-          Re-Verify
-        </Button>
-        <Button
-          onClick={() => setBlacklistOpen(true)}
-          sx={{
-            backgroundColor: colors.grey["600"],
-            fontSize: "1.25em",
-            fontWeight: "bold",
-            color: colors.primary["900"],
-            "&:hover": {
-              backgroundColor: colors.grey["400"],
-            },
-          }}>
-          Blacklist
-        </Button>
+          <Box sx={{ display: "flex", flexDirection: "row" }}>
+            <CallOutlinedIcon sx={{ color: colors.grey[100], mr: 1 }} />
+            <Typography variant='body1'>{Applicant.phone}</Typography>
+          </Box>
+          <Box sx={{ display: "flex", flexDirection: "row" }}>
+            <EmailOutlinedIcon sx={{ color: colors.grey[100], mr: 1 }} />
+            <Typography variant='body1'>{Applicant.email}</Typography>
+          </Box>
+          <Box sx={{ display: "flex", flexDirection: "row" }}>
+            <PinDropOutlinedIcon sx={{ color: colors.grey[100], mr: 1 }} />
+            <Typography variant='body1'>
+              {Applicant.location} - {Applicant.zip}
+            </Typography>
+          </Box>
+        </Box>
+        <Box
+          display='grid'
+          gridTemplateColumns='1fr 1fr'
+          gridColumn='1 / -1'
+          gap='2rem'
+          padding='1rem'>
+          {Applicant.aadhar && (
+            <Box>
+              <img
+                src={`${url}${Applicant.aadhar}`}
+                alt='aadhar card'
+                width='100%'
+                style={{ borderRadius: "1rem" }}
+              />
+            </Box>
+          )}
+          {Applicant.pan && (
+            <Box>
+              <img
+                src={`${url}${Applicant.pan}`}
+                alt='pan card'
+                width='100%'
+                style={{ borderRadius: "1rem" }}
+              />
+            </Box>
+          )}
+        </Box>
+
+        <Box
+          position='sticky'
+          bottom='0'
+          gridAutoFlow='column'
+          display='grid'
+          gridAutoColumns='1fr'
+          gap='1rem'
+          gridColumn='1 / -1'
+          gridRow='-1'
+          padding='1rem'
+          backgroundColor='rgba(0 0 0 / 0.7)'
+          backdropFilter='blur(20px)'>
+          <Button
+            onClick={() => setHireOpen(true)}
+            sx={{
+              backgroundColor: colors.greenAccent["600"],
+              fontWeight: "bold",
+              fontSize: "1.25em",
+              color: colors.primary["900"],
+              "&:hover": {
+                backgroundColor: colors.greenAccent["400"],
+              },
+            }}>
+            Hire
+          </Button>
+          <Button
+            onClick={() => setRejectOpen(true)}
+            sx={{
+              backgroundColor: colors.redAccent["600"],
+              fontSize: "1.25em",
+              fontWeight: "bold",
+              color: colors.primary["900"],
+              "&:hover": {
+                backgroundColor: colors.redAccent["400"],
+              },
+            }}>
+            Reject
+          </Button>
+          <Button
+            to='/dashboard/add-applicant'
+            component={Link}
+            sx={{
+              backgroundColor: colors.blueAccent["600"],
+              fontSize: "1.25em",
+              fontWeight: "bold",
+              color: colors.primary["900"],
+              "&:hover": {
+                backgroundColor: colors.blueAccent["400"],
+              },
+            }}>
+            Re-Verify
+          </Button>
+          <Button
+            onClick={() => setBlacklistOpen(true)}
+            sx={{
+              backgroundColor: colors.grey["600"],
+              fontSize: "1.25em",
+              fontWeight: "bold",
+              color: colors.primary["900"],
+              "&:hover": {
+                backgroundColor: colors.grey["400"],
+              },
+            }}>
+            Blacklist
+          </Button>
+        </Box>
       </Box>
-    </Box>
     </>
   );
 };
