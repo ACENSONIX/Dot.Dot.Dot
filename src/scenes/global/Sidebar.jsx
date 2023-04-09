@@ -132,7 +132,7 @@ const Sidebar = () => {
             />
 
             <Typography variant='h3' color={colors.grey[300]} sx={{ m: "15px 0 5px 20px" }}>
-              Data
+              Management
             </Typography>
             <Item
               title='Manage Applicants'
@@ -155,10 +155,20 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+            <Typography variant='h3' color={colors.grey[300]} sx={{ m: "15px 0 5px 20px" }}>
+              Data
+            </Typography>
             <Item
               title='Risk Distribution'
               to='/dashboard/risk-distribution'
               icon={<PieChartOutlineOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title='Attendance Graph'
+              to='/dashboard/attendance-graph'
+              icon={<BarChartOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -171,17 +181,13 @@ const Sidebar = () => {
               to='/dashboard/aadhar'
               icon={<PeopleOutlinedIcon />}
               selected={selected}
-              setSelected={setSelected}
-            >
-            </Item>
+              setSelected={setSelected}></Item>
             <Item
               title='PAN'
               to='/dashboard/pan'
               icon={<PeopleOutlinedIcon />}
               selected={selected}
-              setSelected={setSelected}
-            >
-            </Item>
+              setSelected={setSelected}></Item>
             {/* <Item
               title="Contacts Information"
               to="/contacts"

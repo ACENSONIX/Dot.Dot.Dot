@@ -28,15 +28,14 @@ import Landing from "./components/Landing";
 import Flagged from "./scenes/flagged/flagged";
 import Test from "./components/QRReader";
 import RiskChart from "./components/RiskChart";
-import Test from "./components/QRReader"
 import Aadhar from "./scenes/aadhar/aadhar";
 import Pan from "./scenes/pan/pan";
-
 
 //redux
 import { useDispatch } from "react-redux";
 import { getApplicants, flaggedApplicants } from "./actions/applicants/applicants";
 import { getEmployees } from "./actions/employees/employees";
+import AttendanceGraph from "./scenes/ams/AttendanceGraph";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -84,10 +83,11 @@ function App() {
             <Route path='/dashboard/view-employee/:id' element={<ViewEmployee />} />
             <Route path='/dashboard/profile' element={<Profile />} />
             <Route path='/dashboard/flagged' element={<Flagged />} />
-            <Route path="/dashboard/test" element={<Test />} />
-            <Route path="/dashboard/aadhar" element={<Aadhar />} />
+            <Route path='/dashboard/test' element={<Test />} />
+            <Route path='/dashboard/aadhar' element={<Aadhar />} />
             <Route path='/dashboard/risk-distribution' element={<RiskChart />} />
-            <Route path="/dashboard/pan" element={<Pan />} />
+            <Route path='/dashboard/attendance-graph' element={<AttendanceGraph />} />
+            <Route path='/dashboard/pan' element={<Pan />} />
           </Route>
 
           {/* 
