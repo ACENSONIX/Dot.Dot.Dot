@@ -16,83 +16,41 @@ import constants from '../../../utility/constants';
 import global from '../../../utility/global';
 import PrimaryButton from '../../../components/PrimaryButton';
 
-const accountInfo = {
-  id: 1,
-  name: 'Nihal Gupta',
-  location: 'Location',
-  image: require('../../../assets/images/logo.jpg'),
-  description:
-    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book',
-  redFlag: 2,
-  yellowFlag: 1,
-  orangeFlag: 0,
-};
+export default function DashboardUser({navigation, route}) {
+  const {item} = route.params;
+  const [redFlag, setRedFlag] = React.useState(0);
+  const [yellowFlag, setYellowFlag] = React.useState(0);
+  const [orangeFlag, setOrangeFlag] = React.useState(0);
+  const [redFlagDetails, setRedFlagDetails] = React.useState([]);
+  const [yellowFlagDetails, setYellowFlagDetails] = React.useState([]);
+  const [orangeFlagDetails, setOrangeFlagDetails] = React.useState([]);
 
-const workDetails = [
-  {
-    id: 1,
-    name: "Company's Name",
-    location: 'Location',
-    image: require('../../../assets/images/logo.jpg'),
-    startDate: '01/01/2020',
-    endDate: '01/01/2020',
-    description:
-      'Your Idea should be based on the problem statements which will be released by the Hackanova 2.0 Organizing team.',
-  },
-  {
-    id: 2,
-    name: "Company's Name",
-    location: 'Location',
-    image: require('../../../assets/images/logo.jpg'),
-    startDate: '01/01/2020',
-    endDate: '01/01/2020',
-    description:
-      'Your Idea should be based on the problem statements which will be released by the Hackanova 2.0 Organizing team',
-  },
-  {
-    id: 3,
-    name: "Compay's Name",
-    location: 'Location',
-    image: require('../../../assets/images/logo.jpg'),
-    startDate: '01/01/2020',
-    endDate: '01/01/2020',
-    description:
-      'Your Idea should be based on the problem statements which will be released by the Hackanova 2.0 Organizing team',
-  },
-];
-
-const redFlagDetails = [
-  {
-    id: 1,
-    title: 'Title',
-    date: '01/01/2020',
-    description:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book',
-  },
-  {
-    id: 2,
-    title: 'Title',
-    date: '01/01/2020',
-    description:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book',
-  },
-];
-
-const yellowFlagDetails = [];
-
-const orangeFlagDetails = [];
-
-export default function DashboardUser({navigation}) {
   useEffect(() => {
-    navigation.setOptions({
-      header: () => (
-        <Header
-          title={'Nihal Gupta'}
-          showBackButton={true}
-          navigation={navigation}
-        />
-      ),
-    });
+    item.works.map(unit =>
+      unit.flags.map(subunit => {
+        if (subunit.type === 'Red') {
+          setRedFlag(redFlag + 1);
+          setRedFlagDetails([...redFlagDetails, subunit]);
+        }
+        if (subunit.type === 'yellow') {
+          setYellowFlag(yellowFlag + 1);
+          setYellowFlagDetails([...yellowFlagDetails, subunit]);
+        }
+        if (subunit.type === 'orange') {
+          setOrangeFlag(orangeFlag + 1);
+          setOrangeFlagDetails([...orangeFlagDetails, subunit]);
+        }
+      }),
+    ),
+      navigation.setOptions({
+        header: () => (
+          <Header
+            title={'Nihal Gupta'}
+            showBackButton={true}
+            navigation={navigation}
+          />
+        ),
+      });
   }, []);
 
   const renderComments = item => {
@@ -108,7 +66,7 @@ export default function DashboardUser({navigation}) {
         <View
           style={{flexDirection: 'row', alignItems: 'center', marginTop: 10}}>
           <Image
-            source={item.image}
+            source={require('../../../assets/images/cafe.jpg')}
             style={internalStyles.logoOfComment}
             resizeMode="contain"
           />
@@ -116,21 +74,33 @@ export default function DashboardUser({navigation}) {
             <View
               style={{
                 flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
+                justifyContent: 'flex-start',
+                alignItems: 'flex-start',
               }}>
-              <Text style={internalStyles.name}>{item.name}</Text>
+              <Text style={internalStyles.name}>
+                {item.company ? item.company : 'Ettarra'}
+              </Text>
               <Text style={{fontSize: 12, color: colors.GREY}}>
                 {'  '}· {item.location}
               </Text>
             </View>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Text style={{fontSize: 12, color: colors.BLACK}}>
-                {item.startDate}
+                {new Date(item.startDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                })}
               </Text>
               <Text style={{fontSize: 12, color: colors.BLACK}}>
                 {'  '}·{'  '}
-                {item.endDate}
+                {item.endDate
+                  ? new Date(item.endDate).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'short',
+                      day: 'numeric',
+                    })
+                  : 'Present'}
               </Text>
             </View>
           </View>
@@ -142,7 +112,8 @@ export default function DashboardUser({navigation}) {
             marginTop: 10,
             color: colors.GREY,
           }}>
-          {item.description}
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry.
         </Text>
       </View>
     );
@@ -181,7 +152,12 @@ export default function DashboardUser({navigation}) {
                   marginTop: 10,
                   color: colors.BLACK,
                 }}>
-                {item.title} - {item.date}
+                {item.reason} -{' '}
+                {new Date(item.createdAt).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                })}
               </Text>
               <Text
                 style={{
@@ -210,7 +186,7 @@ export default function DashboardUser({navigation}) {
       <View style={{paddingHorizontal: 15}}>
         <View style={{flexDirection: 'row'}}>
           <Image
-            source={accountInfo.image}
+            source={require('../../../assets/images/employee.jpg')}
             style={internalStyles.logo}
             resizeMode="contain"
           />
@@ -221,9 +197,11 @@ export default function DashboardUser({navigation}) {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Text style={internalStyles.name}>{accountInfo.name}</Text>
+              <Text style={internalStyles.name}>
+                {item.firstName} {item.lastName}
+              </Text>
               <Text style={{fontSize: 12, color: colors.GREY}}>
-                {'  '}· {accountInfo.location}
+                {'  '}· {item.location}
               </Text>
             </View>
           </View>
@@ -241,7 +219,7 @@ export default function DashboardUser({navigation}) {
           )}
           <Text style={{color: 'red'}}>
             {' '}
-            : {accountInfo.redFlag}
+            : {redFlag}
             {'  '}
           </Text>
           {global.drawIcon(
@@ -252,7 +230,7 @@ export default function DashboardUser({navigation}) {
           )}
           <Text style={{color: 'yellow'}}>
             {' '}
-            : {accountInfo.yellowFlag}
+            : {yellowFlag}
             {'  '}
           </Text>
           {global.drawIcon(
@@ -261,7 +239,7 @@ export default function DashboardUser({navigation}) {
             20,
             'orange',
           )}
-          <Text style={{color: 'orange'}}> : {accountInfo.orangeFlag}</Text>
+          <Text style={{color: 'orange'}}> : {orangeFlag}</Text>
         </View>
         <Text
           style={{
@@ -269,7 +247,10 @@ export default function DashboardUser({navigation}) {
             fontWeight: 'normal',
             color: colors.BLACK,
           }}>
-          {accountInfo.description}
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industrys standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book
         </Text>
         <View
           style={{
@@ -302,18 +283,16 @@ export default function DashboardUser({navigation}) {
       </View>
       <View style={{marginTop: 10, paddingHorizontal: 5}}>
         <FlatList
-          data={workDetails}
+          data={item.works}
           renderItem={({item}) => renderComments(item)}
           keyExtractor={item => item.id}
           scrollEnabled={true}
         />
       </View>
 
-      {accountInfo.redFlag > 0 && renderFlags('Red Flags', redFlagDetails)}
-      {accountInfo.yellowFlag > 1 &&
-        renderFlags('Yellow Flags', yellowFlagDetails)}
-      {accountInfo.orangeFlag > 0 &&
-        renderFlags('Orange Flags', orangeFlagDetails)}
+      {redFlag > 0 && renderFlags('Red Flags', redFlagDetails)}
+      {yellowFlag > 0 && renderFlags('Yellow Flags', yellowFlagDetails)}
+      {orangeFlag > 0 && renderFlags('Orange Flags', orangeFlagDetails)}
 
       <PrimaryButton
         style={{
@@ -324,7 +303,7 @@ export default function DashboardUser({navigation}) {
         title={`+ Add New Flag`}
         onPress={() => {
           // navigate to add new flag screen and send userInfo as param
-          navigation.navigate('AddFlag', {userInfo: accountInfo});
+          navigation.navigate('AddFlag', {userInfo: item});
         }}
       />
     </ScrollView>

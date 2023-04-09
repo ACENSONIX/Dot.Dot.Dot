@@ -22,33 +22,6 @@ import setOfStrings from '../../../utility/screenStrings';
 import Ripple from 'react-native-material-ripple';
 var PushNotification = require('react-native-push-notification');
 
-const employeesData = [
-  {
-    id: 1,
-    name: 'John Doe',
-    image: require('../../../assets/images/logo.jpg'),
-    status: 'Active',
-    role: 'Chef',
-    joiningDate: '12/12/2020',
-  },
-  {
-    id: 2,
-    name: 'John Doe',
-    image: require('../../../assets/images/logo.jpg'),
-    status: 'Active',
-    role: 'Chef',
-    joiningDate: '12/12/2020',
-  },
-  {
-    id: 3,
-    name: 'John Doe',
-    image: require('../../../assets/images/logo.jpg'),
-    status: 'Active',
-    role: 'Chef',
-    joiningDate: '12/12/2020',
-  },
-];
-
 export default function Dashboard({navigation}) {
   const [user, setUser] = useState({
     cafe: {
@@ -68,15 +41,19 @@ export default function Dashboard({navigation}) {
     },
     message: 'Login Successful',
   });
+  const [data, setData] = useState([]);
   useEffect(() => {
     global.getItem(constants.USER_DATA).then(result => {
-      console.log('result', result);
+      callApi(result.cafe.id);
       setUser(result);
     });
+
     navigation.setOptions({
       header: () => (
         <Header
-          title={user ? setOfStrings.hey + ' ' + user.cafe.name: setOfStrings.hey}
+          title={
+            user ? setOfStrings.hey + ' ' + user.cafe.name : setOfStrings.hey
+          }
           showBackButton={false}
           navigation={navigation}
           endRippleIcon={'phone-call'}
@@ -127,6 +104,30 @@ export default function Dashboard({navigation}) {
     requestUserPermission();
     setUpFirebase();
   }, []);
+
+  const callApi = id => {
+    var myHeaders = new Headers();
+    myHeaders.append(
+      'Cookie',
+      'connect.sid=s%3AGq5FWrT2ST3-2QJUH4pJ6cw9EtOzkyKQ.UskRZIYOJ2geE%2FKmmfxR%2BFTZC2uTXUOgOI8ZwiUyoY4',
+    );
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+
+    fetch('http://192.168.208.132:4000/user/profile/' + id, requestOptions)
+      .then(response => response.text())
+      .then(result => {
+        console.log(result);
+        setData(JSON.parse(result));
+        setData(data.user);
+        console.log(data);
+      })
+      .catch(error => console.log('error', error));
+  };
 
   const requestUserPermission = async () => {
     const authorizationStatus = await messaging().requestPermission();
@@ -200,7 +201,7 @@ export default function Dashboard({navigation}) {
         }}>
         <View style={internalStyles.recentPrecautionsItemLeft}>
           <Image
-            source={item.image}
+            source={require('../../../assets/images/employee.jpg')}
             style={internalStyles.recentPrecautionsItemImage}
           />
         </View>
@@ -211,15 +212,21 @@ export default function Dashboard({navigation}) {
               alignItems: 'center',
             }}>
             <Text style={internalStyles.title}>
-              {item.name} {'  '}· {item.joiningDate}
+              {item.firstName} {item.lastName}
+              {'  '}·{' '}
+              {new Date(item.createdAt).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+              })}
             </Text>
           </View>
-          <Text style={internalStyles.crop}>{item.role}</Text>
+          <Text style={internalStyles.crop}>{item.location}</Text>
           <Text
             style={{
-              color: item.status === 'Active' ? 'green' : colors.RED,
+              color: 'green',
             }}>
-            {item.status}
+            Active
           </Text>
         </View>
       </Ripple>
@@ -352,7 +359,7 @@ export default function Dashboard({navigation}) {
           <Text style={internalStyles.header}>{setOfStrings.allEmployees}</Text>
         </View>
         <FlatList
-          data={employeesData}
+          data={data}
           renderItem={({item}) => renderEmployee(item)}
           keyExtractor={item => item.id}
           style={{paddingBottom: 10}}

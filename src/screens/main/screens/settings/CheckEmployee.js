@@ -33,19 +33,6 @@ export default function CheckEmployee({navigation}) {
   };
 
   const check = data => {
-    // const data2 = new FormData();
-    // data2.append('image', data.image.uri);
-    // console.log(data2);
-    // global.isOnline().then(isNetworkAvailable => {
-    //   if (!isNetworkAvailable)
-    //     global.showMessage(constants.NO_INTERNET_SNACKBAR_MESSAGE, true, false);
-    //   else {
-    //     console.log('data2', data2);
-    //     repos.doPredict(data2, onCheck);
-    //   }
-    // });
-    // navigation.navigate('EmployeeDetails', {data: data.image.uri})
-    // navigation.navigate('EmployeeDetails')
     var myHeaders = new Headers();
     myHeaders.append(
       'Cookie',
@@ -68,11 +55,13 @@ export default function CheckEmployee({navigation}) {
       redirect: 'follow',
     };
 
-    fetch('http://192.168.91.132:4000/user/search', requestOptions)
+    fetch('http://192.168.208.132:4000/user/search', requestOptions)
       .then(response => response.text())
-      .then(result => console.log(result))
+      .then(result => {
+        console.log(result.user);
+        // navigation.navigate('EmployeeDetails', {data: result});
+      })
       .catch(error => console.log('error', error));
-    navigation.navigate('EmployeeDetails');
   };
   return (
     <ScrollView
