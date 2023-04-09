@@ -1,5 +1,16 @@
 import { useEffect, useState } from "react";
-import { Typography, Box, Button, useTheme, Modal, TextField } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Button,
+  useTheme,
+  Modal,
+  TextField,
+  List,
+  ListItem,
+  Badge,
+  Tooltip,
+} from "@mui/material";
 import { tokens } from "../../theme";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
@@ -28,7 +39,6 @@ const ViewApplicant = () => {
   const url = "http://192.168.208.132:4000/";
 
   const user = JSON.parse(localStorage.getItem("profile"));
-  console.log(user);
   const { id } = useParams();
   const [Applicant, setApplicant] = useState();
   const [hireOpen, setHireOpen] = useState(false);
@@ -68,7 +78,7 @@ const ViewApplicant = () => {
   useEffect(() => {
     const getApplicantData = async () => {
       const { data } = await axios.get(`${url}user/profile/${id}`);
-      console.log(data.user[0]);
+      // console.log(data.user[0]);
       setApplicant(data.user[0]);
     };
     getApplicantData();
@@ -154,9 +164,7 @@ const ViewApplicant = () => {
   };
 
   if (!Applicant) return null;
-  else {
-    console.log(Applicant);
-  }
+  else console.log(Applicant);
 
   return (
     <>
@@ -343,14 +351,13 @@ const ViewApplicant = () => {
         </Box>
       </Modal>
       <Box
-        p='1rem 0'
+        p='1rem 0 5rem'
         display='grid'
         gap='0 2em'
         height='100%'
-        gridTemplateRows='5rem 5rem auto auto 1fr auto'
-        gridTemplateColumns='repeat(15,1fr)'
-        position='relative'>
-        <img class='cover-image' src='http://unsplash.it/1600/400' alt='cover' />
+        gridTemplateRows='5rem 5rem auto auto 1fr 1fr auto'
+        gridTemplateColumns='repeat(15,1fr)'>
+        <img className='cover-image' src='http://unsplash.it/1600/400' alt='cover' />
 
         <Box
           borderRadius='50%'
@@ -440,6 +447,36 @@ const ViewApplicant = () => {
           )}
         </Box>
 
+        {Applicant.works?.length ? (
+          <Box gridColumn='1 / -1' padding='1rem'>
+            <Typography variant='h2'>Work History</Typography>
+            <Box>
+              {Applicant.works.map((work, i) => (
+                <Box key={i}>
+                  <Typography variant='h4'>{work.cafe.name}</Typography>
+                  <List sx={{ display: "flex" }}>
+                    {work.flags.map((flag, i) => (
+                      <ListItem sx={{ display: "inline-block" }}>
+                        <Tooltip title={flag.description}>
+                          <Badge
+                            sx={{
+                              backgroundColor: flag.type,
+                              padding: "0.25em 0.5em",
+                              borderRadius: "0.25em",
+                            }}
+                            key={i}>
+                            {flag.reason}
+                          </Badge>
+                        </Tooltip>
+                      </ListItem>
+                    ))}
+                  </List>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        ) : null}
+
         <Box
           position='sticky'
           bottom='0'
@@ -451,7 +488,7 @@ const ViewApplicant = () => {
           gridRow='-1'
           padding='1rem'
           backgroundColor='rgba(0 0 0 / 0.7)'
-          backdropFilter='blur(20px)'>
+          sx={{ backdropFilter: "blur(20px)" }}>
           <Button
             onClick={() => setHireOpen(true)}
             sx={{
