@@ -126,7 +126,7 @@ const Dashboard = () => {
         </Box>
         <Box
           gridColumn='span 4'
-          gridRow='span 2'
+          gridRow='span 5'
           backgroundColor={colors.primary[400]}
           overflow='auto'>
           <Box
@@ -163,7 +163,7 @@ const Dashboard = () => {
         </Box>
 
         {/* ROW 3 */}
-        <Box gridColumn='span 4' gridRow='span 2' backgroundColor={colors.primary[400]} p='30px'>
+        {/* <Box gridColumn='span 4' gridRow='span 2' backgroundColor={colors.primary[400]} p='30px'>
           <Typography variant='h5' fontWeight='600'>
             Campaign
           </Typography>
@@ -174,24 +174,24 @@ const Dashboard = () => {
             </Typography>
             <Typography>Includes extra misc expenditures and costs</Typography>
           </Box>
-        </Box>
-        <Box gridColumn='span 4' gridRow='span 2' backgroundColor={colors.primary[400]}>
+        </Box> */}
+        {/* <Box gridColumn='span 4' gridRow='span 2' backgroundColor={colors.primary[400]}>
           <Typography variant='h5' fontWeight='600' sx={{ padding: "30px 30px 0 30px" }}>
             Sales Quantity
           </Typography>
           <Box height='250px' mt='-20px'>
             <BarChart isDashboard={true} />
           </Box>
-        </Box>
+        </Box> */}
         <Box
-          gridColumn='span 4'
-          gridRow='span 2'
+          gridColumn='span 8'
+          gridRow='span 3'
           backgroundColor={colors.primary[400]}
           padding='30px'>
           <Typography variant='h5' fontWeight='600' sx={{ marginBottom: "15px" }}>
             Geography Based Traffic
           </Typography>
-          <Box height='200px'>
+          <Box height='300px'>
             <GeographyChart isDashboard={true} />
           </Box>
         </Box>
