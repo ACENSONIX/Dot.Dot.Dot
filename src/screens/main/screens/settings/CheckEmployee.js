@@ -58,8 +58,13 @@ export default function CheckEmployee({navigation}) {
     fetch('http://192.168.208.132:4000/user/search', requestOptions)
       .then(response => response.text())
       .then(result => {
-        console.log(result.user);
-        // navigation.navigate('EmployeeDetails', {data: result});
+        console.log(result);
+        var obj = JSON.parse(result);
+        if (obj.user === null) global.showMessage('User not found', false);
+        else{
+          global.showMessage('User found', false);
+          navigation.navigate('EmployeeDetail', {item: obj.user});
+        }
       })
       .catch(error => console.log('error', error));
   };

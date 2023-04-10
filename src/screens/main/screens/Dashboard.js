@@ -23,6 +23,7 @@ import Ripple from 'react-native-material-ripple';
 var PushNotification = require('react-native-push-notification');
 
 export default function Dashboard({navigation}) {
+  const [flag, setFlag] = useState(0);
   const [user, setUser] = useState({
     cafe: {
       address: 'Nihal',
@@ -41,7 +42,52 @@ export default function Dashboard({navigation}) {
     },
     message: 'Login Successful',
   });
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([
+    {
+      id: 1,
+      firstName: 'Nihal',
+      lastName: 'Gupta',
+      email: 'nihal@gmail.com',
+      password: 'Pratik@02',
+      location: 'Mumbai',
+      phone: '7896541230',
+      address: '18A / 1374 Ratnasindhu bldg OLD MHB colony',
+      zip: null,
+      aadhar: 'user/aadhar/1.jpg',
+      pan: 'user/pan/1.jpg',
+      dob: '2/2/2002',
+      image: 'user/face/1.jpg',
+      docVerfied: null,
+      createdAt: '2023-04-09T05:19:09.000Z',
+      updatedAt: '2023-04-09T05:19:09.000Z',
+      works: [
+        {
+          id: 1,
+          userId: 1,
+          cafeId: 1,
+          createdAt: '2023-04-09T05:19:09.000Z',
+          updatedAt: '2023-04-09T05:19:09.000Z',
+          cafe: {
+            id: 1,
+            name: 'Nihal',
+            email: 'nihal@gmail.com',
+          },
+          flags: [
+            {
+              id: 1,
+              userId: 1,
+              type: 1,
+              createdAt: '2023-04-09T05:19:09.000Z',
+              updatedAt: '2023-04-09T05:19:09.000Z',
+              reason: 'Killed someone',
+              description: 'Killed someone',
+              cafeId: 1,
+            },
+          ],
+        },
+      ],
+    },
+  ]);
   useEffect(() => {
     global.getItem(constants.USER_DATA).then(result => {
       callApi(result.cafe.id);
@@ -122,9 +168,13 @@ export default function Dashboard({navigation}) {
       .then(response => response.text())
       .then(result => {
         console.log(result);
-        setData(JSON.parse(result));
-        setData(data.user);
-        console.log(data);
+        var gotData = result;
+        if (gotData.user != null) {
+          setData(gotData);
+          setData(data.user);
+          console.log(data);
+          setFlag(flag + 1);
+        }
       })
       .catch(error => console.log('error', error));
   };

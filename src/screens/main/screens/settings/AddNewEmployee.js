@@ -48,7 +48,7 @@ export default function AddNewEmployee({navigation}) {
   }, []);
   const drawToolbar = () => {
     navigation.setOptions({
-      header: () => <Header title={'Check Employee'} navigation={navigation} />,
+      header: () => <Header title={'Add New Employee'} navigation={navigation} />,
     });
   };
 

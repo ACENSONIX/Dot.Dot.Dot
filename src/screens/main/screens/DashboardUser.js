@@ -28,15 +28,15 @@ export default function DashboardUser({navigation, route}) {
   useEffect(() => {
     item.works.map(unit =>
       unit.flags.map(subunit => {
-        if (subunit.type === 'Red') {
+        if (subunit.type === 1) {
           setRedFlag(redFlag + 1);
           setRedFlagDetails([...redFlagDetails, subunit]);
         }
-        if (subunit.type === 'yellow') {
+        if (subunit.type === 2) {
           setYellowFlag(yellowFlag + 1);
           setYellowFlagDetails([...yellowFlagDetails, subunit]);
         }
-        if (subunit.type === 'orange') {
+        if (subunit.type === 3) {
           setOrangeFlag(orangeFlag + 1);
           setOrangeFlagDetails([...orangeFlagDetails, subunit]);
         }
